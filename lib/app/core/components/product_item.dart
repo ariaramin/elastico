@@ -1,0 +1,175 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:elastico/app/core/components/app_icons_icons.dart';
+import 'package:elastico/app/core/components/cached_image.dart';
+import 'package:elastico/app/core/components/shadow_container.dart';
+import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/features/product/domain/entities/product.dart';
+import 'package:flutter/material.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
+
+class ProductItem extends StatelessWidget {
+  final Product product;
+
+  const ProductItem({
+    super.key,
+    required this.product,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ShadowContainer(
+      width: 172,
+      child: Column(
+        children: [
+          Stack(
+            alignment: AlignmentDirectional.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: CachedImage(imageUrl: product.thumbnail),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                top: 14,
+                right: 14,
+                child: _favoriteBadge(),
+              ),
+              if (product.discountPrice != 0) ...{
+                Positioned(
+                  bottom: 4,
+                  left: 5,
+                  child: _discountBadge(context),
+                )
+              }
+            ],
+          ),
+          _getBottomSection(context),
+        ],
+      ),
+    );
+  }
+
+  Widget _discountBadge(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppPalette.red.red80,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 2,
+          horizontal: 8,
+        ),
+        child: Text(
+          '${product.discountPercent}%',
+          style: context.theme.appTextTheme.tiny.copyWith(
+            color: AppPalette.light.light100,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _favoriteBadge({bool isActive = false}) {
+    return Container(
+      width: 26,
+      height: 26,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppPalette.dark.dark75,
+      ),
+      child: Center(
+        child: Icon(
+          AppIcons.iconly_regular_bold_heart,
+          color: isActive ? AppPalette.red.red80 : AppPalette.light.light100,
+          size: 16,
+        ),
+      ),
+    );
+  }
+
+  Widget _getBottomSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            product.name,
+            style: context.theme.appTextTheme.small,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Container(
+          height: 54,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.only(
+              bottomLeft: Radius.circular(16),
+              bottomRight: Radius.circular(16),
+            ),
+            color: context.theme.appColors.primary,
+            boxShadow: [
+              BoxShadow(
+                color: context.theme.appColors.primary,
+                blurRadius: 18,
+                spreadRadius: -14,
+                offset: const Offset(0, 6),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Icon(
+                AppIcons.iconly_regular_outline_arrow___right_circle,
+                color: AppPalette.light.light100,
+              ),
+              const Spacer(),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  if (product.discountPrice != 0) ...{
+                    Text(
+                      product.price.toString().seRagham(),
+                      style: context.theme.appTextTheme.tiny.copyWith(
+                        color: AppPalette.light.light100,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                  },
+                  Text(
+                    product.finalPrice.toString().seRagham(),
+                    style: context.theme.appTextTheme.regular3.copyWith(
+                      color: AppPalette.light.light100,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(width: 8),
+              Text(
+                'toman'.tr(),
+                style: context.theme.appTextTheme.tiny.copyWith(
+                  color: AppPalette.light.light100,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}

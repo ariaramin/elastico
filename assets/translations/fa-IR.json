@@ -1,0 +1,22 @@
+{
+    "home":"خانه",
+    "categories":"دسته‌ بندی ها",
+    "cart":"سبد خرید",
+    "profile":"پروفایل",
+    "greeting":{
+       "morning":"صبح بخیر",
+       "afternoon":"بعد از ظهر بخیر",
+       "evening":"عصر بخیر",
+       "night":"شب بخیر"
+    },
+    "search":"جستجو",
+    "special_offers":"تخفیفات ویژه",
+    "see_all":"مشاهده همه",
+    "best_sellers":"پر فروش ترین ها",
+    "newest":"جدید ترین ها",
+    "toman":"تومان",
+    "cart_summery":"خلاصه سبد خرید",
+    "products_price":"قیمت محصولات",
+    "products_discount":"تخفیف محصولات",
+    "cart_total":"جمع سبد خرید"
+ }
