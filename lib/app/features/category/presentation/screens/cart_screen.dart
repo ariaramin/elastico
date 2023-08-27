@@ -3,7 +3,7 @@ import 'package:elastico/app/core/components/app_icons_icons.dart';
 import 'package:elastico/app/core/components/custom_appbar.dart';
 import 'package:elastico/app/core/components/title_bar.dart';
 import 'package:elastico/app/core/extention/responsive_extention.dart';
-import 'package:elastico/app/features/cart/presentation/widgets/cart_button.dart';
+import 'package:elastico/app/features/cart/presentation/widgets/cart_action_bar.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_item_grid.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_item_list.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_price_detail.dart';
@@ -53,10 +53,10 @@ class CartScreen extends StatelessWidget {
             ],
           ),
           const Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            child: CartButton(),
+            left: 18,
+            right: 18,
+            bottom: 18,
+            child: CartActionBar(),
           )
         ],
       ),

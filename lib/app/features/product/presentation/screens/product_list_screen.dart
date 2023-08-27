@@ -1,7 +1,7 @@
 import 'package:elastico/app/core/components/custom_appbar.dart';
 import 'package:elastico/app/core/components/product_item.dart';
 import 'package:elastico/app/core/extention/responsive_extention.dart';
-import 'package:elastico/app/features/product/presentation/bloc/product_bloc.dart';
+import 'package:elastico/app/features/product/presentation/bloc/product_list/product_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,9 +19,9 @@ class ProductListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: title),
-      body: BlocBuilder<ProductBloc, ProductState>(
+      body: BlocBuilder<ProductListBloc, ProductListState>(
         builder: (context, state) {
-          if (state is ProductLoaded) {
+          if (state is ProductListLoaded) {
             return Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 18,
@@ -48,7 +48,7 @@ class ProductListScreen extends StatelessWidget {
               ),
             );
           }
-          if (state is ProductError) {
+          if (state is ProductListError) {
             return Center(child: Text(state.errorMessage));
           }
           return const Center(child: CircularProgressIndicator());

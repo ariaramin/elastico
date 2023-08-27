@@ -29,7 +29,10 @@ class ProductModel extends Product {
       id: json['id'],
       thumbnail:
           '${Constants.baseUrl}files/${json['collectionId']}/${json['id']}/${json['thumbnail']}',
-      images: List<String>.from(json['images']),
+      images: List<String>.from(json['images'])
+          .map((image) =>
+              '${Constants.baseUrl}files/${json['collectionId']}/${json['id']}/$image')
+          .toList(),
       name: json['name'],
       description: json['description'],
       popularity: json['popularity'],

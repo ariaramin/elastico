@@ -3,4 +3,6 @@ class Constants {
   static const String homeDataUrl = 'collections/home_data/records';
   static const String categoryUrl = 'collections/categories/records';
   static const String productUrl = 'collections/products/records';
+  static const String productVariantUrl =
+      'collections/variants/records?expand=items';
 }

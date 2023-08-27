@@ -3,7 +3,7 @@ import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/data/models/product_model.dart';
 
-abstract class ProductDatasource {
+sealed class ProductDatasource {
   Future<List<ProductModel>> getProductList(String? filterSequence);
 
   Future<ProductModel> getProduct(String productId);

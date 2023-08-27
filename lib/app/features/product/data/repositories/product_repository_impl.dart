@@ -21,9 +21,9 @@ class ProductRepositoryImpl extends ProductRepository {
           await productDatasource.getProductList(filterSequence);
       return Right(productList);
     } on ApiException {
-      return Left(ServerFailure());
+      return const Left(ServerFailure());
     } on SocketException {
-      return Left(ConnectionFailure());
+      return const Left(ConnectionFailure());
     }
   }
 
@@ -33,9 +33,9 @@ class ProductRepositoryImpl extends ProductRepository {
       final product = await productDatasource.getProduct(productId);
       return Right(product);
     } on ApiException {
-      return Left(ServerFailure());
+      return const Left(ServerFailure());
     } on SocketException {
-      return Left(ConnectionFailure());
+      return const Left(ConnectionFailure());
     }
   }
 }

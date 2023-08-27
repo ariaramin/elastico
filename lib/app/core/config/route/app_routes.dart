@@ -1,6 +1,8 @@
 import 'package:elastico/app/core/common/bottom_navigation_cubit.dart';
+import 'package:elastico/app/core/common/slider_cubit.dart';
 import 'package:elastico/app/core/config/route/app_routes_name.dart';
-import 'package:elastico/app/features/product/presentation/bloc/product_bloc.dart';
+import 'package:elastico/app/features/product/presentation/bloc/product/product_bloc.dart';
+import 'package:elastico/app/features/product/presentation/bloc/product_list/product_list_bloc.dart';
 import 'package:elastico/app/features/product/presentation/screens/product_list_screen.dart';
 import 'package:elastico/app/features/product/presentation/screens/product_screen.dart';
 import 'package:elastico/locator.dart';
@@ -32,8 +34,9 @@ class AppRoutes {
 
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
-            create: (context) => ProductBloc(getProducts: locator.get())
-              ..add(FetchProducts(filterSequence: filterSequence)),
+            create: (context) => ProductListBloc(
+              getProducts: locator.get(),
+            )..add(FetchProducts(filterSequence: filterSequence)),
             child: ProductListScreen(
               title: title,
               filter: filterSequence,
@@ -43,8 +46,24 @@ class AppRoutes {
         );
 
       case AppRoutesName.product:
+        final arguments = settings.arguments as Map<String, dynamic>;
+        final productId = arguments['productId'];
+
         return MaterialPageRoute(
-          builder: (context) => const ProductScreen(),
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (BuildContext context) => SliderCubit(),
+              ),
+              BlocProvider(
+                create: (context) => ProductBloc(
+                  getProduct: locator.get(),
+                  getProductVariants: locator.get(),
+                )..add(FetchProduct(productId: productId)),
+              ),
+            ],
+            child: ProductScreen(productId: productId),
+          ),
           settings: settings,
         );
     }

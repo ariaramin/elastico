@@ -12,9 +12,13 @@ class ProductInitial extends ProductState {}
 class ProductLoading extends ProductState {}
 
 class ProductLoaded extends ProductState {
-  final List<Product> products;
+  final Product product;
+  final List<Variant> variants;
 
-  const ProductLoaded({required this.products});
+  const ProductLoaded({
+    required this.product,
+    required this.variants,
+  });
 }
 
 class ProductError extends ProductState {

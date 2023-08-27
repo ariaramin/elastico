@@ -7,8 +7,8 @@ sealed class ProductEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchProducts extends ProductEvent {
-  final String filterSequence;
+class FetchProduct extends ProductEvent {
+  final String productId;
 
-  const FetchProducts({required this.filterSequence});
+  const FetchProduct({required this.productId});
 }

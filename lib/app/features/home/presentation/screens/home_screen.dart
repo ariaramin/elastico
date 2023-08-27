@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:elastico/app/core/components/error_text.dart';
 import 'package:elastico/app/core/components/title_bar.dart';
 import 'package:elastico/app/core/config/route/app_routes_name.dart';
 import 'package:elastico/app/features/home/presentation/bloc/home_bloc.dart';
@@ -72,7 +73,13 @@ class HomeScreen extends StatelessWidget {
                   ],
                 );
               } else if (state is HomeError) {
-                return Center(child: Text(state.errorMessage));
+                return ErrorText(
+                  errorMessage: state.errorMessage,
+                  onPressed: () {
+                    BlocProvider.of<HomeBloc>(context)
+                        .add(HomeInitialRequest());
+                  },
+                );
               } else {
                 return const Center(child: CircularProgressIndicator());
               }

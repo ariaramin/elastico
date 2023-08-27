@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/app_icons_icons.dart';
 import 'package:elastico/app/core/components/cached_image.dart';
+import 'package:elastico/app/core/components/discount_badge.dart';
 import 'package:elastico/app/core/components/shadow_container.dart';
+import 'package:elastico/app/core/config/route/app_routes_name.dart';
 import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
@@ -18,63 +20,48 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShadowContainer(
-      width: 172,
-      child: Column(
-        children: [
-          Stack(
-            alignment: AlignmentDirectional.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: CachedImage(imageUrl: product.thumbnail),
+    return GestureDetector(
+      onTap: () => Navigator.pushNamed(
+        context,
+        AppRoutesName.product,
+        arguments: {'productId': product.id},
+      ),
+      child: ShadowContainer(
+        width: 172,
+        child: Column(
+          children: [
+            Stack(
+              alignment: AlignmentDirectional.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: CachedImage(imageUrl: product.thumbnail),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Positioned(
-                top: 14,
-                right: 14,
-                child: _favoriteBadge(),
-              ),
-              if (product.discountPrice != 0) ...{
                 Positioned(
-                  bottom: 4,
-                  left: 5,
-                  child: _discountBadge(context),
-                )
-              }
-            ],
-          ),
-          _getBottomSection(context),
-        ],
-      ),
-    );
-  }
-
-  Widget _discountBadge(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppPalette.red.red80,
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 2,
-          horizontal: 8,
-        ),
-        child: Text(
-          '${product.discountPercent}%',
-          style: context.theme.appTextTheme.tiny.copyWith(
-            color: AppPalette.light.light100,
-            fontWeight: FontWeight.w600,
-          ),
+                  top: 14,
+                  right: 14,
+                  child: _favoriteBadge(),
+                ),
+                if (product.discountPrice != 0) ...{
+                  Positioned(
+                    bottom: 4,
+                    left: 5,
+                    child: DiscountBadge(percent: product.discountPercent),
+                  ),
+                }
+              ],
+            ),
+            _getBottomSection(context),
+          ],
         ),
       ),
     );
