@@ -18,5 +18,12 @@
     "cart_summery":"خلاصه سبد خرید",
     "products_price":"قیمت محصولات",
     "products_discount":"تخفیف محصولات",
-    "cart_total":"جمع سبد خرید"
+    "cart_total":"جمع سبد خرید",
+    "continue_the_purchase":"ادامه فرایند خرید",
+    "description":"توضیحات",
+    "see_more":"بیشتر",
+    "see_less":" کمتر",
+    "comment":"نظر",
+    "user_comments":"نظرات کاربران",
+    "add_to_cart":"افزودن به سبد خرید"
  }

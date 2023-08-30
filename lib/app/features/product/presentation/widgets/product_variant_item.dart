@@ -4,21 +4,21 @@ import 'package:elastico/app/features/product/domain/entities/variant_item.dart'
 import 'package:elastico/app/features/product/presentation/widgets/variant_option.dart';
 import 'package:flutter/material.dart';
 
-class ProductVariant extends StatefulWidget {
+class ProductVariantItem extends StatefulWidget {
   final Variant variant;
   final Function(VariantItem selectedVariant) onVariantItemChanged;
 
-  const ProductVariant({
+  const ProductVariantItem({
     super.key,
     required this.variant,
     required this.onVariantItemChanged,
   });
 
   @override
-  State<ProductVariant> createState() => _ProductVariantState();
+  State<ProductVariantItem> createState() => _ProductVariantItemState();
 }
 
-class _ProductVariantState extends State<ProductVariant> {
+class _ProductVariantItemState extends State<ProductVariantItem> {
   int _selectedItem = 0;
 
   @override
@@ -56,6 +56,7 @@ class _ProductVariantState extends State<ProductVariant> {
                   )))
               .toList(),
         ),
+        const SizedBox(height: 14),
       ],
     );
   }

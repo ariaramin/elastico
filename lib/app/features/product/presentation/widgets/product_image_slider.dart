@@ -32,48 +32,50 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        AspectRatio(
-          aspectRatio: 1.1,
-          child: Container(
-            width: double.infinity,
-            color: const Color(0xffEAEEEF),
-            child: CarouselSlider.builder(
-              options: CarouselOptions(
-                aspectRatio: 1,
-                viewportFraction: 1,
-                initialPage: 0,
-                autoPlay: true,
-                onPageChanged: (index, reason) =>
-                    context.read<SliderCubit>().changeSelectedIndex(index),
+    return SliverToBoxAdapter(
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: [
+          AspectRatio(
+            aspectRatio: 1.1,
+            child: Container(
+              width: double.infinity,
+              color: const Color(0xffEAEEEF),
+              child: CarouselSlider.builder(
+                options: CarouselOptions(
+                  aspectRatio: 1,
+                  viewportFraction: 1,
+                  initialPage: 0,
+                  autoPlay: true,
+                  onPageChanged: (index, reason) =>
+                      context.read<SliderCubit>().changeSelectedIndex(index),
+                ),
+                itemCount: bannerList.length,
+                itemBuilder: (context, index, realIndex) {
+                  return CachedImage(imageUrl: bannerList[index]);
+                },
               ),
-              itemCount: bannerList.length,
-              itemBuilder: (context, index, realIndex) {
-                return CachedImage(imageUrl: bannerList[index]);
-              },
             ),
           ),
-        ),
-        Positioned(
-          bottom: 16,
-          child: BlocBuilder<SliderCubit, int>(
-            builder: (context, state) {
-              return AnimatedSmoothIndicator(
-                count: bannerList.length,
-                activeIndex: state,
-                effect: ScrollingDotsEffect(
-                  dotHeight: 8,
-                  dotWidth: 8,
-                  dotColor: context.theme.appColors.background,
-                  activeDotColor: context.theme.appColors.primary,
-                ),
-              );
-            },
-          ),
-        )
-      ],
+          Positioned(
+            bottom: 16,
+            child: BlocBuilder<SliderCubit, int>(
+              builder: (context, state) {
+                return AnimatedSmoothIndicator(
+                  count: bannerList.length,
+                  activeIndex: state,
+                  effect: ScrollingDotsEffect(
+                    dotHeight: 8,
+                    dotWidth: 8,
+                    dotColor: context.theme.appColors.background,
+                    activeDotColor: context.theme.appColors.primary,
+                  ),
+                );
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }

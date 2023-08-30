@@ -18,7 +18,7 @@ class ProductActionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ActionBar(
-      buttonText: 'افزودن به سبد خرید',
+      buttonText: 'add_to_cart'.tr(),
       onPressed: () {},
       trailingWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
@@ -46,14 +46,14 @@ class ProductActionBar extends StatelessWidget {
               Text(
                 product.finalPrice.toString().seRagham(),
                 style: context.theme.appTextTheme.regular2.copyWith(
-                  color: AppPalette.light.light100,
+                  color: context.theme.appColors.background,
                 ),
               ),
               const SizedBox(width: 6),
               Text(
                 'toman'.tr(),
                 style: context.theme.appTextTheme.tiny.copyWith(
-                  color: AppPalette.light.light100,
+                  color: context.theme.appColors.background,
                 ),
               ),
             ],

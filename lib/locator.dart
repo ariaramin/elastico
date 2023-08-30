@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:elastico/app/core/utils/constants.dart';
+import 'package:elastico/app/features/comment/data/data_sources/comment_datasource.dart';
+import 'package:elastico/app/features/comment/data/repositories/comment_repository_impl.dart';
+import 'package:elastico/app/features/comment/domain/repositories/comment_repository.dart';
+import 'package:elastico/app/features/comment/domain/usecases/get_product_comments.dart';
 import 'package:elastico/app/features/home/data/data_sources/home_datasource.dart';
 import 'package:elastico/app/features/home/data/repositories/home_repository_impl.dart';
 import 'package:elastico/app/features/home/domain/repositories/home_repository.dart';
@@ -31,6 +35,9 @@ Future<void> initializeLocator() async {
   locator.registerFactory<ProductDetailDatasource>(
       () => ProductDetailDatasourceImpl(dio: locator.get()));
 
+  locator.registerFactory<CommentDatasource>(
+      () => CommentDatasourceImpl(dio: locator.get()));
+
   // repositories
   locator.registerFactory<HomeRepository>(
       () => HomeRepositoryImpl(homeDatasource: locator.get()));
@@ -40,6 +47,9 @@ Future<void> initializeLocator() async {
 
   locator.registerFactory<ProductDetailRepository>(() =>
       ProductDetailRepositoryImpl(productDetailDatasource: locator.get()));
+
+  locator.registerFactory<CommentRepository>(
+      () => CommentRepositoryImpl(commentDatasource: locator.get()));
 
   // usecases
   locator.registerFactory<GetHomeData>(
@@ -53,4 +63,7 @@ Future<void> initializeLocator() async {
 
   locator.registerFactory<GetProductVariants>(
       () => GetProductVariants(productDetailRepository: locator.get()));
+
+  locator.registerFactory<GetProductComments>(
+      () => GetProductComments(commentRepository: locator.get()));
 }

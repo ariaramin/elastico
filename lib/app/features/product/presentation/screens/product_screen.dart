@@ -3,10 +3,11 @@ import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product/product_bloc.dart';
 import 'package:elastico/app/features/product/presentation/widgets/product_action_bar.dart';
 import 'package:elastico/app/features/product/presentation/widgets/product_appbar.dart';
+import 'package:elastico/app/features/product/presentation/widgets/product_comments.dart';
 import 'package:elastico/app/features/product/presentation/widgets/product_description.dart';
 import 'package:elastico/app/features/product/presentation/widgets/product_image_slider.dart';
 import 'package:elastico/app/features/product/presentation/widgets/product_review_detail.dart';
-import 'package:elastico/app/features/product/presentation/widgets/product_variant.dart';
+import 'package:elastico/app/features/product/presentation/widgets/product_variants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,54 +37,44 @@ class ProductScreen extends StatelessWidget {
                   CustomScrollView(
                     slivers: [
                       const ProductAppBar(),
+                      ProductImageSlider(product: state.product),
                       SliverToBoxAdapter(
-                        child: Column(
-                          children: [
-                            ProductImageSlider(product: state.product),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 24,
-                                horizontal: 18,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(18, 18, 18, 0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                state.product.name,
+                                style: context.theme.appTextTheme.title3,
                               ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        state.product.name,
-                                        style:
-                                            context.theme.appTextTheme.title3,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      const ProductReviewDetatil(),
-                                    ],
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 4, 0, 10),
-                                    child: Divider(),
-                                  ),
-                                  ...state.variants.map((variant) {
-                                    return ProductVariant(
-                                      variant: variant,
-                                      onVariantItemChanged:
-                                          (selectedVariant) {},
-                                    );
-                                  }).toList(),
-                                  if (state.product.description.isNotEmpty) ...{
-                                    ProductDescription(
-                                        description: state.product.description),
-                                    const SizedBox(height: 14),
-                                  },
-                                  const SizedBox(height: 92)
-                                ],
-                              ),
-                            ),
-                          ],
+                              const SizedBox(height: 10),
+                              const ProductReviewDetatil(),
+                              const SizedBox(height: 10),
+                            ],
+                          ),
                         ),
                       ),
+                      const SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 18),
+                          child: Divider(),
+                        ),
+                      ),
+                      if (state.product.description.isNotEmpty) ...{
+                        ProductDescription(
+                            description: state.product.description),
+                      },
+                      ProductVariants(variants: state.variants),
+                      const SliverToBoxAdapter(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 18),
+                          child: Divider(),
+                        ),
+                      ),
+                      const ProductComments(),
+                      const SliverPadding(
+                          padding: EdgeInsets.only(bottom: 102)),
                     ],
                   ),
                   Positioned(

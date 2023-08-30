@@ -12,7 +12,7 @@ class CartActionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ActionBar(
-      buttonText: 'ادامه فرایند خرید',
+      buttonText: 'continue_the_purchase'.tr(),
       onPressed: () {},
       trailingWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.end,

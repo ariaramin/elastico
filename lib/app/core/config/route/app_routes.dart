@@ -1,6 +1,7 @@
 import 'package:elastico/app/core/common/bottom_navigation_cubit.dart';
 import 'package:elastico/app/core/common/slider_cubit.dart';
 import 'package:elastico/app/core/config/route/app_routes_name.dart';
+import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product/product_bloc.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product_list/product_list_bloc.dart';
 import 'package:elastico/app/features/product/presentation/screens/product_list_screen.dart';
@@ -60,6 +61,11 @@ class AppRoutes {
                   getProduct: locator.get(),
                   getProductVariants: locator.get(),
                 )..add(FetchProduct(productId: productId)),
+              ),
+              BlocProvider(
+                create: (context) =>
+                    CommentBloc(getProductComments: locator.get())
+                      ..add(FetchProductComments(productId: productId)),
               ),
             ],
             child: ProductScreen(productId: productId),

@@ -1,5 +1,5 @@
 import 'package:elastico/app/core/components/app_icons_icons.dart';
-import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
 import 'package:flutter/material.dart';
 
 class ProductAppBar extends StatelessWidget {
@@ -14,10 +14,10 @@ class ProductAppBar extends StatelessWidget {
       elevation: 0,
       scrolledUnderElevation: 0,
       iconTheme: IconThemeData(
-        color: context.theme.appColors.onBackground,
+        color: AppPalette.dark.dark75,
       ),
       actionsIconTheme: IconThemeData(
-        color: context.theme.appColors.onBackground,
+        color: AppPalette.dark.dark75,
       ),
       actions: [
         IconButton(
