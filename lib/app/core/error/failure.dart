@@ -18,3 +18,8 @@ class ConnectionFailure extends Failure {
   const ConnectionFailure({String? message})
       : super(message: message ?? 'اتصال به شبکه انجام نشد.');
 }
+
+class DatabaseFailure extends Failure {
+  const DatabaseFailure({String? message})
+      : super(message: message ?? 'مشکلی پیش آمده لطفا دوباره امتحان کنید.');
+}

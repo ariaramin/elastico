@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/error_text.dart';
-import 'package:elastico/app/core/components/title_bar.dart';
+import 'package:elastico/app/core/components/section_title.dart';
 import 'package:elastico/app/core/config/route/app_routes_name.dart';
 import 'package:elastico/app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:elastico/app/features/home/presentation/widgets/banner_slider.dart';
-import 'package:elastico/app/features/home/presentation/widgets/product_grid.dart';
+import 'package:elastico/app/core/components/product_grid.dart';
 import 'package:elastico/app/features/home/presentation/widgets/category_list.dart';
 import 'package:elastico/app/features/home/presentation/widgets/home_appbar.dart';
 import 'package:elastico/app/features/home/presentation/widgets/middle_banners.dart';
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                     const HomeAppBar(),
                     BannerSlider(banners: state.homeData.sliderBanners),
                     CategoryList(categories: state.homeData.topCategories),
-                    TitleBar(
+                    SectionTitle(
                       title: 'special_offers'.tr(),
                       onTap: () => Navigator.pushNamed(
                         context,
@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                     SpecialOffersProductList(
                         products: state.homeData.discountedProducts),
                     MiddleBanners(banner: state.homeData.middleBanners.first),
-                    TitleBar(
+                    SectionTitle(
                       title: 'best_sellers'.tr(),
                       onTap: () => Navigator.pushNamed(
                         context,
@@ -56,9 +56,14 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    ProductGrid(products: state.homeData.bestSellerProducts),
+                    SliverToBoxAdapter(
+                      child: ProductGrid(
+                        products: state.homeData.bestSellerProducts,
+                        shrinkWrap: true,
+                      ),
+                    ),
                     MiddleBanners(banner: state.homeData.middleBanners.last),
-                    TitleBar(
+                    SectionTitle(
                       title: 'newest'.tr(),
                       onTap: () => Navigator.pushNamed(
                         context,
@@ -69,7 +74,12 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    ProductGrid(products: state.homeData.newestProducts),
+                    SliverToBoxAdapter(
+                      child: ProductGrid(
+                        products: state.homeData.newestProducts,
+                        shrinkWrap: true,
+                      ),
+                    ),
                   ],
                 );
               } else if (state is HomeError) {

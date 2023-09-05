@@ -3,7 +3,7 @@ import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/category/data/models/category_model.dart';
 
-abstract class CategoryDatasource {
+sealed class CategoryDatasource {
   Future<List<CategoryModel>> getCategories();
 }
 

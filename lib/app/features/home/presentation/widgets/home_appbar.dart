@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/app_icons_icons.dart';
 import 'package:elastico/app/core/components/clickable_textfield.dart';
+import 'package:elastico/app/core/config/route/app_routes_name.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class HomeAppBar extends StatelessWidget {
       snap: false,
       backgroundColor: context.theme.appColors.background,
       scrolledUnderElevation: 2,
+      automaticallyImplyLeading: false,
       title: Row(
         children: [
           const CircleAvatar(
@@ -62,7 +64,7 @@ class HomeAppBar extends StatelessWidget {
         ),
         IconButton(
           icon: const Icon(AppIcons.iconly_regular_outline_heart),
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, AppRoutesName.wishlist),
         ),
       ],
       bottom: AppBar(
@@ -70,6 +72,7 @@ class HomeAppBar extends StatelessWidget {
         backgroundColor: context.theme.appColors.background,
         elevation: 0,
         scrolledUnderElevation: 0,
+        automaticallyImplyLeading: false,
         title: ClickableTextField(
           hint: 'search'.tr(),
           prefixIcon: AppIcons.iconly_regular_outline_search,

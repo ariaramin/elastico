@@ -5,20 +5,27 @@ import 'package:flutter/material.dart';
 
 class ProductGrid extends StatelessWidget {
   final List<Product> products;
+  final EdgeInsetsGeometry? padding;
+  final bool shrinkWrap;
 
   const ProductGrid({
     super.key,
     required this.products,
+    this.padding,
+    this.shrinkWrap = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 18,
-        horizontal: 8,
-      ),
-      sliver: SliverGrid.builder(
+    return Padding(
+      padding: padding ??
+          const EdgeInsets.symmetric(
+            vertical: 18,
+            horizontal: 8,
+          ),
+      child: GridView.builder(
+        shrinkWrap: shrinkWrap,
+        physics: shrinkWrap ? const NeverScrollableScrollPhysics() : null,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: context.responsive<int>(
             2,
@@ -34,9 +41,7 @@ class ProductGrid extends StatelessWidget {
           ),
         ),
         itemCount: products.length,
-        itemBuilder: (context, index) {
-          return ProductItem(product: products[index]);
-        },
+        itemBuilder: (context, index) => ProductItem(product: products[index]),
       ),
     );
   }

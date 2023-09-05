@@ -4,4 +4,5 @@ class AppRoutesName {
   static const main = '/main';
   static const productList = '/product-list';
   static const product = '/product';
+  static const wishlist = '/wishlist';
 }

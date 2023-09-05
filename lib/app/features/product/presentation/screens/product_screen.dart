@@ -24,8 +24,7 @@ class ProductScreen extends StatelessWidget {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          BlocProvider.of<ProductBloc>(context)
-              .add(FetchProduct(productId: productId));
+          context.read<ProductBloc>().add(FetchProduct(productId: productId));
         },
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
@@ -36,7 +35,7 @@ class ProductScreen extends StatelessWidget {
                 children: [
                   CustomScrollView(
                     slivers: [
-                      const ProductAppBar(),
+                      ProductAppBar(product: state.product),
                       ProductImageSlider(product: state.product),
                       SliverToBoxAdapter(
                         child: Padding(
@@ -87,7 +86,12 @@ class ProductScreen extends StatelessWidget {
               );
             }
             if (state is ProductError) {
-              return ErrorText(errorMessage: state.errorMessage);
+              return ErrorText(
+                errorMessage: state.errorMessage,
+                onPressed: () => context
+                    .read<ProductBloc>()
+                    .add(FetchProduct(productId: productId)),
+              );
             }
             return const Center(child: CircularProgressIndicator());
           },

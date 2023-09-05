@@ -2,10 +2,13 @@ import 'package:elastico/app/core/common/bottom_navigation_cubit.dart';
 import 'package:elastico/app/core/common/slider_cubit.dart';
 import 'package:elastico/app/core/config/route/app_routes_name.dart';
 import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
+import 'package:elastico/app/features/intro/presentation/screens/splash_screen.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product/product_bloc.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product_list/product_list_bloc.dart';
 import 'package:elastico/app/features/product/presentation/screens/product_list_screen.dart';
 import 'package:elastico/app/features/product/presentation/screens/product_screen.dart';
+import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+import 'package:elastico/app/features/wishlist/presentation/screens/wishlist_screen.dart';
 import 'package:elastico/locator.dart';
 import 'package:elastico/main_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +17,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AppRoutes {
   static generate(RouteSettings settings) {
     switch (settings.name) {
-      // case AppRoutesName.splash:
-      //   return MaterialPageRoute(
-      //     builder: (context) => const SplashScreen(),
-      //     settings: settings,
-      //   );
+      case AppRoutesName.splash:
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
+          settings: settings,
+        );
+
       case AppRoutesName.main:
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
@@ -36,6 +40,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (context) => BlocProvider(
             create: (context) => ProductListBloc(
+              wishlistBloc: locator.get(),
               getProducts: locator.get(),
             )..add(FetchProducts(filterSequence: filterSequence)),
             child: ProductListScreen(
@@ -67,8 +72,20 @@ class AppRoutes {
                     CommentBloc(getProductComments: locator.get())
                       ..add(FetchProductComments(productId: productId)),
               ),
+              BlocProvider.value(
+                value: locator.get<WishlistBloc>(),
+              ),
             ],
             child: ProductScreen(productId: productId),
+          ),
+          settings: settings,
+        );
+
+      case AppRoutesName.wishlist:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: locator.get<WishlistBloc>()..add(GetWishlist()),
+            child: const WishlistScreen(),
           ),
           settings: settings,
         );

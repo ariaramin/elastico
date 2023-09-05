@@ -33,19 +33,25 @@ class MainScreen extends StatelessWidget {
   List<Widget> _getScreens() {
     return [
       BlocProvider(
-        create: (context) =>
-            HomeBloc(getHomeData: locator.get())..add(HomeInitialRequest()),
+        create: (context) => HomeBloc(
+          wishlistBloc: locator.get(),
+          getHomeData: locator.get(),
+        )..add(HomeInitialRequest()),
         child: const HomeScreen(),
       ),
       BlocProvider(
-        create: (context) =>
-            HomeBloc(getHomeData: locator.get())..add(HomeInitialRequest()),
+        create: (context) => HomeBloc(
+          wishlistBloc: locator.get(),
+          getHomeData: locator.get(),
+        )..add(HomeInitialRequest()),
         child: const HomeScreen(),
       ),
       const CartScreen(),
       BlocProvider(
-        create: (context) =>
-            HomeBloc(getHomeData: locator.get())..add(HomeInitialRequest()),
+        create: (context) => HomeBloc(
+          wishlistBloc: locator.get(),
+          getHomeData: locator.get(),
+        )..add(HomeInitialRequest()),
         child: const HomeScreen(),
       ),
     ];

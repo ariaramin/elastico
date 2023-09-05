@@ -21,6 +21,7 @@ class ErrorText extends StatelessWidget {
           Text(
             errorMessage,
             style: context.theme.appTextTheme.regular3,
+            textAlign: TextAlign.center,
           ),
           const SizedBox(height: 12),
           AppButton(

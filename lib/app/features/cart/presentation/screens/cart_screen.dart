@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/app_icons_icons.dart';
 import 'package:elastico/app/core/components/custom_appbar.dart';
-import 'package:elastico/app/core/components/title_bar.dart';
+import 'package:elastico/app/core/components/section_title.dart';
 import 'package:elastico/app/core/extention/responsive_extention.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_action_bar.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_item_grid.dart';
@@ -44,7 +44,7 @@ class CartScreen extends StatelessWidget {
                   child: Divider(),
                 ),
               ),
-              TitleBar(
+              SectionTitle(
                 title: 'cart_summery'.tr(),
                 hasTrailingText: false,
               ),

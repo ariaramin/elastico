@@ -5,4 +5,6 @@ class Constants {
   static const String productUrl = 'collections/products/records';
   static const String productVariantUrl = 'collections/variants/records';
   static const String commentUrl = 'collections/comments/records';
+
+  static const String wishlistKey = 'wishlist';
 }

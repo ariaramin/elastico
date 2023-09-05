@@ -2,12 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
 
-class TitleBar extends StatelessWidget {
+class SectionTitle extends StatelessWidget {
   final String title;
   final bool hasTrailingText;
   final Function()? onTap;
 
-  const TitleBar({
+  const SectionTitle({
     super.key,
     required this.title,
     this.hasTrailingText = true,

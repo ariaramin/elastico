@@ -3,7 +3,7 @@ import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/home/data/models/home_data_model.dart';
 
-abstract class HomeDatasource {
+sealed class HomeDatasource {
   Future<HomeDataModel> getHomeData();
 }
 

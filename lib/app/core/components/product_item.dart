@@ -7,7 +7,10 @@ import 'package:elastico/app/core/config/route/app_routes_name.dart';
 import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
+import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+import 'package:elastico/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
 class ProductItem extends StatelessWidget {
@@ -20,68 +23,79 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        AppRoutesName.product,
-        arguments: {'productId': product.id},
-      ),
-      child: ShadowContainer(
-        width: 172,
-        child: Column(
-          children: [
-            Stack(
-              alignment: AlignmentDirectional.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: CachedImage(imageUrl: product.thumbnail),
+    return BlocProvider.value(
+      value: locator.get<WishlistBloc>(),
+      child: GestureDetector(
+        onTap: () => Navigator.pushNamed(
+          context,
+          AppRoutesName.product,
+          arguments: {'productId': product.id},
+        ),
+        child: ShadowContainer(
+          width: 172,
+          child: Column(
+            children: [
+              Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: AspectRatio(
+                        aspectRatio: 1,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: CachedImage(imageUrl: product.thumbnail),
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  top: 14,
-                  right: 14,
-                  child: _favoriteBadge(),
-                ),
-                if (product.discountPrice != 0) ...{
                   Positioned(
-                    bottom: 4,
-                    left: 5,
-                    child: DiscountBadge(percent: product.discountPercent),
+                    top: 14,
+                    right: 14,
+                    child: _favoriteBadge(),
                   ),
-                }
-              ],
-            ),
-            _getBottomSection(context),
-          ],
+                  if (product.discountPrice != 0) ...{
+                    Positioned(
+                      bottom: 4,
+                      left: 5,
+                      child: DiscountBadge(percent: product.discountPercent),
+                    ),
+                  }
+                ],
+              ),
+              _getBottomSection(context),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _favoriteBadge({bool isActive = false}) {
-    return Container(
-      width: 26,
-      height: 26,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppPalette.dark.dark75,
-      ),
-      child: Center(
-        child: Icon(
-          AppIcons.iconly_regular_bold_heart,
-          color: isActive ? AppPalette.red.red80 : AppPalette.light.light100,
-          size: 16,
-        ),
-      ),
+  Widget _favoriteBadge() {
+    return BlocBuilder<WishlistBloc, WishlistState>(
+      builder: (context, state) {
+        return Container(
+          width: 26,
+          height: 26,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: AppPalette.dark.dark75,
+          ),
+          child: Center(
+            child: Icon(
+              state.wishlist.any((element) => element.id == product.id)
+                  ? AppIcons.iconly_regular_bold_heart
+                  : AppIcons.iconly_regular_outline_heart,
+              color: state.wishlist.any((element) => element.id == product.id)
+                  ? AppPalette.red.red80
+                  : AppPalette.light.light100,
+              size: 16,
+            ),
+          ),
+        );
+      },
     );
   }
 

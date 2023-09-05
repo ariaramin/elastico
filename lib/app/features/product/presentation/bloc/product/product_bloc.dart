@@ -21,12 +21,15 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       final product = await getProduct.call(event.productId);
       final productVariants = await getProductVariants.call(event.productId);
       product.fold(
-          (failure) => emit(ProductError(errorMessage: failure.message)),
-          (product) => productVariants.fold(
-                (failure) => emit(ProductError(errorMessage: failure.message)),
-                (productVariants) => emit(
-                    ProductLoaded(product: product, variants: productVariants)),
-              ));
+        (failure) => emit(ProductError(errorMessage: failure.message)),
+        (product) {
+          productVariants.fold(
+            (failure) => emit(ProductError(errorMessage: failure.message)),
+            (productVariants) => emit(
+                ProductLoaded(product: product, variants: productVariants)),
+          );
+        },
+      );
     });
   }
 }
