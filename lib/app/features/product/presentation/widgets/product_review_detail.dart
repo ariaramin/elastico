@@ -5,6 +5,7 @@ import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ProductReviewDetatil extends StatelessWidget {
   const ProductReviewDetatil({
@@ -15,32 +16,48 @@ class ProductReviewDetatil extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CommentBloc, CommentState>(
       builder: (context, state) {
-        if (state is CommentLoaded) {
-          return Row(
+        return state.maybeWhen(
+          loaded: (comments) => Row(
             children: [
-              const Icon(
-                AppIcons.iconly_regular_bold_star,
-                color: Colors.amber,
-                size: 18,
+              RatingBar.builder(
+                initialRating: comments.isNotEmpty
+                    ? comments.fold(
+                            0.0,
+                            (previousValue, element) =>
+                                previousValue + element.rating) /
+                        comments.length
+                    : 0,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                ignoreGestures: true,
+                itemCount: 5,
+                itemSize: 18,
+                itemPadding: EdgeInsets.zero,
+                itemBuilder: (context, _) => const Icon(
+                  AppIcons.iconly_regular_bold_star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (double value) {},
               ),
               const SizedBox(width: 4),
               Text(
-                state.comments.isNotEmpty
-                    ? '${state.comments.fold(0.0, (previousValue, element) => previousValue + element.rating) / state.comments.length}'
+                comments.isNotEmpty
+                    ? '${comments.fold(0.0, (previousValue, element) => previousValue + element.rating) / comments.length}'
                     : '0',
                 style: context.theme.appTextTheme.tiny,
               ),
               const SizedBox(width: 4),
               Text(
-                '(${state.comments.length} ${'comment'.tr()})',
+                '(${comments.length} ${'comment'.tr()})',
                 style: context.theme.appTextTheme.tiny.copyWith(
                   color: AppPalette.light.light40,
                 ),
               ),
             ],
-          );
-        }
-        return const SizedBox();
+          ),
+          orElse: () => const SizedBox(),
+        );
       },
     );
   }

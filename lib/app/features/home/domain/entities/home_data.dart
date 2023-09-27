@@ -1,32 +1,18 @@
-import 'package:equatable/equatable.dart';
 import 'package:elastico/app/features/category/domain/entities/category.dart';
 import 'package:elastico/app/features/home/domain/entities/banner.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class HomeData extends Equatable {
-  final List<Banner> sliderBanners;
-  final List<Category> topCategories;
-  final List<Product> discountedProducts;
-  final List<Banner> middleBanners;
-  final List<Product> bestSellerProducts;
-  final List<Product> newestProducts;
+part 'home_data.freezed.dart';
 
-  const HomeData({
-    required this.sliderBanners,
-    required this.topCategories,
-    required this.discountedProducts,
-    required this.middleBanners,
-    required this.bestSellerProducts,
-    required this.newestProducts,
-  });
-
-  @override
-  List<Object?> get props => [
-        sliderBanners,
-        topCategories,
-        discountedProducts,
-        middleBanners,
-        bestSellerProducts,
-        newestProducts,
-      ];
+@freezed
+class HomeData with _$HomeData {
+  const factory HomeData({
+    required List<Banner> sliderBanners,
+    required List<Category> topCategories,
+    required List<Product> discountedProducts,
+    required List<Banner> middleBanners,
+    required List<Product> bestSellerProducts,
+    required List<Product> newestProducts,
+  }) = _HomeData;
 }

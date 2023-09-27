@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/home/data/models/home_data_model.dart';
+import 'package:injectable/injectable.dart';
 
 sealed class HomeDatasource {
   Future<HomeDataModel> getHomeData();
 }
 
+@Injectable(as: HomeDatasource)
 class HomeDatasourceImpl extends HomeDatasource {
   final ApiHelper _apiHelper;
 
@@ -18,7 +20,7 @@ class HomeDatasourceImpl extends HomeDatasource {
       Constants.homeDataUrl,
       queryParameters: {
         'expand':
-            'slider_banners,top_categories,discounted_products,middle_banners,best_seller_products,newest_products',
+            'sliderBanners,topCategories,discountedProducts,middleBanners,bestSellerProducts,newestProducts',
       },
     );
 

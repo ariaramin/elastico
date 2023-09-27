@@ -1,18 +1,13 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Category extends Equatable {
-  final String id;
-  final String thumbnail;
-  final String icon;
-  final String title;
+part 'category.freezed.dart';
 
-  const Category({
-    required this.id,
-    required this.thumbnail,
-    required this.icon,
-    required this.title,
-  });
-
-  @override
-  List<Object?> get props => [id, thumbnail, icon, title];
+@freezed
+class Category with _$Category {
+  const factory Category({
+    required String id,
+    required String thumbnail,
+    required String icon,
+    required String title,
+  }) = _Category;
 }

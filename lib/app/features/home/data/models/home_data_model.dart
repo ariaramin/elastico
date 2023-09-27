@@ -2,44 +2,55 @@ import 'package:elastico/app/features/category/data/models/category_model.dart';
 import 'package:elastico/app/features/home/data/models/banner_model.dart';
 import 'package:elastico/app/features/home/domain/entities/home_data.dart';
 import 'package:elastico/app/features/product/data/models/product_model.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class HomeDataModel extends HomeData {
-  const HomeDataModel({
+part 'home_data_model.freezed.dart';
+part 'home_data_model.g.dart';
+
+@freezed
+class HomeDataModel with _$HomeDataModel {
+  const HomeDataModel._();
+
+  const factory HomeDataModel({
+    @JsonKey(fromJson: _convertListOfBanners)
     required List<BannerModel> sliderBanners,
+    @JsonKey(fromJson: _convertListOfCategories)
     required List<CategoryModel> topCategories,
+    @JsonKey(fromJson: _convertListOfProducts)
     required List<ProductModel> discountedProducts,
+    @JsonKey(fromJson: _convertListOfBanners)
     required List<BannerModel> middleBanners,
+    @JsonKey(fromJson: _convertListOfProducts)
     required List<ProductModel> bestSellerProducts,
+    @JsonKey(fromJson: _convertListOfProducts)
     required List<ProductModel> newestProducts,
-  }) : super(
-          sliderBanners: sliderBanners,
-          topCategories: topCategories,
-          discountedProducts: discountedProducts,
-          middleBanners: middleBanners,
-          bestSellerProducts: bestSellerProducts,
-          newestProducts: newestProducts,
-        );
+  }) = _HomeDataModel;
 
-  factory HomeDataModel.fromJson(Map<String, dynamic> json) {
-    return HomeDataModel(
-      sliderBanners: (json['slider_banners'] as List<dynamic>)
-          .map((bannerJson) => BannerModel.fromJson(bannerJson))
-          .toList(),
-      topCategories: (json['top_categories'] as List<dynamic>)
-          .map((categoryJson) => CategoryModel.fromJson(categoryJson))
-          .toList(),
-      discountedProducts: (json['discounted_products'] as List<dynamic>)
-          .map((productJson) => ProductModel.fromJson(productJson))
-          .toList(),
-      middleBanners: (json['middle_banners'] as List<dynamic>)
-          .map((bannerJson) => BannerModel.fromJson(bannerJson))
-          .toList(),
-      bestSellerProducts: (json['best_seller_products'] as List<dynamic>)
-          .map((productJson) => ProductModel.fromJson(productJson))
-          .toList(),
-      newestProducts: (json['newest_products'] as List<dynamic>)
-          .map((productJson) => ProductModel.fromJson(productJson))
-          .toList(),
-    );
-  }
+  factory HomeDataModel.fromJson(Map<String, dynamic> json) =>
+      _$HomeDataModelFromJson(json);
+
+  HomeData toEntity() => HomeData(
+        sliderBanners: sliderBanners.map((e) => e.toEntity()).toList(),
+        topCategories: topCategories.map((e) => e.toEntity()).toList(),
+        discountedProducts:
+            discountedProducts.map((e) => e.toEntity()).toList(),
+        middleBanners: middleBanners.map((e) => e.toEntity()).toList(),
+        bestSellerProducts:
+            bestSellerProducts.map((e) => e.toEntity()).toList(),
+        newestProducts: newestProducts.map((e) => e.toEntity()).toList(),
+      );
+}
+
+List<BannerModel> _convertListOfBanners(List<dynamic> list) {
+  return list.map((bannerJson) => BannerModel.fromJson(bannerJson)).toList();
+}
+
+List<CategoryModel> _convertListOfCategories(List<dynamic> list) {
+  return list
+      .map((categoryJson) => CategoryModel.fromJson(categoryJson))
+      .toList();
+}
+
+List<ProductModel> _convertListOfProducts(List<dynamic> list) {
+  return list.map((productJson) => ProductModel.fromJson(productJson)).toList();
 }

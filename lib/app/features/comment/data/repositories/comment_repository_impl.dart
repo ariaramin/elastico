@@ -6,7 +6,9 @@ import 'package:elastico/app/core/error/failure.dart';
 import 'package:elastico/app/features/comment/data/data_sources/comment_datasource.dart';
 import 'package:elastico/app/features/comment/domain/entities/comment.dart';
 import 'package:elastico/app/features/comment/domain/repositories/comment_repository.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: CommentRepository)
 class CommentRepositoryImpl extends CommentRepository {
   final CommentDatasource commentDatasource;
 
@@ -17,7 +19,7 @@ class CommentRepositoryImpl extends CommentRepository {
       String productId) async {
     try {
       final comments = await commentDatasource.getProductComments(productId);
-      return Right(comments);
+      return Right(comments.map((e) => e.toEntity()).toList());
     } on ApiException {
       return const Left(ServerFailure());
     } on SocketException {

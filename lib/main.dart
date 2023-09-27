@@ -4,6 +4,7 @@ import 'package:elastico/app/core/config/route/app_routes_name.dart';
 import 'package:elastico/app/core/config/theme/app_themes.dart';
 import 'package:elastico/app/core/helpers/hive_helper.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
+import 'package:elastico/gen/fonts.gen.dart';
 import 'package:elastico/locator.dart';
 import 'package:flutter/material.dart';
 
@@ -11,8 +12,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await HiveHelper().init();
-  await initializeLocator();
-  locator.get<WishlistBloc>().add(GetWishlist());
+  configureDependencies();
+  locator.get<WishlistBloc>().getWishlist();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('fa', 'IR')],
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppThemes.fontFamily = 'Shabnam';
+    AppThemes.fontFamily = FontFamily.shabnam;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
       themeMode: ThemeMode.light,
-      initialRoute: AppRoutesName.main,
+      initialRoute: AppRoutesName.splash,
       onGenerateRoute: (settings) => AppRoutes.generate(settings),
     );
   }

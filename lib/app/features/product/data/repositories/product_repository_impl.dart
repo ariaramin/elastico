@@ -6,7 +6,9 @@ import 'package:elastico/app/core/error/failure.dart';
 import 'package:elastico/app/features/product/data/data_sources/product_datasource.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/product/domain/repositories/product_repository.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: ProductRepository)
 class ProductRepositoryImpl extends ProductRepository {
   final ProductDatasource productDatasource;
 
@@ -19,7 +21,7 @@ class ProductRepositoryImpl extends ProductRepository {
     try {
       final productList =
           await productDatasource.getProductList(filterSequence);
-      return Right(productList);
+      return Right(productList.map((e) => e.toEntity()).toList());
     } on ApiException {
       return const Left(ServerFailure());
     } on SocketException {
@@ -31,7 +33,7 @@ class ProductRepositoryImpl extends ProductRepository {
   Future<Either<Failure, Product>> getProduct(String productId) async {
     try {
       final product = await productDatasource.getProduct(productId);
-      return Right(product);
+      return Right(product.toEntity());
     } on ApiException {
       return const Left(ServerFailure());
     } on SocketException {

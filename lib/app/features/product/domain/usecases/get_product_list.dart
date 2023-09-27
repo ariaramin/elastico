@@ -3,7 +3,9 @@ import 'package:elastico/app/core/error/failure.dart';
 import 'package:elastico/app/core/usecase/usecase.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/product/domain/repositories/product_repository.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class GetProductList extends Usecase<List<Product>, String> {
   final ProductRepository productRepository;
 

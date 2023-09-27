@@ -1,14 +1,11 @@
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Banner extends Equatable {
-  final String id;
-  final String thumbnail;
+part 'banner.freezed.dart';
 
-  const Banner({
-    required this.id,
-    required this.thumbnail,
-  });
-
-  @override
-  List<Object?> get props => [id, thumbnail];
+@freezed
+class Banner with _$Banner {
+  const factory Banner({
+    required String id,
+    required String thumbnail,
+  }) = _Banner;
 }

@@ -1,24 +1,25 @@
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/home/domain/entities/banner.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class BannerModel extends Banner {
-  const BannerModel({
+part 'banner_model.freezed.dart';
+part 'banner_model.g.dart';
+
+@freezed
+class BannerModel with _$BannerModel {
+  const BannerModel._();
+
+  const factory BannerModel({
+    required String collectionId,
     required String id,
     required String thumbnail,
-  }) : super(id: id, thumbnail: thumbnail);
+  }) = _BannerModel;
 
-  factory BannerModel.fromJson(Map<String, dynamic> json) {
-    return BannerModel(
-      id: json['id'],
-      thumbnail:
-          '${Constants.baseUrl}files/${json['collectionId']}/${json['id']}/${json['thumbnail']}',
-    );
-  }
+  factory BannerModel.fromJson(Map<String, dynamic> json) =>
+      _$BannerModelFromJson(json);
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'thumbnail': thumbnail,
-    };
-  }
+  Banner toEntity() => Banner(
+        id: id,
+        thumbnail: '${Constants.baseUrl}files/$collectionId/$id/$thumbnail',
+      );
 }

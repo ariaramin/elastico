@@ -1,21 +1,17 @@
 import 'package:elastico/app/features/auth/domain/entities/user.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Comment {
-  final String id;
-  final User user;
-  final String product;
-  final String text;
-  final double rating;
-  final bool isPublished;
-  final DateTime created;
+part 'comment.freezed.dart';
 
-  Comment({
-    required this.id,
-    required this.user,
-    required this.product,
-    required this.text,
-    required this.rating,
-    required this.isPublished,
-    required this.created,
-  });
+@freezed
+class Comment with _$Comment {
+  const factory Comment({
+    required String id,
+    required User user,
+    required String product,
+    required String text,
+    required double rating,
+    required bool isPublished,
+    required DateTime created,
+  }) = _Comment;
 }

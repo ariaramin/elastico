@@ -2,6 +2,7 @@ import 'package:elastico/app/core/helpers/hive_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/wishlist/data/models/wishlist_item_model.dart';
 import 'package:elastico/app/features/wishlist/domain/entities/wishlist_item.dart';
+import 'package:injectable/injectable.dart';
 
 sealed class WishlistDatasource {
   Future<List<WishlistItemModel>> getWishlistItems();
@@ -11,6 +12,7 @@ sealed class WishlistDatasource {
   Future<void> removeItemFromWishlist(String itemId);
 }
 
+@Injectable(as: WishlistDatasource)
 class WishlistDatasourceImpl extends WishlistDatasource {
   final HiveHelper hiveHelper;
 

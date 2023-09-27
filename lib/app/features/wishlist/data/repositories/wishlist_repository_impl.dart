@@ -5,7 +5,9 @@ import 'package:elastico/app/features/wishlist/data/models/wishlist_item_model.d
 import 'package:elastico/app/features/wishlist/domain/entities/wishlist_item.dart';
 import 'package:elastico/app/features/wishlist/domain/repositories/wishlist_repository.dart';
 import 'package:hive/hive.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: WishlistRepository)
 class WishlistRepositoryImpl extends WishlistRepository {
   final WishlistDatasource wishlistDatasource;
 

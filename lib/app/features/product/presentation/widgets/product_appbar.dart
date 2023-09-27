@@ -15,6 +15,7 @@ class ProductAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<WishlistBloc>();
     return SliverAppBar(
       backgroundColor: const Color(0xffEAEEEF),
       elevation: 0,
@@ -37,11 +38,7 @@ class ProductAppBar extends StatelessWidget {
                     ? AppPalette.red.red80
                     : null,
               ),
-              onPressed: () {
-                context
-                    .read<WishlistBloc>()
-                    .add(ToggleWishlist(product: product));
-              },
+              onPressed: () => bloc.toggleWishlist(product),
             );
           },
         ),

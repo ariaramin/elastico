@@ -1,15 +1,14 @@
-class User {
-  final String id;
-  final String avatar;
-  final String name;
-  final String username;
-  final bool verified;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  User({
-    required this.id,
-    required this.avatar,
-    required this.name,
-    required this.username,
-    required this.verified,
-  });
+part 'user.freezed.dart';
+
+@freezed
+class User with _$User {
+  const factory User({
+    required String id,
+    required String avatar,
+    required String name,
+    required String username,
+    required bool verified,
+  }) = _User;
 }

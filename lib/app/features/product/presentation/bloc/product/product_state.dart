@@ -1,28 +1,14 @@
 part of 'product_bloc.dart';
 
-sealed class ProductState extends Equatable {
-  const ProductState();
-
-  @override
-  List<Object> get props => [];
-}
-
-class ProductInitial extends ProductState {}
-
-class ProductLoading extends ProductState {}
-
-class ProductLoaded extends ProductState {
-  final Product product;
-  final List<Variant> variants;
-
-  const ProductLoaded({
-    required this.product,
-    required this.variants,
-  });
-}
-
-class ProductError extends ProductState {
-  final String errorMessage;
-
-  const ProductError({required this.errorMessage});
+@freezed
+class ProductState with _$ProductState {
+  const factory ProductState.initial() = _Initial;
+  const factory ProductState.loading() = _Loading;
+  const factory ProductState.loaded({
+    required Product product,
+    required List<Variant> variants,
+  }) = _Loaded;
+  const factory ProductState.error({
+    required String errorMessage,
+  }) = _Error;
 }

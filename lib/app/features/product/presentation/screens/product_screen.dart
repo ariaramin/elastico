@@ -1,5 +1,6 @@
 import 'package:elastico/app/core/components/error_text.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product/product_bloc.dart';
 import 'package:elastico/app/features/product/presentation/widgets/product_action_bar.dart';
 import 'package:elastico/app/features/product/presentation/widgets/product_appbar.dart';
@@ -21,22 +22,25 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<ProductBloc>();
+    final commentBloc = context.read<CommentBloc>();
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: () async {
-          context.read<ProductBloc>().add(FetchProduct(productId: productId));
+          bloc.fetchProduct(productId);
+          commentBloc.fetchProductComments(productId);
         },
         child: BlocBuilder<ProductBloc, ProductState>(
           builder: (context, state) {
-            if (state is ProductLoaded) {
-              return Stack(
+            return state.maybeWhen(
+              loaded: (product, variants) => Stack(
                 fit: StackFit.expand,
                 alignment: AlignmentDirectional.center,
                 children: [
                   CustomScrollView(
                     slivers: [
-                      ProductAppBar(product: state.product),
-                      ProductImageSlider(product: state.product),
+                      ProductAppBar(product: product),
+                      ProductImageSlider(product: product),
                       SliverToBoxAdapter(
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(18, 18, 18, 0),
@@ -44,7 +48,7 @@ class ProductScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                state.product.name,
+                                product.name,
                                 style: context.theme.appTextTheme.title3,
                               ),
                               const SizedBox(height: 10),
@@ -60,18 +64,16 @@ class ProductScreen extends StatelessWidget {
                           child: Divider(),
                         ),
                       ),
-                      if (state.product.description.isNotEmpty) ...{
-                        ProductDescription(
-                            description: state.product.description),
-                      },
-                      ProductVariants(variants: state.variants),
+                      if (product.description.isNotEmpty)
+                        ProductDescription(description: product.description),
+                      ProductVariants(variants: variants),
                       const SliverToBoxAdapter(
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 18),
                           child: Divider(),
                         ),
                       ),
-                      const ProductComments(),
+                      ProductComments(productId: productId),
                       const SliverPadding(
                           padding: EdgeInsets.only(bottom: 102)),
                     ],
@@ -80,20 +82,16 @@ class ProductScreen extends StatelessWidget {
                     left: 18,
                     right: 18,
                     bottom: 18,
-                    child: ProductActionBar(product: state.product),
+                    child: ProductActionBar(product: product),
                   ),
                 ],
-              );
-            }
-            if (state is ProductError) {
-              return ErrorText(
-                errorMessage: state.errorMessage,
-                onPressed: () => context
-                    .read<ProductBloc>()
-                    .add(FetchProduct(productId: productId)),
-              );
-            }
-            return const Center(child: CircularProgressIndicator());
+              ),
+              error: (errorMessage) => ErrorText(
+                errorMessage: errorMessage,
+                onPressed: () => bloc.fetchProduct(productId),
+              ),
+              orElse: () => const Center(child: CircularProgressIndicator()),
+            );
           },
         ),
       ),

@@ -11,33 +11,26 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<WishlistBloc>();
     return Scaffold(
       appBar: CustomAppBar(title: 'wishlist'.tr()),
       body: RefreshIndicator(
-        onRefresh: () async => context.read<WishlistBloc>().add(GetWishlist()),
+        onRefresh: () async => bloc.getWishlist(),
         child: BlocBuilder<WishlistBloc, WishlistState>(
           builder: (context, state) {
-            if (state.status is WishlistLoaded) {
-              if ((state.status as WishlistLoaded).wishlistItems.isNotEmpty) {
-                return ProductGrid(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  products: (state.status as WishlistLoaded)
-                      .wishlistItems
-                      .map((e) => e.product)
-                      .toList(),
-                );
-              } else {
-                return Center(child: Text('wishlist_is_empty'.tr()));
-              }
-            }
-            if (state.status is WishlistError) {
-              return ErrorText(
-                errorMessage: (state.status as WishlistError).errorMessage,
-                onPressed: () =>
-                    context.read<WishlistBloc>().add(GetWishlist()),
-              );
-            }
-            return const Center(child: CircularProgressIndicator());
+            return state.status.maybeWhen(
+              loaded: (wishlist) => wishlist.isNotEmpty
+                  ? ProductGrid(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      products: wishlist.map((e) => e.product).toList(),
+                    )
+                  : Center(child: Text('wishlist_is_empty'.tr())),
+              error: (errorMessage) => ErrorText(
+                errorMessage: errorMessage,
+                onPressed: () => bloc.getWishlist(),
+              ),
+              orElse: () => const Center(child: CircularProgressIndicator()),
+            );
           },
         ),
       ),

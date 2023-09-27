@@ -1,14 +1,8 @@
 part of 'comment_bloc.dart';
 
-sealed class CommentEvent extends Equatable {
-  const CommentEvent();
-
-  @override
-  List<Object> get props => [];
-}
-
-class FetchProductComments extends CommentEvent {
-  final String productId;
-
-  const FetchProductComments({required this.productId});
+@freezed
+class CommentEvent with _$CommentEvent {
+  const factory CommentEvent.fetchProductComments({
+    required String productId,
+  }) = _FetchProductComments;
 }

@@ -1,31 +1,12 @@
 part of 'wishlist_bloc.dart';
 
-sealed class WishlistEvent extends Equatable {
-  const WishlistEvent();
-
-  @override
-  List<Object> get props => [];
-}
-
-class GetWishlist extends WishlistEvent {
-  @override
-  List<Object> get props => [];
-}
-
-class ToggleWishlist extends WishlistEvent {
-  final Product product;
-
-  const ToggleWishlist({required this.product});
-
-  @override
-  List<Object> get props => [product];
-}
-
-class UpdateWishlist extends WishlistEvent {
-  final Product product;
-
-  const UpdateWishlist({required this.product});
-
-  @override
-  List<Object> get props => [product];
+@freezed
+class WishlistEvent with _$WishlistEvent {
+  const factory WishlistEvent.getWishlist() = _GetWishlist;
+  const factory WishlistEvent.toggleWishlist({
+    required Product product,
+  }) = _ToggleWishlist;
+  const factory WishlistEvent.updateWishlist({
+    required Product product,
+  }) = _UpdateWishlist;
 }

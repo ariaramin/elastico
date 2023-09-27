@@ -2,11 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/comment/data/models/comment_model.dart';
+import 'package:injectable/injectable.dart';
 
 sealed class CommentDatasource {
   Future<List<CommentModel>> getProductComments(String productId);
 }
 
+@Injectable(as: CommentDatasource)
 class CommentDatasourceImpl extends CommentDatasource {
   final ApiHelper _apiHelper;
 
@@ -18,7 +20,7 @@ class CommentDatasourceImpl extends CommentDatasource {
       Constants.commentUrl,
       queryParameters: {
         'expand': 'user',
-        'filter': 'product=\'$productId\' && is_published=true',
+        'filter': 'product=\'$productId\' && isPublished=true',
       },
     );
 

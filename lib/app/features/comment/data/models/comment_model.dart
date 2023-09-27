@@ -1,34 +1,38 @@
-import 'package:elastico/app/features/auth/data/models/user_model.dart';
 import 'package:elastico/app/features/comment/domain/entities/comment.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:elastico/app/features/auth/data/models/user_model.dart';
 
-class CommentModel extends Comment {
-  CommentModel({
+part 'comment_model.freezed.dart';
+part 'comment_model.g.dart';
+
+@freezed
+class CommentModel with _$CommentModel {
+  const CommentModel._();
+
+  const factory CommentModel({
     required String id,
-    required UserModel user,
+    @JsonKey(name: 'expand', fromJson: _convertUser) required UserModel user,
     required String product,
     required String text,
     required double rating,
     required bool isPublished,
-    required DateTime created,
-  }) : super(
-          id: id,
-          user: user,
-          product: product,
-          text: text,
-          rating: rating,
-          isPublished: isPublished,
-          created: created,
-        );
+    required String created,
+  }) = _CommentModel;
 
-  factory CommentModel.fromJson(Map<String, dynamic> json) {
-    return CommentModel(
-      id: json['id'],
-      text: json['text'],
-      user: UserModel.fromJson(json['expand']['user']),
-      product: json['product'],
-      rating: json['rating'] / 1,
-      isPublished: json['is_published'],
-      created: DateTime.parse(json['created']),
-    );
-  }
+  factory CommentModel.fromJson(Map<String, dynamic> json) =>
+      _$CommentModelFromJson(json);
+
+  Comment toEntity() => Comment(
+        id: id,
+        user: user.toEntity(),
+        product: product,
+        text: text,
+        rating: rating / 1,
+        isPublished: isPublished,
+        created: DateTime.parse(created),
+      );
+}
+
+UserModel _convertUser(Map<String, dynamic> json) {
+  return UserModel.fromJson(json['user']);
 }

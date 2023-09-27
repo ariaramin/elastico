@@ -1,15 +1,14 @@
-class VariantItem {
-  String id;
-  String title;
-  String value;
-  int priceChange;
-  int quantity;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  VariantItem({
-    required this.id,
-    required this.title,
-    required this.value,
-    required this.priceChange,
-    required this.quantity,
-  });
+part 'variant_item.freezed.dart';
+
+@freezed
+class VariantItem with _$VariantItem {
+  const factory VariantItem({
+    required String id,
+    required String title,
+    required String value,
+    required int priceChange,
+    required int quantity,
+  }) = _VariantItem;
 }

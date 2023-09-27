@@ -2,10 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/product/domain/usecases/get_product_list.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'product_list_event.dart';
 part 'product_list_state.dart';
+part 'product_list_bloc.freezed.dart';
 
 class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   final WishlistBloc wishlistBloc;
@@ -14,21 +15,25 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
   ProductListBloc({
     required this.wishlistBloc,
     required this.getProducts,
-  }) : super(ProductListInitial()) {
-    on<FetchProducts>(_fetchProducts);
+  }) : super(const _Initial()) {
+    on<ProductListEvent>(
+      (events, emit) async => events.map(
+        fetchProducts: (event) async => _fetchProducts(event, emit),
+      ),
+    );
   }
 
   void _fetchProducts(
-    FetchProducts event,
+    _FetchProducts event,
     Emitter<ProductListState> emit,
   ) async {
-    emit(ProductListLoading());
+    emit(const _Loading());
     final products = await getProducts.call(event.filterSequence);
     products.fold(
-      (failure) => emit(ProductListError(errorMessage: failure.message)),
+      (failure) => emit(_Error(errorMessage: failure.message)),
       (response) {
         _updateProductsInWishlist(response);
-        emit(ProductListLoaded(products: response));
+        emit(_Loaded(products: response));
       },
     );
   }
@@ -39,8 +44,11 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
     for (final product in products) {
       if (wishlistIds.contains(product.id)) {
-        wishlistBloc.add(UpdateWishlist(product: product));
+        wishlistBloc.updateWishlist(product);
       }
     }
   }
+
+  void fetchProducts(String filterSequence) =>
+      add(_FetchProducts(filterSequence: filterSequence));
 }

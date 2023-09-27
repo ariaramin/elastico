@@ -1,22 +1,36 @@
 import 'package:bloc/bloc.dart';
 import 'package:elastico/app/features/comment/domain/entities/comment.dart';
 import 'package:elastico/app/features/comment/domain/usecases/get_product_comments.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'comment_event.dart';
 part 'comment_state.dart';
+part 'comment_bloc.freezed.dart';
 
 class CommentBloc extends Bloc<CommentEvent, CommentState> {
   final GetProductComments getProductComments;
 
-  CommentBloc({required this.getProductComments}) : super(CommentInitial()) {
-    on<FetchProductComments>((event, emit) async {
-      emit(CommentLoading());
-      final comments = await getProductComments.call(event.productId);
-      comments.fold(
-        (failure) => emit(CommentError(errorMessage: failure.message)),
-        (response) => emit(CommentLoaded(comments: response)),
-      );
-    });
+  CommentBloc({required this.getProductComments}) : super(const _Initial()) {
+    on<CommentEvent>(
+      (events, emit) async => events.map(
+        fetchProductComments: (event) async =>
+            _fetchProductComments(event, emit),
+      ),
+    );
   }
+
+  void _fetchProductComments(
+    _FetchProductComments event,
+    Emitter<CommentState> emit,
+  ) async {
+    emit(const _Loading());
+    final comments = await getProductComments.call(event.productId);
+    comments.fold(
+      (failure) => emit(_Error(errorMessage: failure.message)),
+      (response) => emit(_Loaded(comments: response)),
+    );
+  }
+
+  void fetchProductComments(String productId) =>
+      add(_FetchProductComments(productId: productId));
 }

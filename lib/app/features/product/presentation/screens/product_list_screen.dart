@@ -17,25 +17,22 @@ class ProductListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<ProductListBloc>();
     return Scaffold(
       appBar: CustomAppBar(title: title),
       body: BlocBuilder<ProductListBloc, ProductListState>(
         builder: (context, state) {
-          if (state is ProductListLoaded) {
-            return ProductGrid(
+          return state.maybeWhen(
+            loaded: (products) => ProductGrid(
               padding: const EdgeInsets.symmetric(horizontal: 8),
-              products: state.products,
-            );
-          }
-          if (state is ProductListError) {
-            return ErrorText(
-              errorMessage: state.errorMessage,
-              onPressed: () => context
-                  .read<ProductListBloc>()
-                  .add(FetchProducts(filterSequence: filter)),
-            );
-          }
-          return const Center(child: CircularProgressIndicator());
+              products: products,
+            ),
+            error: (errorMessage) => ErrorText(
+              errorMessage: errorMessage,
+              onPressed: () => bloc.fetchProducts(filter),
+            ),
+            orElse: () => const Center(child: CircularProgressIndicator()),
+          );
         },
       ),
     );

@@ -1,17 +1,15 @@
 import 'package:elastico/app/features/product/domain/entities/variant_item.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-class Variant {
-  final String id;
-  final String product;
-  final String title;
-  final String type;
-  final List<VariantItem> items;
+part 'variant.freezed.dart';
 
-  Variant({
-    required this.id,
-    required this.product,
-    required this.title,
-    required this.type,
-    required this.items,
-  });
+@freezed
+class Variant with _$Variant {
+  const factory Variant({
+    required String id,
+    required String product,
+    required String title,
+    required String type,
+    required List<VariantItem> items,
+  }) = _Variant;
 }

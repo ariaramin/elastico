@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/data/models/product_model.dart';
+import 'package:injectable/injectable.dart';
 
 sealed class ProductDatasource {
   Future<List<ProductModel>> getProductList(String? filterSequence);
@@ -9,6 +10,7 @@ sealed class ProductDatasource {
   Future<ProductModel> getProduct(String productId);
 }
 
+@Injectable(as: ProductDatasource)
 class ProductDatasourceImpl extends ProductDatasource {
   final ApiHelper _apiHelper;
 

@@ -17,20 +17,19 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.read<HomeBloc>();
     return Scaffold(
       body: SafeArea(
         child: RefreshIndicator(
-          onRefresh: () async {
-            BlocProvider.of<HomeBloc>(context).add(HomeInitialRequest());
-          },
+          onRefresh: () async => bloc.initialRequest(),
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
-              if (state is HomeLoaded) {
-                return CustomScrollView(
+              return state.maybeWhen(
+                loaded: (homeData) => CustomScrollView(
                   slivers: [
                     const HomeAppBar(),
-                    BannerSlider(banners: state.homeData.sliderBanners),
-                    CategoryList(categories: state.homeData.topCategories),
+                    BannerSlider(banners: homeData.sliderBanners),
+                    CategoryList(categories: homeData.topCategories),
                     SectionTitle(
                       title: 'special_offers'.tr(),
                       onTap: () => Navigator.pushNamed(
@@ -43,8 +42,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     SpecialOffersProductList(
-                        products: state.homeData.discountedProducts),
-                    MiddleBanners(banner: state.homeData.middleBanners.first),
+                        products: homeData.discountedProducts),
+                    MiddleBanners(banner: homeData.middleBanners.first),
                     SectionTitle(
                       title: 'best_sellers'.tr(),
                       onTap: () => Navigator.pushNamed(
@@ -58,11 +57,11 @@ class HomeScreen extends StatelessWidget {
                     ),
                     SliverToBoxAdapter(
                       child: ProductGrid(
-                        products: state.homeData.bestSellerProducts,
+                        products: homeData.bestSellerProducts,
                         shrinkWrap: true,
                       ),
                     ),
-                    MiddleBanners(banner: state.homeData.middleBanners.last),
+                    MiddleBanners(banner: homeData.middleBanners.last),
                     SectionTitle(
                       title: 'newest'.tr(),
                       onTap: () => Navigator.pushNamed(
@@ -76,23 +75,18 @@ class HomeScreen extends StatelessWidget {
                     ),
                     SliverToBoxAdapter(
                       child: ProductGrid(
-                        products: state.homeData.newestProducts,
+                        products: homeData.newestProducts,
                         shrinkWrap: true,
                       ),
                     ),
                   ],
-                );
-              } else if (state is HomeError) {
-                return ErrorText(
-                  errorMessage: state.errorMessage,
-                  onPressed: () {
-                    BlocProvider.of<HomeBloc>(context)
-                        .add(HomeInitialRequest());
-                  },
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
+                ),
+                error: (errorMessage) => ErrorText(
+                  errorMessage: errorMessage,
+                  onPressed: () => bloc.initialRequest(),
+                ),
+                orElse: () => const Center(child: CircularProgressIndicator()),
+              );
             },
           ),
         ),
