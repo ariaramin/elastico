@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/shadow_container.dart';
-import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_price_detail_item.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/error_text.dart';
+import 'package:elastico/app/core/components/loading_indicator.dart';
 import 'package:elastico/app/core/extention/responsive_extention.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
@@ -83,7 +84,7 @@ class ProductComments extends StatelessWidget {
                 errorMessage: errorMessage,
                 onPressed: () => bloc.fetchProductComments(productId),
               ),
-              orElse: () => const Center(child: CircularProgressIndicator()),
+              orElse: () => const Center(child: LoadingIndicator()),
             );
           },
         ),

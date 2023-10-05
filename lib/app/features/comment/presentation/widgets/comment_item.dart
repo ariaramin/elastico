@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elastico/app/core/components/app_icons_icons.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/shadow_container.dart';
-import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/comment/domain/entities/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
+import 'package:readmore/readmore.dart';
 
 class CommentItem extends StatelessWidget {
   final Comment comment;
@@ -71,8 +73,13 @@ class CommentItem extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Text(
+          ReadMoreText(
             comment.text,
+            trimLines: 3,
+            colorClickableText: context.theme.appColors.onBackground,
+            trimMode: TrimMode.Line,
+            trimCollapsedText: 'see_more'.tr(),
+            trimExpandedText: 'see_less'.tr(),
             style: context.theme.appTextTheme.small,
           ),
         ],

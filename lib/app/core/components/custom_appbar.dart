@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/components/app_icons_icons.dart';
+import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/data/models/product_model.dart';
@@ -14,7 +13,7 @@ sealed class ProductDatasource {
 class ProductDatasourceImpl extends ProductDatasource {
   final ApiHelper _apiHelper;
 
-  ProductDatasourceImpl({required Dio dio}) : _apiHelper = ApiHelper(dio);
+  ProductDatasourceImpl(this._apiHelper);
 
   @override
   Future<List<ProductModel>> getProductList(String? filterSequence) async {

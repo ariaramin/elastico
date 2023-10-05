@@ -20,6 +20,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/banner.jpg
   AssetGenImage get banner => const AssetGenImage('assets/images/banner.jpg');
 
+  /// File path: assets/images/no_data.svg
+  SvgGenImage get noData => const SvgGenImage('assets/images/no_data.svg');
+
   /// File path: assets/images/profile.jpg
   AssetGenImage get profile => const AssetGenImage('assets/images/profile.jpg');
 
@@ -28,7 +31,7 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/real-madrid.png');
 
   /// List of all assets
-  List<dynamic> get values => [appIcon, banner, profile, realMadrid];
+  List<dynamic> get values => [appIcon, banner, noData, profile, realMadrid];
 }
 
 class $AssetsTranslationsGen {

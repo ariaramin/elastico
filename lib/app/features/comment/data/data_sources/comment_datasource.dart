@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/comment/data/models/comment_model.dart';
@@ -12,7 +11,7 @@ sealed class CommentDatasource {
 class CommentDatasourceImpl extends CommentDatasource {
   final ApiHelper _apiHelper;
 
-  CommentDatasourceImpl({required Dio dio}) : _apiHelper = ApiHelper(dio);
+  CommentDatasourceImpl(this._apiHelper);
 
   @override
   Future<List<CommentModel>> getProductComments(String productId) async {

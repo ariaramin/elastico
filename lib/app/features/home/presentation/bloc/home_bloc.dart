@@ -10,13 +10,13 @@ part 'home_state.dart';
 part 'home_bloc.freezed.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final WishlistBloc wishlistBloc;
-  final GetHomeData getHomeData;
+  final WishlistBloc _wishlistBloc;
+  final GetHomeData _getHomeData;
 
-  HomeBloc({
-    required this.wishlistBloc,
-    required this.getHomeData,
-  }) : super(const _Initial()) {
+  HomeBloc(
+    this._wishlistBloc,
+    this._getHomeData,
+  ) : super(const _Initial()) {
     on<HomeEvent>(
       (events, emit) async => events.map(
         homeInitialRequest: (event) async => _initialRequest(event, emit),
@@ -29,7 +29,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) async {
     emit(const _Loading());
-    final homeData = await getHomeData.call();
+    final homeData = await _getHomeData.call();
     homeData.fold(
       (failure) => emit(_Error(errorMessage: failure.message)),
       (response) {
@@ -50,11 +50,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _updateProductsInWishlist(List<Product> products) {
     final wishlistIds =
-        wishlistBloc.state.wishlist.map((item) => item.id).toSet();
+        _wishlistBloc.state.wishlist.map((item) => item.id).toSet();
 
     for (final product in products) {
       if (wishlistIds.contains(product.id)) {
-        wishlistBloc.updateWishlist(product);
+        _wishlistBloc.updateWishlist(product);
       }
     }
   }

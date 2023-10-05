@@ -10,17 +10,17 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: HomeRepository)
 class HomeRepositoryImpl extends HomeRepository {
-  final HomeDatasource homeDatasource;
+  final HomeDatasource _datasource;
 
-  HomeRepositoryImpl({required this.homeDatasource});
+  HomeRepositoryImpl(this._datasource);
 
   @override
   Future<Either<Failure, HomeData>> getHomeData() async {
     try {
-      final homeData = await homeDatasource.getHomeData();
+      final homeData = await _datasource.getHomeData();
       return Right(homeData.toEntity());
-    } on ApiException {
-      return const Left(ServerFailure());
+    } on ApiException catch (error) {
+      return Left(ServerFailure(message: error.message));
     } on SocketException {
       return const Left(ConnectionFailure());
     }

@@ -1,9 +1,11 @@
 import 'package:elastico/app/core/common/bottom_navigation_cubit.dart';
 import 'package:elastico/app/core/components/bottom_navigation.dart';
-import 'package:elastico/app/features/category/presentation/screens/cart_screen.dart';
+import 'package:elastico/app/config/locator/locator.dart';
+import 'package:elastico/app/features/auth/presentation/screens/profile_screen.dart';
+import 'package:elastico/app/features/cart/presentation/screens/cart_screen.dart';
 import 'package:elastico/app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:elastico/app/features/home/presentation/screens/home_screen.dart';
-import 'package:elastico/locator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,27 +35,17 @@ class MainScreen extends StatelessWidget {
   List<Widget> _getScreens() {
     return [
       BlocProvider(
-        create: (context) => HomeBloc(
-          wishlistBloc: locator.get(),
-          getHomeData: locator.get(),
-        )..initialRequest(),
+        create: (context) =>
+            HomeBloc(locator.get(), locator.get())..initialRequest(),
         child: const HomeScreen(),
       ),
       BlocProvider(
-        create: (context) => HomeBloc(
-          wishlistBloc: locator.get(),
-          getHomeData: locator.get(),
-        )..initialRequest(),
+        create: (context) =>
+            HomeBloc(locator.get(), locator.get())..initialRequest(),
         child: const HomeScreen(),
       ),
       const CartScreen(),
-      BlocProvider(
-        create: (context) => HomeBloc(
-          wishlistBloc: locator.get(),
-          getHomeData: locator.get(),
-        )..initialRequest(),
-        child: const HomeScreen(),
-      ),
+      const ProfileScreen(),
     ];
   }
 }

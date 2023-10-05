@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/data/models/variant_model.dart';
@@ -12,7 +11,7 @@ sealed class ProductDetailDatasource {
 class ProductDetailDatasourceImpl extends ProductDetailDatasource {
   final ApiHelper _apiHelper;
 
-  ProductDetailDatasourceImpl({required Dio dio}) : _apiHelper = ApiHelper(dio);
+  ProductDetailDatasourceImpl(this._apiHelper);
 
   @override
   Future<List<VariantModel>> getProductVariants(String productId) async {

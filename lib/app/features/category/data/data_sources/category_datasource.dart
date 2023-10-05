@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/category/data/models/category_model.dart';
@@ -12,7 +11,7 @@ sealed class CategoryDatasource {
 class CategoryDatasourceImpl extends CategoryDatasource {
   final ApiHelper _apiHelper;
 
-  CategoryDatasourceImpl({required Dio dio}) : _apiHelper = ApiHelper(dio);
+  CategoryDatasourceImpl(this._apiHelper);
 
   @override
   Future<List<CategoryModel>> getCategories() async {

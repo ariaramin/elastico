@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +8,11 @@ class AppTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
+  final Color? suffixIconColor;
+
   final bool isPassword;
-  final bool isClickable;
+  final bool autofocus;
+  final Function()? onSuffixIconTap;
 
   const AppTextField({
     super.key,
@@ -18,8 +21,10 @@ class AppTextField extends StatefulWidget {
     this.keyboardType,
     this.prefixIcon,
     this.suffixIcon,
+    this.suffixIconColor,
     this.isPassword = false,
-    this.isClickable = false,
+    this.autofocus = false,
+    this.onSuffixIconTap,
   });
 
   @override
@@ -67,6 +72,7 @@ class _AppTextFieldState extends State<AppTextField> {
         child: TextFormField(
           controller: widget.controller,
           focusNode: _focusNode,
+          autofocus: widget.autofocus,
           keyboardType: widget.keyboardType,
           style: context.theme.appTextTheme.regular3.copyWith(
             fontWeight: FontWeight.w600,
@@ -98,14 +104,18 @@ class _AppTextFieldState extends State<AppTextField> {
                           : Icons.remove_red_eye_outlined,
                     ),
                   )
-                : Icon(widget.suffixIcon),
-            suffixIconColor: MaterialStateColor.resolveWith(
-              (states) => states.contains(MaterialState.focused)
-                  ? context.theme.appColors.onBackground
-                  : widget.controller.text.isNotEmpty
+                : GestureDetector(
+                    onTap: widget.onSuffixIconTap,
+                    child: Icon(widget.suffixIcon),
+                  ),
+            suffixIconColor: widget.suffixIconColor ??
+                MaterialStateColor.resolveWith(
+                  (states) => states.contains(MaterialState.focused)
                       ? context.theme.appColors.onBackground
-                      : AppPalette.light.light40,
-            ),
+                      : widget.controller.text.isNotEmpty
+                          ? context.theme.appColors.onBackground
+                          : AppPalette.light.light40,
+                ),
           ),
           textAlignVertical: TextAlignVertical.center,
         ),

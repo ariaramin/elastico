@@ -9,13 +9,13 @@ part 'product_list_state.dart';
 part 'product_list_bloc.freezed.dart';
 
 class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
-  final WishlistBloc wishlistBloc;
-  final GetProductList getProducts;
+  final WishlistBloc _wishlistBloc;
+  final GetProductList _getProducts;
 
-  ProductListBloc({
-    required this.wishlistBloc,
-    required this.getProducts,
-  }) : super(const _Initial()) {
+  ProductListBloc(
+    this._wishlistBloc,
+    this._getProducts,
+  ) : super(const _Initial()) {
     on<ProductListEvent>(
       (events, emit) async => events.map(
         fetchProducts: (event) async => _fetchProducts(event, emit),
@@ -28,7 +28,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     Emitter<ProductListState> emit,
   ) async {
     emit(const _Loading());
-    final products = await getProducts.call(event.filterSequence);
+    final products = await _getProducts.call(event.filterSequence);
     products.fold(
       (failure) => emit(_Error(errorMessage: failure.message)),
       (response) {
@@ -40,11 +40,11 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
 
   void _updateProductsInWishlist(List<Product> products) {
     final wishlistIds =
-        wishlistBloc.state.wishlist.map((item) => item.id).toSet();
+        _wishlistBloc.state.wishlist.map((item) => item.id).toSet();
 
     for (final product in products) {
       if (wishlistIds.contains(product.id)) {
-        wishlistBloc.updateWishlist(product);
+        _wishlistBloc.updateWishlist(product);
       }
     }
   }

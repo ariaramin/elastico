@@ -10,18 +10,18 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: CommentRepository)
 class CommentRepositoryImpl extends CommentRepository {
-  final CommentDatasource commentDatasource;
+  final CommentDatasource _datasource;
 
-  CommentRepositoryImpl({required this.commentDatasource});
+  CommentRepositoryImpl(this._datasource);
 
   @override
   Future<Either<Failure, List<Comment>>> getProductComments(
       String productId) async {
     try {
-      final comments = await commentDatasource.getProductComments(productId);
+      final comments = await _datasource.getProductComments(productId);
       return Right(comments.map((e) => e.toEntity()).toList());
-    } on ApiException {
-      return const Left(ServerFailure());
+    } on ApiException catch (error) {
+      return Left(ServerFailure(message: error.message));
     } on SocketException {
       return const Left(ConnectionFailure());
     }

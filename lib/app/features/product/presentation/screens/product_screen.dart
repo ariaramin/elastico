@@ -1,4 +1,5 @@
 import 'package:elastico/app/core/components/error_text.dart';
+import 'package:elastico/app/core/components/loading_indicator.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product/product_bloc.dart';
@@ -90,7 +91,7 @@ class ProductScreen extends StatelessWidget {
                 errorMessage: errorMessage,
                 onPressed: () => bloc.fetchProduct(productId),
               ),
-              orElse: () => const Center(child: CircularProgressIndicator()),
+              orElse: () => const Center(child: LoadingIndicator()),
             );
           },
         ),

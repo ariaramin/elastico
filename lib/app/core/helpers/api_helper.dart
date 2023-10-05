@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:elastico/app/core/error/api_exception.dart';
+import 'package:injectable/injectable.dart';
 
+@injectable
 class ApiHelper {
   final Dio _dio;
 

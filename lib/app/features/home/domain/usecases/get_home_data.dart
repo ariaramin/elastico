@@ -7,12 +7,12 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class GetHomeData extends NoParamUsecase<HomeData> {
-  final HomeRepository homeRepository;
+  final HomeRepository _repository;
 
-  GetHomeData({required this.homeRepository});
+  GetHomeData(this._repository);
 
   @override
   Future<Either<Failure, HomeData>> call() {
-    return homeRepository.getHomeData();
+    return _repository.getHomeData();
   }
 }

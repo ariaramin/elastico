@@ -7,12 +7,12 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class GetProduct extends Usecase<Product, String> {
-  final ProductRepository productRepository;
+  final ProductRepository _repository;
 
-  GetProduct({required this.productRepository});
+  GetProduct(this._repository);
 
   @override
   Future<Either<Failure, Product>> call(params) {
-    return productRepository.getProduct(params);
+    return _repository.getProduct(params);
   }
 }

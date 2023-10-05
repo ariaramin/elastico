@@ -1,5 +1,5 @@
-import 'package:elastico/app/core/components/app_icons_icons.dart';
-import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/core/components/app_icons.dart';
+import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';

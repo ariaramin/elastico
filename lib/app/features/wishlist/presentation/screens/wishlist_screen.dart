@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/custom_appbar.dart';
 import 'package:elastico/app/core/components/error_text.dart';
+import 'package:elastico/app/core/components/loading_indicator.dart';
 import 'package:elastico/app/core/components/product_grid.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class WishlistScreen extends StatelessWidget {
                 errorMessage: errorMessage,
                 onPressed: () => bloc.getWishlist(),
               ),
-              orElse: () => const Center(child: CircularProgressIndicator()),
+              orElse: () => const Center(child: LoadingIndicator()),
             );
           },
         ),

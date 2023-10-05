@@ -1,0 +1,79 @@
+import 'package:elastico/app/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/core/components/app_button.dart';
+import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:flutter/material.dart';
+
+class CustomBottomSheet extends StatelessWidget {
+  final String title;
+  final Widget content;
+  final String? cancelText;
+  final String? saveText;
+  final Function()? onSavePressed;
+
+  const CustomBottomSheet({
+    super.key,
+    required this.title,
+    required this.content,
+    this.cancelText,
+    this.saveText,
+    this.onSavePressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+        color: context.theme.appColors.background,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const SizedBox(height: 8),
+          Container(
+            width: 32,
+            height: 4,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(32),
+              color: AppPalette.light.light60,
+            ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            title,
+            style: context.theme.appTextTheme.title3,
+          ),
+          const SizedBox(height: 16),
+          const Divider(),
+          const SizedBox(height: 16),
+          content,
+          const Divider(),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              Expanded(
+                child: AppButton(
+                  text: cancelText ?? 'لغو',
+                  isPrimary: false,
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: AppButton(
+                  text: saveText ?? 'تایید',
+                  onPressed: onSavePressed,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+        ],
+      ),
+    );
+  }
+}

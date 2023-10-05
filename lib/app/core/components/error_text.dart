@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/app_button.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class ErrorText extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           AppButton(
-            text: 'دوباره امتحان کن',
+            text: 'try_again'.tr(),
             onPressed: onPressed,
           ),
         ],

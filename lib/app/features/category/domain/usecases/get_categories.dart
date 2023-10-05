@@ -7,12 +7,12 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class GetCategories extends NoParamUsecase<List<Category>> {
-  final CategoryRepository categoryRepository;
+  final CategoryRepository _repository;
 
-  GetCategories({required this.categoryRepository});
+  GetCategories(this._repository);
 
   @override
   Future<Either<Failure, List<Category>>> call() {
-    return categoryRepository.getCategories();
+    return _repository.getCategories();
   }
 }

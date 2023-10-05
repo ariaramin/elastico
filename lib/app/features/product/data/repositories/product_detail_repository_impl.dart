@@ -10,19 +10,18 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProductDetailRepository)
 class ProductDetailRepositoryImpl extends ProductDetailRepository {
-  final ProductDetailDatasource productDetailDatasource;
+  final ProductDetailDatasource _datasource;
 
-  ProductDetailRepositoryImpl({required this.productDetailDatasource});
+  ProductDetailRepositoryImpl(this._datasource);
 
   @override
   Future<Either<Failure, List<Variant>>> getProductVariants(
       String productId) async {
     try {
-      final variants =
-          await productDetailDatasource.getProductVariants(productId);
+      final variants = await _datasource.getProductVariants(productId);
       return Right(variants.map((e) => e.toEntity()).toList());
-    } on ApiException {
-      return const Left(ServerFailure());
+    } on ApiException catch (error) {
+      return Left(ServerFailure(message: error.message));
     } on SocketException {
       return const Left(ConnectionFailure());
     }

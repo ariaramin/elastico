@@ -7,12 +7,12 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class GetProductVariants extends Usecase<List<Variant>, String> {
-  final ProductDetailRepository productDetailRepository;
+  final ProductDetailRepository _repository;
 
-  GetProductVariants({required this.productDetailRepository});
+  GetProductVariants(this._repository);
 
   @override
   Future<Either<Failure, List<Variant>>> call(params) {
-    return productDetailRepository.getProductVariants(params);
+    return _repository.getProductVariants(params);
   }
 }

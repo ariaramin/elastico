@@ -10,20 +10,19 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProductRepository)
 class ProductRepositoryImpl extends ProductRepository {
-  final ProductDatasource productDatasource;
+  final ProductDatasource _datasource;
 
-  ProductRepositoryImpl({required this.productDatasource});
+  ProductRepositoryImpl(this._datasource);
 
   @override
   Future<Either<Failure, List<Product>>> getProductList(
     String? filterSequence,
   ) async {
     try {
-      final productList =
-          await productDatasource.getProductList(filterSequence);
+      final productList = await _datasource.getProductList(filterSequence);
       return Right(productList.map((e) => e.toEntity()).toList());
-    } on ApiException {
-      return const Left(ServerFailure());
+    } on ApiException catch (error) {
+      return Left(ServerFailure(message: error.message));
     } on SocketException {
       return const Left(ConnectionFailure());
     }
@@ -32,10 +31,10 @@ class ProductRepositoryImpl extends ProductRepository {
   @override
   Future<Either<Failure, Product>> getProduct(String productId) async {
     try {
-      final product = await productDatasource.getProduct(productId);
+      final product = await _datasource.getProduct(productId);
       return Right(product.toEntity());
-    } on ApiException {
-      return const Left(ServerFailure());
+    } on ApiException catch (error) {
+      return Left(ServerFailure(message: error.message));
     } on SocketException {
       return const Left(ConnectionFailure());
     }

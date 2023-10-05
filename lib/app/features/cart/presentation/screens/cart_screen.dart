@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:elastico/app/core/components/app_icons_icons.dart';
+import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/custom_appbar.dart';
 import 'package:elastico/app/core/components/section_title.dart';
 import 'package:elastico/app/core/extention/responsive_extention.dart';
@@ -35,7 +35,7 @@ class CartScreen extends StatelessWidget {
                 ),
                 sliver: context.responsive(
                   const CartItemList(),
-                  md: const CartItemGrid(),
+                  sm: const CartItemGrid(),
                 ),
               ),
               const SliverPadding(
@@ -53,9 +53,9 @@ class CartScreen extends StatelessWidget {
             ],
           ),
           const Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
+            left: 18,
+            right: 18,
+            bottom: 18,
             child: CartActionBar(),
           )
         ],

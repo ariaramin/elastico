@@ -10,17 +10,17 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: CategoryRepository)
 class CategoryRepositoryImpl extends CategoryRepository {
-  final CategoryDatasource categoryDatasource;
+  final CategoryDatasource _datasource;
 
-  CategoryRepositoryImpl({required this.categoryDatasource});
+  CategoryRepositoryImpl(this._datasource);
 
   @override
   Future<Either<Failure, List<Category>>> getCategories() async {
     try {
-      final categories = await categoryDatasource.getCategories();
+      final categories = await _datasource.getCategories();
       return Right(categories.map((e) => e.toEntity()).toList());
-    } on ApiException {
-      return const Left(ServerFailure());
+    } on ApiException catch (error) {
+      return Left(ServerFailure(message: error.message));
     } on SocketException {
       return const Left(ConnectionFailure());
     }

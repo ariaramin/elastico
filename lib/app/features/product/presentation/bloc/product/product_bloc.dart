@@ -10,13 +10,13 @@ part 'product_state.dart';
 part 'product_bloc.freezed.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  final GetProduct getProduct;
-  final GetProductVariants getProductVariants;
+  final GetProduct _getProduct;
+  final GetProductVariants _getProductVariants;
 
-  ProductBloc({
-    required this.getProduct,
-    required this.getProductVariants,
-  }) : super(const _Initial()) {
+  ProductBloc(
+    this._getProduct,
+    this._getProductVariants,
+  ) : super(const _Initial()) {
     on<ProductEvent>(
       (events, emit) async => events.map(
         fetchProduct: (event) async => _fetchProduct(event, emit),
@@ -29,8 +29,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     Emitter<ProductState> emit,
   ) async {
     emit(const _Loading());
-    final product = await getProduct.call(event.productId);
-    final productVariants = await getProductVariants.call(event.productId);
+    final product = await _getProduct.call(event.productId);
+    final productVariants = await _getProductVariants.call(event.productId);
     product.fold(
       (failure) => emit(_Error(errorMessage: failure.message)),
       (product) {

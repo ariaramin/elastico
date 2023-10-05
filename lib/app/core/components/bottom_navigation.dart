@@ -1,5 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:elastico/app/core/components/app_icons_icons.dart';
+import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavigation extends StatelessWidget {

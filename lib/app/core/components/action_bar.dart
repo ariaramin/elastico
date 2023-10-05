@@ -20,7 +20,9 @@ class ActionBar extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: context.theme.appColors.onBackground,
+        color: context.isDark
+            ? context.theme.appColors.surface
+            : context.theme.appColors.onBackground,
         boxShadow: [
           BoxShadow(
             color: context.theme.appColors.shadow,

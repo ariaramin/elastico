@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 
 class SectionTitle extends StatelessWidget {
   final String title;
+  final String? trailingText;
   final bool hasTrailingText;
   final Function()? onTap;
 
   const SectionTitle({
     super.key,
     required this.title,
+    this.trailingText,
     this.hasTrailingText = true,
     this.onTap,
   });
@@ -30,7 +32,7 @@ class SectionTitle extends StatelessWidget {
               GestureDetector(
                 onTap: onTap,
                 child: Text(
-                  'see_all'.tr(),
+                  trailingText ?? 'see_all'.tr(),
                   style: context.theme.appTextTheme.tiny.copyWith(
                     color: context.theme.appColors.primary,
                   ),

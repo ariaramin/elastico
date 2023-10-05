@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:elastico/app/core/helpers/api_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/home/data/models/home_data_model.dart';
@@ -12,7 +11,7 @@ sealed class HomeDatasource {
 class HomeDatasourceImpl extends HomeDatasource {
   final ApiHelper _apiHelper;
 
-  HomeDatasourceImpl({required Dio dio}) : _apiHelper = ApiHelper(dio);
+  HomeDatasourceImpl(this._apiHelper);
 
   @override
   Future<HomeDataModel> getHomeData() async {

@@ -1,11 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/error_text.dart';
+import 'package:elastico/app/core/components/loading_indicator.dart';
 import 'package:elastico/app/core/components/section_title.dart';
-import 'package:elastico/app/core/config/route/app_routes_name.dart';
+import 'package:elastico/app/config/route/app_routes_name.dart';
+import 'package:elastico/app/features/category/presentation/widgets/category_list.dart';
 import 'package:elastico/app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:elastico/app/features/home/presentation/widgets/banner_slider.dart';
 import 'package:elastico/app/core/components/product_grid.dart';
-import 'package:elastico/app/features/home/presentation/widgets/category_list.dart';
 import 'package:elastico/app/features/home/presentation/widgets/home_appbar.dart';
 import 'package:elastico/app/features/home/presentation/widgets/middle_banners.dart';
 import 'package:elastico/app/features/home/presentation/widgets/special_offers_product_list.dart';
@@ -55,11 +56,9 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    SliverToBoxAdapter(
-                      child: ProductGrid(
-                        products: homeData.bestSellerProducts,
-                        shrinkWrap: true,
-                      ),
+                    ProductGrid(
+                      products: homeData.bestSellerProducts,
+                      isSliver: true,
                     ),
                     MiddleBanners(banner: homeData.middleBanners.last),
                     SectionTitle(
@@ -73,11 +72,9 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    SliverToBoxAdapter(
-                      child: ProductGrid(
-                        products: homeData.newestProducts,
-                        shrinkWrap: true,
-                      ),
+                    ProductGrid(
+                      products: homeData.newestProducts,
+                      isSliver: true,
                     ),
                   ],
                 ),
@@ -85,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                   errorMessage: errorMessage,
                   onPressed: () => bloc.initialRequest(),
                 ),
-                orElse: () => const Center(child: CircularProgressIndicator()),
+                orElse: () => const Center(child: LoadingIndicator()),
               );
             },
           ),

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/action_bar.dart';
 import 'package:elastico/app/core/components/discount_badge.dart';
-import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:flutter/material.dart';
@@ -46,14 +46,18 @@ class ProductActionBar extends StatelessWidget {
               Text(
                 product.finalPrice.toString().seRagham(),
                 style: context.theme.appTextTheme.regular2.copyWith(
-                  color: context.theme.appColors.background,
+                  color: context.isDark
+                      ? context.theme.appColors.onBackground
+                      : context.theme.appColors.background,
                 ),
               ),
               const SizedBox(width: 6),
               Text(
                 'toman'.tr(),
                 style: context.theme.appTextTheme.tiny.copyWith(
-                  color: context.theme.appColors.background,
+                  color: context.isDark
+                      ? context.theme.appColors.onBackground
+                      : context.theme.appColors.background,
                 ),
               ),
             ],

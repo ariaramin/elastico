@@ -7,12 +7,12 @@ import 'package:injectable/injectable.dart';
 
 @injectable
 class GetProductComments extends Usecase<List<Comment>, String> {
-  final CommentRepository commentRepository;
+  final CommentRepository _repository;
 
-  GetProductComments({required this.commentRepository});
+  GetProductComments(this._repository);
 
   @override
   Future<Either<Failure, List<Comment>>> call(params) {
-    return commentRepository.getProductComments(params);
+    return _repository.getProductComments(params);
   }
 }

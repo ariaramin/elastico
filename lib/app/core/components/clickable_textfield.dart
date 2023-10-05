@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
 

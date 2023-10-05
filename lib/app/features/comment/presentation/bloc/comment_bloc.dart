@@ -8,9 +8,9 @@ part 'comment_state.dart';
 part 'comment_bloc.freezed.dart';
 
 class CommentBloc extends Bloc<CommentEvent, CommentState> {
-  final GetProductComments getProductComments;
+  final GetProductComments _getProductComments;
 
-  CommentBloc({required this.getProductComments}) : super(const _Initial()) {
+  CommentBloc(this._getProductComments) : super(const _Initial()) {
     on<CommentEvent>(
       (events, emit) async => events.map(
         fetchProductComments: (event) async =>
@@ -24,7 +24,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     Emitter<CommentState> emit,
   ) async {
     emit(const _Loading());
-    final comments = await getProductComments.call(event.productId);
+    final comments = await _getProductComments.call(event.productId);
     comments.fold(
       (failure) => emit(_Error(errorMessage: failure.message)),
       (response) => emit(_Loaded(comments: response)),
