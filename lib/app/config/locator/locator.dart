@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pocketbase/pocketbase.dart';
 import 'locator.config.dart';
 
 final locator = GetIt.instance;
@@ -13,4 +14,7 @@ void configureDependencies() => locator.init();
 abstract class ServiceModule {
   @lazySingleton
   Dio get dio => Dio(BaseOptions(baseUrl: Constants.baseUrl));
+
+  @lazySingleton
+  PocketBase get pb => PocketBase(Constants.baseUrl);
 }

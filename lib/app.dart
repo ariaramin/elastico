@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Elastico',
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
-      themeMode: ThemeMode.light,
+      // themeMode: ThemeMode.light,
       initialRoute: AppRoutesName.splash,
       onGenerateRoute: (settings) => AppRoutes.generate(settings),
     );

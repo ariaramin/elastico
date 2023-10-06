@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/helpers/api_helper.dart';
+import 'package:elastico/app/core/helpers/pocketbase_helper.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/data/models/variant_model.dart';
 import 'package:injectable/injectable.dart';
@@ -9,23 +9,20 @@ sealed class ProductDetailDatasource {
 
 @Injectable(as: ProductDetailDatasource)
 class ProductDetailDatasourceImpl extends ProductDetailDatasource {
-  final ApiHelper _apiHelper;
+  final PocketBaseHelper _pocketBaseHelper;
 
-  ProductDetailDatasourceImpl(this._apiHelper);
+  ProductDetailDatasourceImpl(this._pocketBaseHelper);
 
   @override
   Future<List<VariantModel>> getProductVariants(String productId) async {
-    final response = await _apiHelper.get(
-      Constants.productVariantUrl,
-      queryParameters: {
-        'expand': 'items',
-        'filter': 'product=\'$productId\'',
-      },
+    final response = await _pocketBaseHelper.getList(
+      Constants.productVariant,
+      expand: 'items',
+      filter: 'product=\'$productId\'',
     );
 
-    List<VariantModel> variants = (response['items'] as List)
-        .map((item) => VariantModel.fromJson(item))
-        .toList();
+    List<VariantModel> variants =
+        response.items.map((item) => VariantModel.fromRecord(item)).toList();
 
     return variants;
   }

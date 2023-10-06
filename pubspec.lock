@@ -493,6 +493,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  go_router:
+    dependency: "direct main"
+    description:
+      name: go_router
+      sha256: a07c781bf55bf11ae85133338e4850f0b4e33e261c44a66c750fc707d65d8393
+      url: "https://pub.dev"
+    source: hosted
+    version: "11.1.2"
   graphs:
     dependency: transitive
     description:
@@ -781,6 +789,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.5"
+  pocketbase:
+    dependency: "direct main"
+    description:
+      name: pocketbase
+      sha256: d1a77d4f9511783e91f850cdc1e4ad664a9b7a87a6366023c40f6acb8b631b23
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.1"
   pool:
     dependency: transitive
     description:
@@ -1140,4 +1156,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.1.0 <4.0.0"
-  flutter: ">=3.7.0-0"
+  flutter: ">=3.7.0"

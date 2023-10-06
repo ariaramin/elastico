@@ -41,16 +41,11 @@ class HomeDataModel with _$HomeDataModel {
       );
 }
 
-List<BannerModel> _convertListOfBanners(List<dynamic> list) {
-  return list.map((bannerJson) => BannerModel.fromJson(bannerJson)).toList();
-}
+List<BannerModel> _convertListOfBanners(List<dynamic> list) =>
+    list.map((record) => BannerModel.fromRecord(record)).toList();
 
-List<CategoryModel> _convertListOfCategories(List<dynamic> list) {
-  return list
-      .map((categoryJson) => CategoryModel.fromJson(categoryJson))
-      .toList();
-}
+List<CategoryModel> _convertListOfCategories(List<dynamic> list) =>
+    list.map((record) => CategoryModel.fromRecord(record)).toList();
 
-List<ProductModel> _convertListOfProducts(List<dynamic> list) {
-  return list.map((productJson) => ProductModel.fromJson(productJson)).toList();
-}
+List<ProductModel> _convertListOfProducts(List<dynamic> list) =>
+    list.map((record) => ProductModel.fromRecord(record)).toList();

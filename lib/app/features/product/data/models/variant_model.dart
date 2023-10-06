@@ -1,6 +1,7 @@
 import 'package:elastico/app/features/product/data/models/variant_item_model.dart';
 import 'package:elastico/app/features/product/domain/entities/variant.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pocketbase/pocketbase.dart';
 
 part 'variant_model.freezed.dart';
 part 'variant_model.g.dart';
@@ -18,6 +19,9 @@ class VariantModel with _$VariantModel {
     required List<VariantItemModel> items,
   }) = _VariantModel;
 
+  factory VariantModel.fromRecord(RecordModel record) =>
+      VariantModel.fromJson(record.toJson());
+
   factory VariantModel.fromJson(Map<String, dynamic> json) =>
       _$VariantModelFromJson(json);
 
@@ -30,8 +34,7 @@ class VariantModel with _$VariantModel {
       );
 }
 
-List<VariantItemModel> _convertListOfVariantItem(Map<String, dynamic> json) {
-  return (json['items'] as List)
-      .map((variantItemJson) => VariantItemModel.fromJson(variantItemJson))
-      .toList();
-}
+List<VariantItemModel> _convertListOfVariantItem(Map<String, dynamic> json) =>
+    (json['items'] as List)
+        .map((variantItemJson) => VariantItemModel.fromJson(variantItemJson))
+        .toList();

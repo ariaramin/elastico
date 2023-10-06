@@ -23,7 +23,7 @@ abstract class UserModel with _$UserModel {
 
   User toEntity() => User(
         id: id,
-        avatar: '${Constants.baseUrl}files/$collectionId/$id/$avatar',
+        avatar: '${Constants.baseUrl}api/files/$collectionId/$id/$avatar',
         name: name,
         username: username,
         verified: verified,

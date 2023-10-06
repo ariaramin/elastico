@@ -1,7 +1,7 @@
 import 'package:elastico/app/core/components/custom_appbar.dart';
 import 'package:elastico/app/core/components/error_text.dart';
 import 'package:elastico/app/core/components/loading_indicator.dart';
-import 'package:elastico/app/core/components/product_grid.dart';
+import 'package:elastico/app/core/components/product_wrap.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product_list/product_list_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,9 +24,9 @@ class ProductListScreen extends StatelessWidget {
       body: BlocBuilder<ProductListBloc, ProductListState>(
         builder: (context, state) {
           return state.maybeWhen(
-            loaded: (products) => ProductGrid(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              products: products,
+            loaded: (products) => SizedBox(
+              width: double.infinity,
+              child: ProductWrap(products: products),
             ),
             error: (errorMessage) => ErrorText(
               errorMessage: errorMessage,

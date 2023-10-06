@@ -6,7 +6,7 @@ import 'package:elastico/app/config/route/app_routes_name.dart';
 import 'package:elastico/app/features/category/presentation/widgets/category_list.dart';
 import 'package:elastico/app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:elastico/app/features/home/presentation/widgets/banner_slider.dart';
-import 'package:elastico/app/core/components/product_grid.dart';
+import 'package:elastico/app/core/components/product_wrap.dart';
 import 'package:elastico/app/features/home/presentation/widgets/home_appbar.dart';
 import 'package:elastico/app/features/home/presentation/widgets/middle_banners.dart';
 import 'package:elastico/app/features/home/presentation/widgets/special_offers_product_list.dart';
@@ -43,7 +43,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     SpecialOffersProductList(
-                        products: homeData.discountedProducts),
+                      products: homeData.discountedProducts,
+                    ),
                     MiddleBanners(banner: homeData.middleBanners.first),
                     SectionTitle(
                       title: 'best_sellers'.tr(),
@@ -56,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    ProductGrid(
+                    ProductWrap(
                       products: homeData.bestSellerProducts,
                       isSliver: true,
                     ),
@@ -72,7 +73,7 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    ProductGrid(
+                    ProductWrap(
                       products: homeData.newestProducts,
                       isSliver: true,
                     ),

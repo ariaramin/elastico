@@ -1,6 +1,7 @@
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/home/domain/entities/banner.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pocketbase/pocketbase.dart';
 
 part 'banner_model.freezed.dart';
 part 'banner_model.g.dart';
@@ -15,11 +16,14 @@ class BannerModel with _$BannerModel {
     required String thumbnail,
   }) = _BannerModel;
 
+  factory BannerModel.fromRecord(RecordModel record) =>
+      BannerModel.fromJson(record.toJson());
+
   factory BannerModel.fromJson(Map<String, dynamic> json) =>
       _$BannerModelFromJson(json);
 
   Banner toEntity() => Banner(
         id: id,
-        thumbnail: '${Constants.baseUrl}files/$collectionId/$id/$thumbnail',
+        thumbnail: '${Constants.baseUrl}api/files/$collectionId/$id/$thumbnail',
       );
 }

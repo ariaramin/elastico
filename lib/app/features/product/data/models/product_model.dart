@@ -1,6 +1,7 @@
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pocketbase/pocketbase.dart';
 
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
@@ -22,15 +23,18 @@ class ProductModel with _$ProductModel {
     required int discountPrice,
   }) = _ProductModel;
 
+  factory ProductModel.fromRecord(RecordModel record) =>
+      ProductModel.fromJson(record.toJson());
+
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);
 
   Product toEntity() => Product(
         id: id,
-        thumbnail: '${Constants.baseUrl}files/$collectionId/$id/$thumbnail',
+        thumbnail: '${Constants.baseUrl}api/files/$collectionId/$id/$thumbnail',
         images: List<String>.from(images)
-            .map(
-                (image) => '${Constants.baseUrl}files/$collectionId/$id/$image')
+            .map((image) =>
+                '${Constants.baseUrl}api/files/$collectionId/$id/$image')
             .toList(),
         name: name,
         description: description,
