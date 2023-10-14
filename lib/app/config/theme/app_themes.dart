@@ -25,6 +25,14 @@ class AppThemes {
         selectedLabelStyle: const TextStyle(fontSize: 12),
         unselectedLabelStyle: const TextStyle(fontSize: 12),
       ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: _lightAppColors.background,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(16),
+          ),
+        ),
+      ),
       textTheme: defaultTheme.textTheme.copyWith(
         // Default text style for Text widget.
         bodyMedium: AppTypography.regular3.copyWith(
@@ -110,6 +118,14 @@ class AppThemes {
         selectedItemColor: _lightAppColors.primary,
         selectedLabelStyle: const TextStyle(fontSize: 12),
         unselectedLabelStyle: const TextStyle(fontSize: 12),
+      ),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: _darkAppColors.background,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(16),
+          ),
+        ),
       ),
       textTheme: defaultTheme.textTheme.copyWith(
         // Default text style for Text widget.

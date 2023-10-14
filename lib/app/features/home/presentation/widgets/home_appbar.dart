@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/clickable_textfield.dart';
-import 'package:elastico/app/config/route/app_routes_name.dart';
+import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/home/presentation/widgets/welcome.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
@@ -31,7 +32,7 @@ class HomeAppBar extends StatelessWidget {
         ),
         IconButton(
           icon: const Icon(AppIcons.iconly_regular_outline_heart),
-          onPressed: () => Navigator.pushNamed(context, AppRoutesName.wishlist),
+          onPressed: () => context.push(AppRouterPaths.wishlist),
         ),
       ],
       bottom: AppBar(
@@ -45,7 +46,7 @@ class HomeAppBar extends StatelessWidget {
           prefixIcon: AppIcons.iconly_regular_outline_search,
           suffixIcon: AppIcons.iconly_regular_outline_filter,
           suffixIconColor: context.theme.appColors.onBackground,
-          onTap: () => Navigator.pushNamed(context, AppRoutesName.search),
+          onTap: () => context.push(AppRouterPaths.search),
         ),
       ),
     );

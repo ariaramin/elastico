@@ -43,7 +43,7 @@ class ProductAppBar extends StatelessWidget {
           },
         ),
         IconButton(
-          icon: const Icon(AppIcons.iconly_regular_outline_notification),
+          icon: const Icon(AppIcons.iconly_regular_outline_send),
           onPressed: () {},
         ),
       ],

@@ -36,7 +36,7 @@ const List<SettingsItem> settings = [
   ),
   SettingsItem(
     title: 'زبان',
-    icon: AppIcons.iconly_regular_outline_star,
+    icon: AppIcons.iconly_regular_outline_document,
     type: SettingsItemType.selectable,
     options: ['فارسی', 'انگلیسی'],
   ),
@@ -47,7 +47,7 @@ const List<SettingsItem> settings = [
   ),
   SettingsItem(
     title: 'دعوت از دوستان',
-    icon: AppIcons.iconly_regular_outline_profile,
+    icon: AppIcons.iconly_regular_outline_3_user,
   ),
   SettingsItem(
     title: 'خروج از حساب کاربری',

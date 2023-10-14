@@ -53,6 +53,7 @@ class _SettingsTileState extends State<SettingsTile> {
         SettingsItemType.switchItem => setState(() => _isOn = !_isOn),
         SettingsItemType.selectable => showModalBottomSheet(
             context: context,
+            useRootNavigator: true,
             builder: (context) => SelectableBottomSheet(
               options: widget.item.options!,
               selectedOption: _selectedOption!,

@@ -1,7 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({
@@ -11,7 +13,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () => context.go(AppRouterPaths.profile),
       child: Row(
         children: [
           CircleAvatar(

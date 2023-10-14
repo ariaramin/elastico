@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/error_text.dart';
-import 'package:elastico/app/config/route/app_routes_name.dart';
+import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/intro/presentation/bloc/network_bloc.dart';
 import 'package:elastico/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -49,11 +50,7 @@ class SplashScreen extends StatelessWidget {
                   if (state is NetworkSuccess) {
                     Future.delayed(
                       const Duration(milliseconds: 2500),
-                      () => Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        AppRoutesName.main,
-                        (route) => false,
-                      ),
+                      () => context.go(AppRouterPaths.home),
                     );
                   }
                 },

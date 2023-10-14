@@ -31,7 +31,7 @@ class BottomNavigation extends StatelessWidget {
         ),
         _getBottomNavigationItem(
           AppIcons.iconly_regular_outline_bag,
-          AppIcons.iconly_regular_bold_bag,
+          AppIcons.bag,
           'cart'.tr(),
         ),
         _getBottomNavigationItem(

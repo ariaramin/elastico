@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:elastico/app/config/route/app_routes.dart';
-import 'package:elastico/app/config/route/app_routes_name.dart';
+import 'package:elastico/app/config/route/app_router.dart';
 import 'package:elastico/app/config/theme/app_themes.dart';
 import 'package:elastico/gen/fonts.gen.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppThemes.fontFamily = FontFamily.shabnam;
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
@@ -20,8 +19,7 @@ class MyApp extends StatelessWidget {
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
       // themeMode: ThemeMode.light,
-      initialRoute: AppRoutesName.splash,
-      onGenerateRoute: (settings) => AppRoutes.generate(settings),
+      routerConfig: AppRouter.router,
     );
   }
 }

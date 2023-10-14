@@ -1,5 +1,4 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/custom_appbar.dart';
 import 'package:elastico/app/core/components/section_title.dart';
 import 'package:elastico/app/core/extention/responsive_extention.dart';
@@ -15,15 +14,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'cart'.tr(),
-        actions: [
-          IconButton(
-            icon: const Icon(AppIcons.iconly_regular_outline_search),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(title: 'cart'.tr()),
       body: Stack(
         children: [
           CustomScrollView(

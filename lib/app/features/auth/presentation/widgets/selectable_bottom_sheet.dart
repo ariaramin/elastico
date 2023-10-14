@@ -25,8 +25,8 @@ class SelectableBottomSheet extends StatelessWidget {
         titleTextStyle: context.theme.appTextTheme.regular3,
         trailing: selectedOption == options[index]
             ? Icon(
-                AppIcons.iconly_regular_outline_chat,
-                size: 18,
+                AppIcons.tick_square,
+                size: 20,
                 color: AppPalette.green.green80,
               )
             : null,

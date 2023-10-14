@@ -30,7 +30,7 @@ class Avatar extends StatelessWidget {
                     color: context.theme.appColors.primary,
                   ),
                   child: const Icon(
-                    AppIcons.iconly_regular_outline_edit,
+                    AppIcons.iconly_regular_bold_edit,
                     size: 12,
                     color: Colors.white,
                   ),

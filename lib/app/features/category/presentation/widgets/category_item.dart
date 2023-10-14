@@ -1,8 +1,9 @@
 import 'package:elastico/app/core/components/cached_image.dart';
-import 'package:elastico/app/config/route/app_routes_name.dart';
+import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/category/domain/entities/category.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoryItem extends StatelessWidget {
   final Category category;
@@ -15,13 +16,10 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        AppRoutesName.productList,
-        arguments: {
-          'title': category.title,
-          'filter': 'category=\'${category.id}\'',
-        },
+      onTap: () => context.push(
+        AppRouterPaths.productList
+            .replaceFirst(':title', category.title)
+            .replaceFirst(':filter', 'category=\'${category.id}\''),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

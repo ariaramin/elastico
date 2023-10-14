@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/error_text.dart';
 import 'package:elastico/app/core/components/loading_indicator.dart';
 import 'package:elastico/app/core/components/section_title.dart';
-import 'package:elastico/app/config/route/app_routes_name.dart';
+import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/features/category/presentation/widgets/category_list.dart';
 import 'package:elastico/app/features/home/presentation/bloc/home_bloc.dart';
 import 'package:elastico/app/features/home/presentation/widgets/banner_slider.dart';
@@ -12,6 +12,7 @@ import 'package:elastico/app/features/home/presentation/widgets/middle_banners.d
 import 'package:elastico/app/features/home/presentation/widgets/special_offers_product_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -33,13 +34,11 @@ class HomeScreen extends StatelessWidget {
                     CategoryList(categories: homeData.topCategories),
                     SectionTitle(
                       title: 'special_offers'.tr(),
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        AppRoutesName.productList,
-                        arguments: {
-                          'title': 'special_offers'.tr(),
-                          'filter': 'popularity=\'discounted\''
-                        },
+                      onTap: () => context.push(
+                        AppRouterPaths.productList
+                            .replaceFirst(':title', 'special_offers'.tr())
+                            .replaceFirst(
+                                ':filter', 'popularity=\'discounted\''),
                       ),
                     ),
                     SpecialOffersProductList(
@@ -48,13 +47,11 @@ class HomeScreen extends StatelessWidget {
                     MiddleBanners(banner: homeData.middleBanners.first),
                     SectionTitle(
                       title: 'best_sellers'.tr(),
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        AppRoutesName.productList,
-                        arguments: {
-                          'title': 'best_sellers'.tr(),
-                          'filter': 'popularity=\'best-seller\''
-                        },
+                      onTap: () => context.push(
+                        AppRouterPaths.productList
+                            .replaceFirst(':title', 'best_sellers'.tr())
+                            .replaceFirst(
+                                ':filter', 'popularity=\'best-seller\''),
                       ),
                     ),
                     ProductWrap(
@@ -64,13 +61,10 @@ class HomeScreen extends StatelessWidget {
                     MiddleBanners(banner: homeData.middleBanners.last),
                     SectionTitle(
                       title: 'newest'.tr(),
-                      onTap: () => Navigator.pushNamed(
-                        context,
-                        AppRoutesName.productList,
-                        arguments: {
-                          'title': 'newest'.tr(),
-                          'filter': 'popularity=\'newest\''
-                        },
+                      onTap: () => context.push(
+                        AppRouterPaths.productList
+                            .replaceFirst(':title', 'newest'.tr())
+                            .replaceFirst(':filter', 'popularity=\'newest\''),
                       ),
                     ),
                     ProductWrap(

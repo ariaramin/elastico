@@ -4,13 +4,14 @@ import 'package:elastico/app/core/components/cached_image.dart';
 import 'package:elastico/app/core/components/discount_badge.dart';
 import 'package:elastico/app/core/components/shadow_container.dart';
 import 'package:elastico/app/config/locator/locator.dart';
-import 'package:elastico/app/config/route/app_routes_name.dart';
+import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
 class ProductItem extends StatelessWidget {
@@ -26,10 +27,8 @@ class ProductItem extends StatelessWidget {
     return BlocProvider.value(
       value: locator.get<WishlistBloc>(),
       child: GestureDetector(
-        onTap: () => Navigator.pushNamed(
-          context,
-          AppRoutesName.product,
-          arguments: {'productId': product.id},
+        onTap: () => context.push(
+          AppRouterPaths.product.replaceFirst(':productId', product.id),
         ),
         child: ShadowContainer(
           width: 172,
@@ -135,7 +134,7 @@ class ProductItem extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               Icon(
-                AppIcons.iconly_regular_outline_arrow___right_circle,
+                AppIcons.iconly_regular_bold_arrow___right_circle,
                 color: AppPalette.light.light100,
               ),
               const Spacer(),
