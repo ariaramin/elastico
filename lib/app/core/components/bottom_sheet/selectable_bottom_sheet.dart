@@ -2,16 +2,19 @@ import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+import 'entity/option.dart';
 
 class SelectableBottomSheet extends StatelessWidget {
-  final List<String> options;
-  final String selectedOption;
-  final Function(String) onOptionSelected;
+  final List<Option> options;
+  final Option? selectedOption;
+  final Function(Option) onOptionSelected;
 
   const SelectableBottomSheet({
     super.key,
     required this.options,
-    required this.selectedOption,
+    this.selectedOption,
     required this.onOptionSelected,
   });
 
@@ -21,7 +24,7 @@ class SelectableBottomSheet extends StatelessWidget {
       shrinkWrap: true,
       itemCount: options.length,
       itemBuilder: (context, index) => ListTile(
-        title: Text(options[index]),
+        title: Text(options[index].title),
         titleTextStyle: context.theme.appTextTheme.regular3,
         trailing: selectedOption == options[index]
             ? Icon(
@@ -32,7 +35,7 @@ class SelectableBottomSheet extends StatelessWidget {
             : null,
         onTap: () {
           onOptionSelected(options[index]);
-          Navigator.pop(context);
+          context.pop();
         },
       ),
     );

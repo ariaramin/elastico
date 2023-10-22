@@ -24,8 +24,7 @@ mixin _$UserModel {
   String get id => throw _privateConstructorUsedError;
   String get avatar => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  bool get verified => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,8 +42,7 @@ abstract class $UserModelCopyWith<$Res> {
       String id,
       String avatar,
       String name,
-      String username,
-      bool verified});
+      String email});
 }
 
 /// @nodoc
@@ -64,8 +62,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? id = null,
     Object? avatar = null,
     Object? name = null,
-    Object? username = null,
-    Object? verified = null,
+    Object? email = null,
   }) {
     return _then(_value.copyWith(
       collectionId: null == collectionId
@@ -84,14 +81,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
-      verified: null == verified
-          ? _value.verified
-          : verified // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 }
@@ -108,8 +101,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String id,
       String avatar,
       String name,
-      String username,
-      bool verified});
+      String email});
 }
 
 /// @nodoc
@@ -127,8 +119,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? id = null,
     Object? avatar = null,
     Object? name = null,
-    Object? username = null,
-    Object? verified = null,
+    Object? email = null,
   }) {
     return _then(_$_UserModel(
       collectionId: null == collectionId
@@ -147,14 +138,10 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
-      verified: null == verified
-          ? _value.verified
-          : verified // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -167,8 +154,7 @@ class _$_UserModel extends _UserModel {
       required this.id,
       required this.avatar,
       required this.name,
-      required this.username,
-      required this.verified})
+      required this.email})
       : super._();
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
@@ -183,13 +169,11 @@ class _$_UserModel extends _UserModel {
   @override
   final String name;
   @override
-  final String username;
-  @override
-  final bool verified;
+  final String email;
 
   @override
   String toString() {
-    return 'UserModel(collectionId: $collectionId, id: $id, avatar: $avatar, name: $name, username: $username, verified: $verified)';
+    return 'UserModel(collectionId: $collectionId, id: $id, avatar: $avatar, name: $name, email: $email)';
   }
 
   @override
@@ -202,16 +186,13 @@ class _$_UserModel extends _UserModel {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.verified, verified) ||
-                other.verified == verified));
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, collectionId, id, avatar, name, username, verified);
+  int get hashCode =>
+      Object.hash(runtimeType, collectionId, id, avatar, name, email);
 
   @JsonKey(ignore: true)
   @override
@@ -233,8 +214,7 @@ abstract class _UserModel extends UserModel {
       required final String id,
       required final String avatar,
       required final String name,
-      required final String username,
-      required final bool verified}) = _$_UserModel;
+      required final String email}) = _$_UserModel;
   const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -249,9 +229,7 @@ abstract class _UserModel extends UserModel {
   @override
   String get name;
   @override
-  String get username;
-  @override
-  bool get verified;
+  String get email;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

@@ -1,4 +1,5 @@
 import 'package:elastico/app/core/components/app_icons.dart';
+import 'package:elastico/app/core/components/bottom_sheet/entity/option.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,25 +13,25 @@ enum SettingsItemType {
 }
 
 @freezed
-abstract class SettingsItem with _$SettingsItem {
+class SettingsItem with _$SettingsItem {
   const factory SettingsItem({
     required String title,
     required IconData icon,
     @Default(SettingsItemType.normal) SettingsItemType type,
-    List<String>? options,
+    List<Option>? options,
   }) = _SettingsItem;
 }
 
-const List<SettingsItem> settings = [
-  SettingsItem(
+List<SettingsItem> settings = [
+  const SettingsItem(
     title: 'ویرایش پروفایل',
     icon: AppIcons.iconly_regular_outline_profile,
   ),
-  SettingsItem(
+  const SettingsItem(
     title: 'آدرس ها',
     icon: AppIcons.iconly_regular_outline_location,
   ),
-  SettingsItem(
+  const SettingsItem(
     title: 'اعلان ها',
     icon: AppIcons.iconly_regular_outline_notification,
   ),
@@ -38,18 +39,27 @@ const List<SettingsItem> settings = [
     title: 'زبان',
     icon: AppIcons.iconly_regular_outline_document,
     type: SettingsItemType.selectable,
-    options: ['فارسی', 'انگلیسی'],
+    options: [
+      Option(
+        title: 'فارسی',
+        value: const Locale('fa', 'IR'),
+      ),
+      Option(
+        title: 'انگلیسی',
+        value: const Locale('en', 'US'),
+      ),
+    ],
   ),
-  SettingsItem(
+  const SettingsItem(
     title: 'دارک مود',
     icon: AppIcons.iconly_regular_outline_show,
     type: SettingsItemType.switchItem,
   ),
-  SettingsItem(
+  const SettingsItem(
     title: 'دعوت از دوستان',
     icon: AppIcons.iconly_regular_outline_3_user,
   ),
-  SettingsItem(
+  const SettingsItem(
     title: 'خروج از حساب کاربری',
     icon: AppIcons.iconly_regular_outline_logout,
     type: SettingsItemType.logout,

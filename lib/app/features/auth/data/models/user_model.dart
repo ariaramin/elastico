@@ -1,6 +1,7 @@
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/auth/domain/entities/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pocketbase/pocketbase.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
@@ -14,18 +15,21 @@ abstract class UserModel with _$UserModel {
     required String id,
     required String avatar,
     required String name,
-    required String username,
-    required bool verified,
+    required String email,
   }) = _UserModel;
+
+  factory UserModel.fromRecord(RecordModel record) =>
+      UserModel.fromJson(record.toJson());
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
   User toEntity() => User(
         id: id,
-        avatar: '${Constants.baseUrl}api/files/$collectionId/$id/$avatar',
+        avatar: avatar.isEmpty
+            ? 'https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-symbol-image-400-244492311.jpg'
+            : '${Constants.baseUrl}api/files/$collectionId/$id/$avatar',
         name: name,
-        username: username,
-        verified: verified,
+        email: email,
       );
 }

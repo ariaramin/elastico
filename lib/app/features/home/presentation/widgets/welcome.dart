@@ -1,8 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
-import 'package:elastico/gen/assets.gen.dart';
+import 'package:elastico/app/features/auth/presentation/bloc/app_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class Welcome extends StatelessWidget {
@@ -14,40 +16,44 @@ class Welcome extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => context.go(AppRouterPaths.profile),
-      child: Row(
-        children: [
-          CircleAvatar(
-            backgroundImage: Assets.images.profile.provider(),
-            radius: 22,
-          ),
-          const SizedBox(width: 12),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      child: BlocBuilder<AppBloc, AppState>(
+        builder: (context, state) {
+          return Row(
             children: [
-              Row(
+              CircleAvatar(
+                backgroundImage: CachedNetworkImageProvider(state.user.avatar!),
+                radius: 22,
+              ),
+              const SizedBox(width: 12),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'greeting'.tr(gender: 'morning'),
-                    style: context.theme.appTextTheme.tiny.copyWith(
-                      color:
-                          context.theme.appColors.onBackground.withOpacity(.4),
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        'greeting'.tr(gender: 'morning'),
+                        style: context.theme.appTextTheme.tiny.copyWith(
+                          color: context.theme.appColors.onBackground
+                              .withOpacity(.4),
+                        ),
+                      ),
+                      Text(
+                        ' 👋',
+                        style: context.theme.appTextTheme.tiny,
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 2),
                   Text(
-                    ' 👋',
-                    style: context.theme.appTextTheme.tiny,
+                    state.user.name!,
+                    style: context.theme.appTextTheme.regular2,
                   ),
                 ],
               ),
-              const SizedBox(height: 2),
-              Text(
-                'آریا رامین',
-                style: context.theme.appTextTheme.regular2,
-              ),
             ],
-          ),
-        ],
+          );
+        },
       ),
     );
   }

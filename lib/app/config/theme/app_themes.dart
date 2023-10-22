@@ -35,10 +35,11 @@ class AppThemes {
       ),
       textTheme: defaultTheme.textTheme.copyWith(
         // Default text style for Text widget.
-        bodyMedium: AppTypography.regular3.copyWith(
-          fontFamily: _fontFamily,
-          color: _lightAppColors.onBackground,
-        ),
+        bodyMedium: _lightTextTheme.regular3,
+        titleSmall: _lightTextTheme.small,
+      ),
+      colorScheme: defaultTheme.colorScheme.copyWith(
+        secondary: _lightAppColors.primary,
       ),
       extensions: [
         _lightAppColors,
@@ -129,10 +130,11 @@ class AppThemes {
       ),
       textTheme: defaultTheme.textTheme.copyWith(
         // Default text style for Text widget.
-        bodyMedium: AppTypography.regular3.copyWith(
-          fontFamily: _fontFamily,
-          color: _darkAppColors.onBackground,
-        ),
+        bodyMedium: _darkTextTheme.regular3,
+        titleSmall: _darkTextTheme.small,
+      ),
+      colorScheme: defaultTheme.colorScheme.copyWith(
+        secondary: _darkAppColors.primary,
       ),
       extensions: [
         _darkAppColors,

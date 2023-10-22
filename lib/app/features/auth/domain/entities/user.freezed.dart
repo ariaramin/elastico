@@ -17,10 +17,9 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$User {
   String get id => throw _privateConstructorUsedError;
-  String get avatar => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get username => throw _privateConstructorUsedError;
-  bool get verified => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -31,8 +30,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call(
-      {String id, String avatar, String name, String username, bool verified});
+  $Res call({String id, String? avatar, String? name, String? email});
 }
 
 /// @nodoc
@@ -49,32 +47,27 @@ class _$UserCopyWithImpl<$Res, $Val extends User>
   @override
   $Res call({
     Object? id = null,
-    Object? avatar = null,
-    Object? name = null,
-    Object? username = null,
-    Object? verified = null,
+    Object? avatar = freezed,
+    Object? name = freezed,
+    Object? email = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: null == avatar
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      verified: null == verified
-          ? _value.verified
-          : verified // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -85,8 +78,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String id, String avatar, String name, String username, bool verified});
+  $Res call({String id, String? avatar, String? name, String? email});
 }
 
 /// @nodoc
@@ -99,60 +91,49 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
   @override
   $Res call({
     Object? id = null,
-    Object? avatar = null,
-    Object? name = null,
-    Object? username = null,
-    Object? verified = null,
+    Object? avatar = freezed,
+    Object? name = freezed,
+    Object? email = freezed,
   }) {
     return _then(_$_User(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: null == avatar
+      avatar: freezed == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
+              as String?,
+      name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      username: null == username
-          ? _value.username
-          : username // ignore: cast_nullable_to_non_nullable
-              as String,
-      verified: null == verified
-          ? _value.verified
-          : verified // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_User implements _User {
-  const _$_User(
-      {required this.id,
-      required this.avatar,
-      required this.name,
-      required this.username,
-      required this.verified});
+class _$_User extends _User {
+  const _$_User({required this.id, this.avatar, this.name, this.email})
+      : super._();
 
   @override
   final String id;
   @override
-  final String avatar;
+  final String? avatar;
   @override
-  final String name;
+  final String? name;
   @override
-  final String username;
-  @override
-  final bool verified;
+  final String? email;
 
   @override
   String toString() {
-    return 'User(id: $id, avatar: $avatar, name: $name, username: $username, verified: $verified)';
+    return 'User(id: $id, avatar: $avatar, name: $name, email: $email)';
   }
 
   @override
@@ -163,15 +144,11 @@ class _$_User implements _User {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.avatar, avatar) || other.avatar == avatar) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.username, username) ||
-                other.username == username) &&
-            (identical(other.verified, verified) ||
-                other.verified == verified));
+            (identical(other.email, email) || other.email == email));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, avatar, name, username, verified);
+  int get hashCode => Object.hash(runtimeType, id, avatar, name, email);
 
   @JsonKey(ignore: true)
   @override
@@ -180,24 +157,22 @@ class _$_User implements _User {
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
 }
 
-abstract class _User implements User {
+abstract class _User extends User {
   const factory _User(
       {required final String id,
-      required final String avatar,
-      required final String name,
-      required final String username,
-      required final bool verified}) = _$_User;
+      final String? avatar,
+      final String? name,
+      final String? email}) = _$_User;
+  const _User._() : super._();
 
   @override
   String get id;
   @override
-  String get avatar;
+  String? get avatar;
   @override
-  String get name;
+  String? get name;
   @override
-  String get username;
-  @override
-  bool get verified;
+  String? get email;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

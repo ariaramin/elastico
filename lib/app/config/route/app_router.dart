@@ -1,3 +1,8 @@
+import 'package:elastico/app/features/auth/presentation/bloc/app_bloc.dart';
+import 'package:elastico/app/features/auth/presentation/cubit/login/login_cubit.dart';
+import 'package:elastico/app/features/auth/presentation/cubit/register/register_cubit.dart';
+import 'package:elastico/app/features/auth/presentation/screens/login_screen.dart';
+import 'package:elastico/app/features/auth/presentation/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -26,7 +31,17 @@ import 'package:elastico/main_screen.dart';
 class AppRouter {
   static final GlobalKey<NavigatorState> _rootNavigatorKey =
       GlobalKey<NavigatorState>();
-  static final GlobalKey<NavigatorState> _shellNavigatorKey =
+
+  static final GlobalKey<NavigatorState> _homeNavigatorKey =
+      GlobalKey<NavigatorState>();
+
+  static final GlobalKey<NavigatorState> _categoriesNavigatorKey =
+      GlobalKey<NavigatorState>();
+
+  static final GlobalKey<NavigatorState> _cartNavigatorKey =
+      GlobalKey<NavigatorState>();
+
+  static final GlobalKey<NavigatorState> _profileNavigatorKey =
       GlobalKey<NavigatorState>();
 
   static final GoRouter _router = GoRouter(
@@ -40,6 +55,8 @@ class AppRouter {
   static List<RouteBase> _createRoutes() {
     return [
       _createSplashRoute(),
+      _createLoginRoute(),
+      _createRegisterRoute(),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) => MainScreen(
           navigationShell: navigationShell,
@@ -69,6 +86,26 @@ class AppRouter {
     );
   }
 
+  static GoRoute _createLoginRoute() {
+    return _createRoute(
+      AppRouterPaths.login,
+      (context, state) => BlocProvider(
+        create: (context) => LoginCubit(locator.get()),
+        child: const LoginScreen(),
+      ),
+    );
+  }
+
+  static GoRoute _createRegisterRoute() {
+    return _createRoute(
+      AppRouterPaths.register,
+      (context, state) => BlocProvider(
+        create: (context) => RegisterCubit(locator.get()),
+        child: const RegisterScreen(),
+      ),
+    );
+  }
+
   static StatefulShellBranch _createHomeRoute() {
     return _createShellBranch(
       AppRouterPaths.home,
@@ -77,7 +114,7 @@ class AppRouter {
             HomeBloc(locator.get(), locator.get())..initialRequest(),
         child: const HomeScreen(),
       ),
-      navigatorKey: _shellNavigatorKey,
+      navigatorKey: _homeNavigatorKey,
     );
   }
 
@@ -85,6 +122,7 @@ class AppRouter {
     return _createShellBranch(
       AppRouterPaths.categories,
       (context, state) => const CartScreen(),
+      navigatorKey: _categoriesNavigatorKey,
     );
   }
 
@@ -92,6 +130,7 @@ class AppRouter {
     return _createShellBranch(
       AppRouterPaths.cart,
       (context, state) => const CartScreen(),
+      navigatorKey: _cartNavigatorKey,
     );
   }
 
@@ -99,6 +138,7 @@ class AppRouter {
     return _createShellBranch(
       AppRouterPaths.profile,
       (context, state) => const ProfileScreen(),
+      navigatorKey: _profileNavigatorKey,
     );
   }
 
@@ -190,6 +230,12 @@ class AppRouter {
         GoRoute(
           path: path,
           builder: builder,
+          redirect: (context, state) {
+            final appState = context.read<AppBloc>().state;
+            return (appState.status == AppStatus.unauthenticated)
+                ? AppRouterPaths.login
+                : null;
+          },
         ),
       ],
     );

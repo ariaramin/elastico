@@ -1,14 +1,16 @@
 import 'package:dio/dio.dart';
 import 'package:elastico/app/core/utils/constants.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pocketbase/pocketbase.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'locator.config.dart';
 
 final locator = GetIt.instance;
 
 @InjectableInit()
-void configureDependencies() => locator.init();
+Future<GetIt> configureDependencies() async => await locator.init();
 
 @module
 abstract class ServiceModule {
@@ -17,4 +19,11 @@ abstract class ServiceModule {
 
   @lazySingleton
   PocketBase get pb => PocketBase(Constants.baseUrl);
+
+  @preResolve
+  @lazySingleton
+  Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
+
+  @lazySingleton
+  FlutterSecureStorage get storage => const FlutterSecureStorage();
 }

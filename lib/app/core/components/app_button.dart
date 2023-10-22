@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class AppButton extends StatelessWidget {
   final String text;
   final bool isPrimary;
+  final bool isLoading;
   final Color? backgroundColor;
   final Function()? onPressed;
 
@@ -12,6 +13,7 @@ class AppButton extends StatelessWidget {
     super.key,
     required this.text,
     this.isPrimary = true,
+    this.isLoading = false,
     this.backgroundColor,
     this.onPressed,
   });
@@ -20,10 +22,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(
-          vertical: 14,
-          horizontal: 18,
-        ),
+        fixedSize: const Size.fromHeight(56),
         elevation: 0,
         shadowColor: AppPalette.light.light40.withOpacity(.5),
         shape: RoundedRectangleBorder(
@@ -41,7 +40,16 @@ class AppButton extends StatelessWidget {
         ),
       ),
       onPressed: onPressed,
-      child: Text(text),
+      child: isLoading
+          ? SizedBox(
+              width: 28,
+              height: 28,
+              child: CircularProgressIndicator(
+                color: AppPalette.light.light100,
+                strokeWidth: 3.5,
+              ),
+            )
+          : Text(text),
     );
   }
 }

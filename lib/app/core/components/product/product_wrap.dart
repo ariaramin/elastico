@@ -1,6 +1,7 @@
-import 'package:elastico/app/core/components/product_item.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:flutter/material.dart';
+
+import 'product_item.dart';
 
 class ProductWrap extends StatefulWidget {
   final List<Product> products;

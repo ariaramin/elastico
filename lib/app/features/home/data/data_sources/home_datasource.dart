@@ -8,7 +8,7 @@ sealed class HomeDatasource {
 }
 
 @Injectable(as: HomeDatasource)
-class HomeDatasourceImpl extends HomeDatasource {
+class HomeDatasourceImpl implements HomeDatasource {
   final PocketBaseHelper _pocketBaseHelper;
 
   HomeDatasourceImpl(this._pocketBaseHelper);

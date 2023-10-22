@@ -19,7 +19,7 @@ mixin _$SettingsItem {
   String get title => throw _privateConstructorUsedError;
   IconData get icon => throw _privateConstructorUsedError;
   SettingsItemType get type => throw _privateConstructorUsedError;
-  List<String>? get options => throw _privateConstructorUsedError;
+  List<Option>? get options => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SettingsItemCopyWith<SettingsItem> get copyWith =>
@@ -36,7 +36,7 @@ abstract class $SettingsItemCopyWith<$Res> {
       {String title,
       IconData icon,
       SettingsItemType type,
-      List<String>? options});
+      List<Option>? options});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$SettingsItemCopyWithImpl<$Res, $Val extends SettingsItem>
       options: freezed == options
           ? _value.options
           : options // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Option>?,
     ) as $Val);
   }
 }
@@ -90,7 +90,7 @@ abstract class _$$_SettingsItemCopyWith<$Res>
       {String title,
       IconData icon,
       SettingsItemType type,
-      List<String>? options});
+      List<Option>? options});
 }
 
 /// @nodoc
@@ -125,7 +125,7 @@ class __$$_SettingsItemCopyWithImpl<$Res>
       options: freezed == options
           ? _value._options
           : options // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Option>?,
     ));
   }
 }
@@ -137,7 +137,7 @@ class _$_SettingsItem implements _SettingsItem {
       {required this.title,
       required this.icon,
       this.type = SettingsItemType.normal,
-      final List<String>? options})
+      final List<Option>? options})
       : _options = options;
 
   @override
@@ -147,9 +147,9 @@ class _$_SettingsItem implements _SettingsItem {
   @override
   @JsonKey()
   final SettingsItemType type;
-  final List<String>? _options;
+  final List<Option>? _options;
   @override
-  List<String>? get options {
+  List<Option>? get options {
     final value = _options;
     if (value == null) return null;
     if (_options is EqualUnmodifiableListView) return _options;
@@ -189,7 +189,7 @@ abstract class _SettingsItem implements SettingsItem {
       {required final String title,
       required final IconData icon,
       final SettingsItemType type,
-      final List<String>? options}) = _$_SettingsItem;
+      final List<Option>? options}) = _$_SettingsItem;
 
   @override
   String get title;
@@ -198,7 +198,7 @@ abstract class _SettingsItem implements SettingsItem {
   @override
   SettingsItemType get type;
   @override
-  List<String>? get options;
+  List<Option>? get options;
   @override
   @JsonKey(ignore: true)
   _$$_SettingsItemCopyWith<_$_SettingsItem> get copyWith =>

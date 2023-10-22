@@ -1,9 +1,14 @@
+import 'package:elastico/app/config/locator/locator.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/config/theme/cubit/theme_cubit.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
+import 'package:elastico/app/core/components/bottom_sheet/entity/option.dart';
+import 'package:elastico/app/core/components/bottom_sheet/selectable_bottom_sheet.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/core/helpers/auth_helper.dart';
 import 'package:elastico/app/features/auth/domain/entities/settings_item.dart';
-import 'package:elastico/app/features/auth/presentation/widgets/selectable_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsTile extends StatefulWidget {
   final SettingsItem item;
@@ -20,8 +25,7 @@ class SettingsTile extends StatefulWidget {
 }
 
 class _SettingsTileState extends State<SettingsTile> {
-  bool _isOn = false;
-  String? _selectedOption;
+  Option? _selectedOption;
 
   @override
   void initState() {
@@ -50,7 +54,7 @@ class _SettingsTileState extends State<SettingsTile> {
       horizontalTitleGap: 0,
       onTap: () => switch (widget.item.type) {
         SettingsItemType.normal => widget.onItemTap,
-        SettingsItemType.switchItem => setState(() => _isOn = !_isOn),
+        SettingsItemType.switchItem => context.read<ThemeCubit>().toggleTheme(),
         SettingsItemType.selectable => showModalBottomSheet(
             context: context,
             useRootNavigator: true,
@@ -61,7 +65,7 @@ class _SettingsTileState extends State<SettingsTile> {
                   setState(() => _selectedOption = option),
             ),
           ),
-        SettingsItemType.logout => widget.onItemTap,
+        SettingsItemType.logout => locator.get<AuthHelper>().logout(),
       },
       trailing: switch (widget.item.type) {
         SettingsItemType.normal => Icon(
@@ -69,16 +73,20 @@ class _SettingsTileState extends State<SettingsTile> {
             size: 18,
             color: context.theme.appColors.onBackground,
           ),
-        SettingsItemType.switchItem => Switch(
-            value: _isOn,
-            onChanged: (value) => setState(() => _isOn = !_isOn),
+        SettingsItemType.switchItem => BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return Switch(
+                value: state.isDark,
+                onChanged: (value) => context.read<ThemeCubit>().toggleTheme(),
+              );
+            },
           ),
         SettingsItemType.selectable => Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                _selectedOption!,
+                _selectedOption!.title,
                 style: context.theme.appTextTheme.small,
               ),
               const SizedBox(width: 6),

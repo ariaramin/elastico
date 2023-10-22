@@ -32,7 +32,7 @@ class CommentItem extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundImage:
-                    CachedNetworkImageProvider(comment.user.avatar),
+                    CachedNetworkImageProvider(comment.user.avatar!),
                 radius: 22,
               ),
               const SizedBox(width: 12),
@@ -40,7 +40,7 @@ class CommentItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    comment.user.name,
+                    comment.user.name!,
                     style: context.theme.appTextTheme.regular3.copyWith(
                       fontWeight: FontWeight.w600,
                     ),

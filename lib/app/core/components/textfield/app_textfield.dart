@@ -1,22 +1,23 @@
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatefulWidget {
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String hint;
   final TextInputType? keyboardType;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final Color? suffixIconColor;
-
   final bool isPassword;
   final bool autofocus;
   final Function()? onSuffixIconTap;
+  final Function(String)? onChanged;
 
   const AppTextField({
     super.key,
-    required this.controller,
+    this.controller,
     required this.hint,
     this.keyboardType,
     this.prefixIcon,
@@ -25,6 +26,7 @@ class AppTextField extends StatefulWidget {
     this.isPassword = false,
     this.autofocus = false,
     this.onSuffixIconTap,
+    this.onChanged,
   });
 
   @override
@@ -32,6 +34,7 @@ class AppTextField extends StatefulWidget {
 }
 
 class _AppTextFieldState extends State<AppTextField> {
+  late TextEditingController _controller;
   late FocusNode _focusNode;
   bool _hasFocus = false;
   bool _isPasswordVisible = false;
@@ -39,6 +42,7 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   void initState() {
     super.initState();
+    _controller = widget.controller ?? TextEditingController();
     _focusNode = FocusNode();
     _focusNode.addListener(() {
       setState(() {
@@ -49,6 +53,7 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   void dispose() {
+    _controller.dispose();
     _focusNode.dispose();
     super.dispose();
   }
@@ -57,7 +62,7 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      height: 56,
+      height: 58,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: _hasFocus
@@ -70,14 +75,14 @@ class _AppTextFieldState extends State<AppTextField> {
       ),
       child: Center(
         child: TextFormField(
-          controller: widget.controller,
+          controller: _controller,
           focusNode: _focusNode,
           autofocus: widget.autofocus,
           keyboardType: widget.keyboardType,
           style: context.theme.appTextTheme.regular3.copyWith(
             fontWeight: FontWeight.w600,
           ),
-          obscureText: _isPasswordVisible,
+          obscureText: widget.isPassword ? !_isPasswordVisible : false,
           obscuringCharacter: '●',
           decoration: InputDecoration(
             border: InputBorder.none,
@@ -89,7 +94,7 @@ class _AppTextFieldState extends State<AppTextField> {
             prefixIconColor: MaterialStateColor.resolveWith(
               (states) => states.contains(MaterialState.focused)
                   ? context.theme.appColors.onBackground
-                  : widget.controller.text.isNotEmpty
+                  : _controller.text.isNotEmpty
                       ? context.theme.appColors.onBackground
                       : AppPalette.light.light40,
             ),
@@ -99,9 +104,9 @@ class _AppTextFieldState extends State<AppTextField> {
                       _isPasswordVisible = !_isPasswordVisible;
                     }),
                     child: Icon(
-                      !_isPasswordVisible
-                          ? Icons.password
-                          : Icons.remove_red_eye_outlined,
+                      _isPasswordVisible
+                          ? AppIcons.iconly_regular_bold_hide
+                          : AppIcons.iconly_regular_bold_show,
                     ),
                   )
                 : GestureDetector(
@@ -112,12 +117,13 @@ class _AppTextFieldState extends State<AppTextField> {
                 MaterialStateColor.resolveWith(
                   (states) => states.contains(MaterialState.focused)
                       ? context.theme.appColors.onBackground
-                      : widget.controller.text.isNotEmpty
+                      : _controller.text.isNotEmpty
                           ? context.theme.appColors.onBackground
                           : AppPalette.light.light40,
                 ),
           ),
           textAlignVertical: TextAlignVertical.center,
+          onChanged: widget.onChanged,
         ),
       ),
     );

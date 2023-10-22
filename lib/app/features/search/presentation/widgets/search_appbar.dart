@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
-import 'package:elastico/app/core/components/app_textfield.dart';
+import 'package:elastico/app/core/components/textfield/app_textfield.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/search/presentation/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';

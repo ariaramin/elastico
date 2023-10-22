@@ -1,7 +1,6 @@
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/wishlist/domain/entities/wishlist_item.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 

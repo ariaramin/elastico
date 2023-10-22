@@ -11,8 +11,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       id: json['id'] as String,
       avatar: json['avatar'] as String,
       name: json['name'] as String,
-      username: json['username'] as String,
-      verified: json['verified'] as bool,
+      email: json['email'] as String,
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
@@ -21,6 +20,5 @@ Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
       'id': instance.id,
       'avatar': instance.avatar,
       'name': instance.name,
-      'username': instance.username,
-      'verified': instance.verified,
+      'email': instance.email,
     };

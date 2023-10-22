@@ -26,7 +26,7 @@ class ClickableTextField extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        height: 56,
+        height: 58,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           color: context.theme.appColors.textField,
