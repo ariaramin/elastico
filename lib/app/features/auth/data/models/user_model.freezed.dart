@@ -24,7 +24,7 @@ mixin _$UserModel {
   String get id => throw _privateConstructorUsedError;
   String get avatar => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String? get email => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +42,7 @@ abstract class $UserModelCopyWith<$Res> {
       String id,
       String avatar,
       String name,
-      String email});
+      String? email});
 }
 
 /// @nodoc
@@ -62,7 +62,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? id = null,
     Object? avatar = null,
     Object? name = null,
-    Object? email = null,
+    Object? email = freezed,
   }) {
     return _then(_value.copyWith(
       collectionId: null == collectionId
@@ -81,10 +81,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -101,7 +101,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String id,
       String avatar,
       String name,
-      String email});
+      String? email});
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? id = null,
     Object? avatar = null,
     Object? name = null,
-    Object? email = null,
+    Object? email = freezed,
   }) {
     return _then(_$_UserModel(
       collectionId: null == collectionId
@@ -138,10 +138,10 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
+      email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -154,7 +154,7 @@ class _$_UserModel extends _UserModel {
       required this.id,
       required this.avatar,
       required this.name,
-      required this.email})
+      this.email})
       : super._();
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
@@ -169,7 +169,7 @@ class _$_UserModel extends _UserModel {
   @override
   final String name;
   @override
-  final String email;
+  final String? email;
 
   @override
   String toString() {
@@ -214,7 +214,7 @@ abstract class _UserModel extends UserModel {
       required final String id,
       required final String avatar,
       required final String name,
-      required final String email}) = _$_UserModel;
+      final String? email}) = _$_UserModel;
   const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -229,7 +229,7 @@ abstract class _UserModel extends UserModel {
   @override
   String get name;
   @override
-  String get email;
+  String? get email;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

@@ -1,20 +1,22 @@
-import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/wishlist/domain/entities/wishlist_item.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
+@lazySingleton
 class HiveHelper {
   Future<HiveHelper> init() async {
     await Hive.initFlutter();
     Hive.registerAdapter(ProductAdapter());
     Hive.registerAdapter(WishlistItemAdapter());
-    await Hive.openBox<WishlistItem>(Constants.wishlistKey);
     return this;
   }
 
-  List<T> read<T>(String boxKey) {
+  Future<List<T>> read<T>(String boxKey) async {
+    final isBoxOpen = Hive.isBoxOpen(boxKey);
+    if (!isBoxOpen) {
+      await Hive.openBox<T>(boxKey);
+    }
     final box = Hive.box<T>(boxKey);
     return box.values.toList();
   }

@@ -2,7 +2,7 @@ import 'package:elastico/app/core/error/api_exception.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pocketbase/pocketbase.dart';
 
-@injectable
+@lazySingleton
 class PocketBaseHelper {
   final PocketBase _pocketBase;
 

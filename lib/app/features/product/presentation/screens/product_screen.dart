@@ -77,7 +77,7 @@ class ProductScreen extends StatelessWidget {
                         ),
                         ProductComments(productId: productId),
                         const SliverPadding(
-                            padding: EdgeInsets.only(bottom: 102)),
+                            padding: EdgeInsets.only(bottom: 112)),
                       ],
                     ),
                     Positioned(

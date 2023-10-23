@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:elastico/app/core/helpers/auth_helper.dart';
 import 'package:elastico/app/features/auth/domain/entities/user.dart';
+import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,9 +14,10 @@ part 'app_bloc.freezed.dart';
 @lazySingleton
 class AppBloc extends Bloc<AppEvent, AppState> {
   final AuthHelper _authHelper;
+  final WishlistBloc _wishlistBloc;
   late final StreamSubscription<User> _userSubscription;
 
-  AppBloc(this._authHelper)
+  AppBloc(this._authHelper, this._wishlistBloc)
       : super(const AppState(status: AppStatus.unauthenticated)) {
     on<AppEvent>((events, emit) async => events.map(
           initiale: (_) async => _initiale(emit),
@@ -31,15 +33,19 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     _UserChanged event,
     Emitter<AppState> emit,
   ) {
-    event.user.isEmpty
-        ? emit(state.copyWith(status: AppStatus.unauthenticated))
-        : emit(state.copyWith(
-            status: AppStatus.authenticated,
-            user: event.user,
-          ));
+    if (event.user.isNotEmpty) {
+      _wishlistBloc.getWishlist();
+      emit(state.copyWith(
+        status: AppStatus.authenticated,
+        user: event.user,
+      ));
+    } else {
+      emit(state.copyWith(status: AppStatus.unauthenticated));
+    }
   }
 
   void _initiale(Emitter<AppState> emit) async {
+    _wishlistBloc.getWishlist();
     final user = await _authHelper.currentUser;
     user.isEmpty
         ? emit(state.copyWith(status: AppStatus.unauthenticated))

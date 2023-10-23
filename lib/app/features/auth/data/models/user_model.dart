@@ -15,7 +15,7 @@ abstract class UserModel with _$UserModel {
     required String id,
     required String avatar,
     required String name,
-    required String email,
+    String? email,
   }) = _UserModel;
 
   factory UserModel.fromRecord(RecordModel record) =>

@@ -1,4 +1,5 @@
 import 'package:elastico/app/config/locator/locator.dart';
+import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/config/theme/cubit/theme_cubit.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
@@ -9,6 +10,7 @@ import 'package:elastico/app/core/helpers/auth_helper.dart';
 import 'package:elastico/app/features/auth/domain/entities/settings_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingsTile extends StatefulWidget {
   final SettingsItem item;
@@ -65,7 +67,10 @@ class _SettingsTileState extends State<SettingsTile> {
                   setState(() => _selectedOption = option),
             ),
           ),
-        SettingsItemType.logout => locator.get<AuthHelper>().logout(),
+        SettingsItemType.logout => {
+            locator.get<AuthHelper>().logout(),
+            context.go(AppRouterPaths.login),
+          },
       },
       trailing: switch (widget.item.type) {
         SettingsItemType.normal => Icon(

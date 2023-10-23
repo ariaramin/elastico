@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:injectable/injectable.dart';
 
-@injectable
+@lazySingleton
 class NetworkHelper {
   Future<bool> checkNetworkConnection() async {
     try {
