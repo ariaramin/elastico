@@ -62,7 +62,7 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
-      height: 58,
+      height: 56,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
         border: _hasFocus

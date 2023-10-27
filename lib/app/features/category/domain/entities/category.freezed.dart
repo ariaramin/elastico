@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Category {
   String get id => throw _privateConstructorUsedError;
+  String get parent => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -31,7 +32,8 @@ abstract class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) then) =
       _$CategoryCopyWithImpl<$Res, Category>;
   @useResult
-  $Res call({String id, String thumbnail, String icon, String title});
+  $Res call(
+      {String id, String parent, String thumbnail, String icon, String title});
 }
 
 /// @nodoc
@@ -48,6 +50,7 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
   @override
   $Res call({
     Object? id = null,
+    Object? parent = null,
     Object? thumbnail = null,
     Object? icon = null,
     Object? title = null,
@@ -56,6 +59,10 @@ class _$CategoryCopyWithImpl<$Res, $Val extends Category>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
               as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
@@ -80,7 +87,8 @@ abstract class _$$_CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res> {
       __$$_CategoryCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String thumbnail, String icon, String title});
+  $Res call(
+      {String id, String parent, String thumbnail, String icon, String title});
 }
 
 /// @nodoc
@@ -95,6 +103,7 @@ class __$$_CategoryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? parent = null,
     Object? thumbnail = null,
     Object? icon = null,
     Object? title = null,
@@ -103,6 +112,10 @@ class __$$_CategoryCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
               as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
@@ -125,12 +138,15 @@ class __$$_CategoryCopyWithImpl<$Res>
 class _$_Category implements _Category {
   const _$_Category(
       {required this.id,
+      required this.parent,
       required this.thumbnail,
       required this.icon,
       required this.title});
 
   @override
   final String id;
+  @override
+  final String parent;
   @override
   final String thumbnail;
   @override
@@ -140,7 +156,7 @@ class _$_Category implements _Category {
 
   @override
   String toString() {
-    return 'Category(id: $id, thumbnail: $thumbnail, icon: $icon, title: $title)';
+    return 'Category(id: $id, parent: $parent, thumbnail: $thumbnail, icon: $icon, title: $title)';
   }
 
   @override
@@ -149,6 +165,7 @@ class _$_Category implements _Category {
         (other.runtimeType == runtimeType &&
             other is _$_Category &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.parent, parent) || other.parent == parent) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
             (identical(other.icon, icon) || other.icon == icon) &&
@@ -156,7 +173,8 @@ class _$_Category implements _Category {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, thumbnail, icon, title);
+  int get hashCode =>
+      Object.hash(runtimeType, id, parent, thumbnail, icon, title);
 
   @JsonKey(ignore: true)
   @override
@@ -168,12 +186,15 @@ class _$_Category implements _Category {
 abstract class _Category implements Category {
   const factory _Category(
       {required final String id,
+      required final String parent,
       required final String thumbnail,
       required final String icon,
       required final String title}) = _$_Category;
 
   @override
   String get id;
+  @override
+  String get parent;
   @override
   String get thumbnail;
   @override

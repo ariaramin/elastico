@@ -32,7 +32,7 @@ class Welcome extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'greeting'.tr(gender: 'morning'),
+                        'greeting'.tr(gender: _getTimeOfDayStatus()),
                         style: context.theme.appTextTheme.tiny.copyWith(
                           color: context.theme.appColors.onBackground
                               .withOpacity(.4),
@@ -56,5 +56,20 @@ class Welcome extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String _getTimeOfDayStatus() {
+    final now = DateTime.now();
+    final hour = now.hour;
+
+    if (hour >= 6 && hour < 12) {
+      return 'morning';
+    } else if (hour >= 12 && hour < 16) {
+      return 'afternoon';
+    } else if (hour >= 16 && hour < 20) {
+      return 'evening';
+    } else {
+      return 'night';
+    }
   }
 }

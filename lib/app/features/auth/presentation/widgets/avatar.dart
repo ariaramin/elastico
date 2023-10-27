@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/bottom_sheet/entity/option.dart';
@@ -36,8 +37,8 @@ class _AvatarState extends State<Avatar> {
                   useRootNavigator: true,
                   builder: (context) => SelectableBottomSheet(
                     options: [
-                      Option(title: 'گالری', value: ImageSource.gallery),
-                      Option(title: 'دوربین', value: ImageSource.camera),
+                      Option(title: 'gallery'.tr(), value: ImageSource.gallery),
+                      Option(title: 'camera'.tr(), value: ImageSource.camera),
                     ],
                     onOptionSelected: (option) => _pickImage(option.value),
                   ),

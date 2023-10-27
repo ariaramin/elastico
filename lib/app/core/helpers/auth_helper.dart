@@ -18,9 +18,11 @@ class AuthHelper {
           final userModel = UserModel.fromRecord(event.model);
           final userJson = userModel.toJson();
           _storage.write(key: 'user', value: jsonEncode(userJson));
+          _storage.write(key: 'token', value: event.token);
           return userModel.toEntity();
         } else {
           _storage.delete(key: 'user');
+          _storage.delete(key: 'token');
           return User.empty;
         }
       });
@@ -33,6 +35,8 @@ class AuthHelper {
     }
     return User.empty;
   }
+
+  Future<String?> get userToken async => _storage.read(key: 'token');
 
   void logout() => _pocketBase.authStore.clear();
 }

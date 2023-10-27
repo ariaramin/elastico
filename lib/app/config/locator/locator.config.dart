@@ -33,7 +33,7 @@ import 'package:elastico/app/features/category/data/repositories/category_reposi
     as _i26;
 import 'package:elastico/app/features/category/domain/repositories/category_repository.dart'
     as _i25;
-import 'package:elastico/app/features/category/domain/usecases/get_categories.dart'
+import 'package:elastico/app/features/category/domain/usecases/get_main_categories.dart'
     as _i30;
 import 'package:elastico/app/features/comment/data/data_sources/comment_datasource.dart'
     as _i27;
@@ -150,8 +150,8 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i27.CommentDatasourceImpl(gh<_i8.PocketBaseHelper>()));
     gh.factory<_i28.CommentRepository>(
         () => _i29.CommentRepositoryImpl(gh<_i27.CommentDatasource>()));
-    gh.factory<_i30.GetCategories>(
-        () => _i30.GetCategories(gh<_i25.CategoryRepository>()));
+    gh.factory<_i30.GetMainCategories>(
+        () => _i30.GetMainCategories(gh<_i25.CategoryRepository>()));
     gh.factory<_i31.GetProduct>(
         () => _i31.GetProduct(gh<_i13.ProductRepository>()));
     gh.factory<_i32.GetProductComments>(

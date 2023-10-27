@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/components/app_button.dart';
@@ -31,8 +32,8 @@ class LoginScreen extends StatelessWidget {
             listener: (context, state) async {
               if (state.status.isSuccess) {
                 context.showToast(
-                  title: 'ورود موفقیت آمیز بود',
-                  description: 'شما با موفقیت وارد حساب کاربری خود شدید.',
+                  title: 'login_successfully'.tr(),
+                  description: 'you_are_logged_in_successfully'.tr(),
                   type: ToastificationType.success,
                 );
                 await Future.delayed(
@@ -41,9 +42,9 @@ class LoginScreen extends StatelessWidget {
                 );
               } else if (state.status.isFailure) {
                 context.showToast(
-                  title: 'خطایی رخ داده است',
-                  description:
-                      state.errorMessage ?? 'مشکلی در ورود پیش آمده است.',
+                  title: 'something_went_wrong'.tr(),
+                  description: state.errorMessage ??
+                      'something_went_wrong_with_login'.tr(),
                   type: ToastificationType.error,
                 );
               }
@@ -62,7 +63,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'وارد حساب کاربری خود شوید',
+                    'login_to_account'.tr(),
                     style: context.theme.appTextTheme.title2,
                   ),
                   const SizedBox(height: 24),
@@ -75,7 +76,7 @@ class LoginScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () {},
                     child: Text(
-                      'رمز عبور خود را فراموش کرده اید؟',
+                      'forgot_your_password'.tr(),
                       style: context.theme.appTextTheme.small,
                     ),
                   ),
@@ -84,13 +85,13 @@ class LoginScreen extends StatelessWidget {
                     onTap: () => context.go(AppRouterPaths.register),
                     child: RichText(
                       text: TextSpan(
-                        text: 'حساب کاربری ندارید؟ ',
+                        text: 'dont_have_account'.tr(),
                         style: context.theme.appTextTheme.tiny.copyWith(
                           color: AppPalette.light.light40,
                         ),
                         children: [
                           TextSpan(
-                            text: 'ثبت نام',
+                            text: 'register'.tr(),
                             style: context.theme.appTextTheme.tiny,
                           ),
                         ],
@@ -119,7 +120,7 @@ class _LoginButton extends StatelessWidget {
           width: double.infinity,
           child: AppButton(
             key: const Key('login_button'),
-            text: 'ورود به حساب کاربری',
+            text: 'login'.tr(),
             isLoading: state.status.isInProgress,
             onPressed:
                 state.isValid ? () => context.read<LoginCubit>().login() : null,
@@ -140,7 +141,7 @@ class _PasswordTextFeild extends StatelessWidget {
       builder: (context, state) {
         return AppTextField(
           key: const Key('password_text_field'),
-          hint: 'رمز عبور',
+          hint: 'password'.tr(),
           isPassword: true,
           prefixIcon: AppIcons.iconly_regular_outline_lock,
           onChanged: (value) =>
@@ -161,7 +162,7 @@ class _EmailTextField extends StatelessWidget {
       builder: (context, state) {
         return AppTextField(
           key: const Key('email_text_field'),
-          hint: 'ایمیل',
+          hint: 'email'.tr(),
           keyboardType: TextInputType.emailAddress,
           prefixIcon: AppIcons.iconly_regular_bold_message,
           onChanged: (value) => context.read<LoginCubit>().emailChanged(value),

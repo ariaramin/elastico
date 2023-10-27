@@ -13,6 +13,7 @@ class CategoryModel with _$CategoryModel {
   const factory CategoryModel({
     required String collectionId,
     required String id,
+    required String parent,
     required String thumbnail,
     required String icon,
     required String title,
@@ -26,6 +27,7 @@ class CategoryModel with _$CategoryModel {
 
   Category toEntity() => Category(
         id: id,
+        parent: parent,
         thumbnail: '${Constants.baseUrl}api/files/$collectionId/$id/$thumbnail',
         icon: '${Constants.baseUrl}api/files/$collectionId/$id/$icon',
         title: title,

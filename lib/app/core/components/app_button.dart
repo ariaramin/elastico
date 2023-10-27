@@ -6,6 +6,7 @@ class AppButton extends StatelessWidget {
   final String text;
   final bool isPrimary;
   final bool isLoading;
+  final double height;
   final Color? backgroundColor;
   final Function()? onPressed;
 
@@ -14,6 +15,7 @@ class AppButton extends StatelessWidget {
     required this.text,
     this.isPrimary = true,
     this.isLoading = false,
+    this.height = 52,
     this.backgroundColor,
     this.onPressed,
   });
@@ -22,7 +24,7 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: const Size.fromHeight(56),
+        fixedSize: Size.fromHeight(height),
         elevation: 0,
         shadowColor: AppPalette.light.light40.withOpacity(.5),
         shape: RoundedRectangleBorder(

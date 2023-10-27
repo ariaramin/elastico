@@ -21,7 +21,7 @@ class CartScreen extends StatelessWidget {
             slivers: [
               SliverPadding(
                 padding: const EdgeInsets.symmetric(
-                  vertical: 10,
+                  vertical: 8,
                   horizontal: 18,
                 ),
                 sliver: context.responsive(

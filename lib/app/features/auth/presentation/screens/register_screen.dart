@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/components/app_button.dart';
@@ -31,19 +32,19 @@ class RegisterScreen extends StatelessWidget {
             listener: (context, state) async {
               if (state.status.isSuccess) {
                 context.showToast(
-                  title: 'ثبت نام موفقیت آمیز بود',
-                  description: 'حساب کاربری شما با موفقیت ساخته شد.',
+                  title: 'register_successfully'.tr(),
+                  description: 'account_created_successfully'.tr(),
                   type: ToastificationType.success,
                 );
                 await Future.delayed(
-                  const Duration(seconds: 2),
+                  const Duration(seconds: 4),
                   () => context.go(AppRouterPaths.home),
                 );
               } else if (state.status.isFailure) {
                 context.showToast(
-                  title: 'خطایی رخ داده است',
-                  description:
-                      state.errorMessage ?? 'مشکلی در ثبت نام پیش آمده است.',
+                  title: 'something_went_wrong'.tr(),
+                  description: state.errorMessage ??
+                      'something_went_wrong_with_register'.tr(),
                   type: ToastificationType.error,
                 );
               }
@@ -62,7 +63,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'ساخت حساب کاربری',
+                    'create_account'.tr(),
                     style: context.theme.appTextTheme.title2,
                   ),
                   const SizedBox(height: 24),
@@ -78,13 +79,13 @@ class RegisterScreen extends StatelessWidget {
                     onTap: () => context.go(AppRouterPaths.login),
                     child: RichText(
                       text: TextSpan(
-                        text: 'حساب کاربری دارید؟ ',
+                        text: 'do_you_have_account'.tr(),
                         style: context.theme.appTextTheme.tiny.copyWith(
                           color: AppPalette.light.light40,
                         ),
                         children: [
                           TextSpan(
-                            text: 'وارد شوید',
+                            text: 'login'.tr(),
                             style: context.theme.appTextTheme.tiny,
                           ),
                         ],
@@ -113,7 +114,7 @@ class _RegisterButton extends StatelessWidget {
           width: double.infinity,
           child: AppButton(
             key: const Key('register_button'),
-            text: 'ثبت نام',
+            text: 'register'.tr(),
             isLoading: state.status.isInProgress,
             onPressed: state.isValid
                 ? () => context.read<RegisterCubit>().register()
@@ -135,7 +136,7 @@ class _PasswordTextField extends StatelessWidget {
       builder: (context, state) {
         return AppTextField(
           key: const Key('password_text_field'),
-          hint: 'رمز عبور',
+          hint: 'password'.tr(),
           isPassword: true,
           prefixIcon: AppIcons.iconly_regular_outline_lock,
           onChanged: (value) =>
@@ -156,7 +157,7 @@ class _EmailTextField extends StatelessWidget {
       builder: (context, state) {
         return AppTextField(
           key: const Key('email_text_field'),
-          hint: 'ایمیل',
+          hint: 'email'.tr(),
           keyboardType: TextInputType.emailAddress,
           prefixIcon: AppIcons.iconly_regular_bold_message,
           onChanged: (value) =>
@@ -177,7 +178,7 @@ class _FullNameTextField extends StatelessWidget {
       builder: (context, state) {
         return AppTextField(
           key: const Key('fullname_text_field'),
-          hint: 'نام و نام خانوادگی',
+          hint: 'full_name'.tr(),
           prefixIcon: AppIcons.iconly_regular_bold_profile,
           onChanged: (value) =>
               context.read<RegisterCubit>().fullNameChanged(value),

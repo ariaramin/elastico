@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/custom_appbar.dart';
 import 'package:elastico/app/core/components/error_text.dart';
 import 'package:elastico/app/core/components/loading_indicator.dart';
@@ -25,10 +26,14 @@ class ProductListScreen extends StatelessWidget {
       body: BlocBuilder<ProductListBloc, ProductListState>(
         builder: (context, state) {
           return state.maybeWhen(
-            loaded: (products) => SizedBox(
-              width: double.infinity,
-              child: ProductWrap(products: products),
-            ),
+            loaded: (products) => products.isNotEmpty
+                ? SingleChildScrollView(
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ProductWrap(products: products),
+                    ),
+                  )
+                : Center(child: Text('nothing_found'.tr())),
             error: (errorMessage) => ErrorText(
               errorMessage: errorMessage,
               onPressed: () => bloc.fetchProducts(filter),

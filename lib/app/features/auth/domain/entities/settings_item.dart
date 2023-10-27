@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/bottom_sheet/entity/option.dart';
 import 'package:flutter/material.dart';
@@ -23,44 +24,44 @@ class SettingsItem with _$SettingsItem {
 }
 
 List<SettingsItem> settings = [
-  const SettingsItem(
-    title: 'ویرایش پروفایل',
+  SettingsItem(
+    title: 'edit_profile'.tr(),
     icon: AppIcons.iconly_regular_outline_profile,
   ),
-  const SettingsItem(
-    title: 'آدرس ها',
+  SettingsItem(
+    title: 'addressess'.tr(),
     icon: AppIcons.iconly_regular_outline_location,
   ),
-  const SettingsItem(
-    title: 'اعلان ها',
+  SettingsItem(
+    title: 'notifications'.tr(),
     icon: AppIcons.iconly_regular_outline_notification,
   ),
   SettingsItem(
-    title: 'زبان',
+    title: 'language'.tr(),
     icon: AppIcons.iconly_regular_outline_document,
     type: SettingsItemType.selectable,
     options: [
       Option(
-        title: 'فارسی',
+        title: 'persian'.tr(),
         value: const Locale('fa', 'IR'),
       ),
       Option(
-        title: 'انگلیسی',
+        title: 'english'.tr(),
         value: const Locale('en', 'US'),
       ),
     ],
   ),
-  const SettingsItem(
-    title: 'دارک مود',
+  SettingsItem(
+    title: 'dark_mode'.tr(),
     icon: AppIcons.iconly_regular_outline_show,
     type: SettingsItemType.switchItem,
   ),
-  const SettingsItem(
-    title: 'دعوت از دوستان',
+  SettingsItem(
+    title: 'invite_friends'.tr(),
     icon: AppIcons.iconly_regular_outline_3_user,
   ),
-  const SettingsItem(
-    title: 'خروج از حساب کاربری',
+  SettingsItem(
+    title: 'logout_from_account'.tr(),
     icon: AppIcons.iconly_regular_outline_logout,
     type: SettingsItemType.logout,
   ),

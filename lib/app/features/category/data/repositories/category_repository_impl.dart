@@ -15,9 +15,9 @@ class CategoryRepositoryImpl extends CategoryRepository {
   CategoryRepositoryImpl(this._datasource);
 
   @override
-  Future<Either<Failure, List<Category>>> getCategories() async {
+  Future<Either<Failure, List<Category>>> getMainCategories() async {
     try {
-      final categories = await _datasource.getCategories();
+      final categories = await _datasource.getMainCategories();
       return Right(categories.map((e) => e.toEntity()).toList());
     } on ApiException catch (error) {
       return Left(ServerFailure(message: error.message));

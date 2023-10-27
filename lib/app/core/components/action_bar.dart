@@ -35,6 +35,7 @@ class ActionBar extends StatelessWidget {
           Expanded(
             child: AppButton(
               text: buttonText,
+              height: 48,
               backgroundColor: context.theme.appColors.success,
               onPressed: onPressed,
             ),

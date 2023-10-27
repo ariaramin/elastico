@@ -34,7 +34,7 @@ class PocketBaseHelper {
     String password,
   ) async {
     try {
-      return await _pocketBase.collection('users').create(
+      final recordModel = await _pocketBase.collection('users').create(
         body: {
           'name': fullName,
           'email': email,
@@ -42,6 +42,8 @@ class PocketBaseHelper {
           'passwordConfirm': password,
         },
       );
+      await login(email, password);
+      return recordModel;
     } on ClientException catch (error) {
       final invalidFields = error.response['data'] as Map<String, dynamic>;
       if (invalidFields.isNotEmpty) {

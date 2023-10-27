@@ -3,6 +3,8 @@ import 'package:elastico/app/features/auth/presentation/cubit/login/login_cubit.
 import 'package:elastico/app/features/auth/presentation/cubit/register/register_cubit.dart';
 import 'package:elastico/app/features/auth/presentation/screens/login_screen.dart';
 import 'package:elastico/app/features/auth/presentation/screens/register_screen.dart';
+import 'package:elastico/app/features/category/presentation/bloc/bloc/category_bloc.dart';
+import 'package:elastico/app/features/category/presentation/screens/category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -121,7 +123,10 @@ class AppRouter {
   static StatefulShellBranch _createCategoriesRoute() {
     return _createShellBranch(
       AppRouterPaths.categories,
-      (context, state) => const CartScreen(),
+      (context, state) => BlocProvider(
+        create: (context) => CategoryBloc(locator.get())..fetchCategory(),
+        child: const CategoryScreen(),
+      ),
       navigatorKey: _categoriesNavigatorKey,
     );
   }

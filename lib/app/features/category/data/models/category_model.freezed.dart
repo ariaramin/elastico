@@ -22,6 +22,7 @@ CategoryModel _$CategoryModelFromJson(Map<String, dynamic> json) {
 mixin _$CategoryModel {
   String get collectionId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
+  String get parent => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   String get icon => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
@@ -41,6 +42,7 @@ abstract class $CategoryModelCopyWith<$Res> {
   $Res call(
       {String collectionId,
       String id,
+      String parent,
       String thumbnail,
       String icon,
       String title});
@@ -61,6 +63,7 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
   $Res call({
     Object? collectionId = null,
     Object? id = null,
+    Object? parent = null,
     Object? thumbnail = null,
     Object? icon = null,
     Object? title = null,
@@ -73,6 +76,10 @@ class _$CategoryModelCopyWithImpl<$Res, $Val extends CategoryModel>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
               as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
@@ -101,6 +108,7 @@ abstract class _$$_CategoryModelCopyWith<$Res>
   $Res call(
       {String collectionId,
       String id,
+      String parent,
       String thumbnail,
       String icon,
       String title});
@@ -119,6 +127,7 @@ class __$$_CategoryModelCopyWithImpl<$Res>
   $Res call({
     Object? collectionId = null,
     Object? id = null,
+    Object? parent = null,
     Object? thumbnail = null,
     Object? icon = null,
     Object? title = null,
@@ -131,6 +140,10 @@ class __$$_CategoryModelCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      parent: null == parent
+          ? _value.parent
+          : parent // ignore: cast_nullable_to_non_nullable
               as String,
       thumbnail: null == thumbnail
           ? _value.thumbnail
@@ -154,6 +167,7 @@ class _$_CategoryModel extends _CategoryModel {
   const _$_CategoryModel(
       {required this.collectionId,
       required this.id,
+      required this.parent,
       required this.thumbnail,
       required this.icon,
       required this.title})
@@ -167,6 +181,8 @@ class _$_CategoryModel extends _CategoryModel {
   @override
   final String id;
   @override
+  final String parent;
+  @override
   final String thumbnail;
   @override
   final String icon;
@@ -175,7 +191,7 @@ class _$_CategoryModel extends _CategoryModel {
 
   @override
   String toString() {
-    return 'CategoryModel(collectionId: $collectionId, id: $id, thumbnail: $thumbnail, icon: $icon, title: $title)';
+    return 'CategoryModel(collectionId: $collectionId, id: $id, parent: $parent, thumbnail: $thumbnail, icon: $icon, title: $title)';
   }
 
   @override
@@ -186,6 +202,7 @@ class _$_CategoryModel extends _CategoryModel {
             (identical(other.collectionId, collectionId) ||
                 other.collectionId == collectionId) &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.parent, parent) || other.parent == parent) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
             (identical(other.icon, icon) || other.icon == icon) &&
@@ -194,8 +211,8 @@ class _$_CategoryModel extends _CategoryModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, collectionId, id, thumbnail, icon, title);
+  int get hashCode => Object.hash(
+      runtimeType, collectionId, id, parent, thumbnail, icon, title);
 
   @JsonKey(ignore: true)
   @override
@@ -215,6 +232,7 @@ abstract class _CategoryModel extends CategoryModel {
   const factory _CategoryModel(
       {required final String collectionId,
       required final String id,
+      required final String parent,
       required final String thumbnail,
       required final String icon,
       required final String title}) = _$_CategoryModel;
@@ -227,6 +245,8 @@ abstract class _CategoryModel extends CategoryModel {
   String get collectionId;
   @override
   String get id;
+  @override
+  String get parent;
   @override
   String get thumbnail;
   @override
