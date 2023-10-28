@@ -1,6 +1,8 @@
 import 'package:elastico/app/core/components/error_text.dart';
 import 'package:elastico/app/core/components/loading_indicator.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/features/cart/domain/entities/cart_item.dart';
+import 'package:elastico/app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
 import 'package:elastico/app/features/product/presentation/bloc/product/product_bloc.dart';
 import 'package:elastico/app/features/product/presentation/widgets/product_action_bar.dart';
@@ -13,7 +15,7 @@ import 'package:elastico/app/features/product/presentation/widgets/product_varia
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductScreen extends StatelessWidget {
+class ProductScreen extends StatefulWidget {
   final String productId;
 
   const ProductScreen({
@@ -22,15 +24,23 @@ class ProductScreen extends StatelessWidget {
   });
 
   @override
+  State<ProductScreen> createState() => _ProductScreenState();
+}
+
+class _ProductScreenState extends State<ProductScreen> {
+  late CartItem cartItem;
+
+  @override
   Widget build(BuildContext context) {
     final bloc = context.read<ProductBloc>();
     final commentBloc = context.read<CommentBloc>();
+    final cartBloc = context.read<CartBloc>();
     return Scaffold(
       body: SafeArea(
         child: RefreshIndicator(
           onRefresh: () async {
-            bloc.fetchProduct(productId);
-            commentBloc.fetchProductComments(productId);
+            bloc.fetchProduct(widget.productId);
+            commentBloc.fetchProductComments(widget.productId);
           },
           child: BlocBuilder<ProductBloc, ProductState>(
             builder: (context, state) {
@@ -68,14 +78,22 @@ class ProductScreen extends StatelessWidget {
                         ),
                         if (product.description.isNotEmpty)
                           ProductDescription(description: product.description),
-                        ProductVariants(variants: variants),
+                        ProductVariants(
+                          variants: variants,
+                          onVariantChanged: (selectedVariant) =>
+                              cartItem = CartItem(
+                            id: '${product.id}-${selectedVariant.items.first.id}',
+                            product: product,
+                            variant: selectedVariant,
+                          ),
+                        ),
                         const SliverToBoxAdapter(
                           child: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 18),
                             child: Divider(),
                           ),
                         ),
-                        ProductComments(productId: productId),
+                        ProductComments(productId: widget.productId),
                         const SliverPadding(
                             padding: EdgeInsets.only(bottom: 112)),
                       ],
@@ -84,13 +102,23 @@ class ProductScreen extends StatelessWidget {
                       left: 18,
                       right: 18,
                       bottom: 18,
-                      child: ProductActionBar(product: product),
+                      child: ProductActionBar(
+                        product: product,
+                        onButtonPressed: () => variants.isNotEmpty
+                            ? cartBloc.addToCart(cartItem)
+                            : cartBloc.addToCart(
+                                CartItem(
+                                  id: product.id,
+                                  product: product,
+                                ),
+                              ),
+                      ),
                     ),
                   ],
                 ),
                 error: (errorMessage) => ErrorText(
                   errorMessage: errorMessage,
-                  onPressed: () => bloc.fetchProduct(productId),
+                  onPressed: () => bloc.fetchProduct(widget.productId),
                 ),
                 orElse: () => const Center(child: LoadingIndicator()),
               );

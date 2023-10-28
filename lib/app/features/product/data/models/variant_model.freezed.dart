@@ -20,11 +20,16 @@ VariantModel _$VariantModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$VariantModel {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get product => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get title => throw _privateConstructorUsedError;
+  @HiveField(3)
   String get type => throw _privateConstructorUsedError;
   @JsonKey(name: 'expand', fromJson: _convertListOfVariantItem)
+  @HiveField(4)
   List<VariantItemModel> get items => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -40,11 +45,12 @@ abstract class $VariantModelCopyWith<$Res> {
       _$VariantModelCopyWithImpl<$Res, VariantModel>;
   @useResult
   $Res call(
-      {String id,
-      String product,
-      String title,
-      String type,
+      {@HiveField(0) String id,
+      @HiveField(1) String product,
+      @HiveField(2) String title,
+      @HiveField(3) String type,
       @JsonKey(name: 'expand', fromJson: _convertListOfVariantItem)
+      @HiveField(4)
       List<VariantItemModel> items});
 }
 
@@ -101,11 +107,12 @@ abstract class _$$_VariantModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id,
-      String product,
-      String title,
-      String type,
+      {@HiveField(0) String id,
+      @HiveField(1) String product,
+      @HiveField(2) String title,
+      @HiveField(3) String type,
       @JsonKey(name: 'expand', fromJson: _convertListOfVariantItem)
+      @HiveField(4)
       List<VariantItemModel> items});
 }
 
@@ -155,11 +162,12 @@ class __$$_VariantModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_VariantModel extends _VariantModel {
   const _$_VariantModel(
-      {required this.id,
-      required this.product,
-      required this.title,
-      required this.type,
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.product,
+      @HiveField(2) required this.title,
+      @HiveField(3) required this.type,
       @JsonKey(name: 'expand', fromJson: _convertListOfVariantItem)
+      @HiveField(4)
       required final List<VariantItemModel> items})
       : _items = items,
         super._();
@@ -168,16 +176,21 @@ class _$_VariantModel extends _VariantModel {
       _$$_VariantModelFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String product;
   @override
+  @HiveField(2)
   final String title;
   @override
+  @HiveField(3)
   final String type;
   final List<VariantItemModel> _items;
   @override
   @JsonKey(name: 'expand', fromJson: _convertListOfVariantItem)
+  @HiveField(4)
   List<VariantItemModel> get items {
     if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
@@ -222,11 +235,12 @@ class _$_VariantModel extends _VariantModel {
 
 abstract class _VariantModel extends VariantModel {
   const factory _VariantModel(
-      {required final String id,
-      required final String product,
-      required final String title,
-      required final String type,
+      {@HiveField(0) required final String id,
+      @HiveField(1) required final String product,
+      @HiveField(2) required final String title,
+      @HiveField(3) required final String type,
       @JsonKey(name: 'expand', fromJson: _convertListOfVariantItem)
+      @HiveField(4)
       required final List<VariantItemModel> items}) = _$_VariantModel;
   const _VariantModel._() : super._();
 
@@ -234,15 +248,20 @@ abstract class _VariantModel extends VariantModel {
       _$_VariantModel.fromJson;
 
   @override
+  @HiveField(0)
   String get id;
   @override
+  @HiveField(1)
   String get product;
   @override
+  @HiveField(2)
   String get title;
   @override
+  @HiveField(3)
   String get type;
   @override
   @JsonKey(name: 'expand', fromJson: _convertListOfVariantItem)
+  @HiveField(4)
   List<VariantItemModel> get items;
   @override
   @JsonKey(ignore: true)

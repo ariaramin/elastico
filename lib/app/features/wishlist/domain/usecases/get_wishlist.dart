@@ -6,13 +6,12 @@ import 'package:elastico/app/features/wishlist/domain/repositories/wishlist_repo
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetWishlistItems extends NoParamUsecase<List<WishlistItem>> {
-  final WishlistRepository wishlistRepository;
+class GetWishlist implements NoParamUsecase<List<WishlistItem>> {
+  final WishlistRepository _wishlistRepository;
 
-  GetWishlistItems({required this.wishlistRepository});
+  GetWishlist(this._wishlistRepository);
 
   @override
-  Future<Either<Failure, List<WishlistItem>>> call() async {
-    return wishlistRepository.getWishlistItems();
-  }
+  Future<Either<Failure, List<WishlistItem>>> call() async =>
+      _wishlistRepository.getWishlist();
 }

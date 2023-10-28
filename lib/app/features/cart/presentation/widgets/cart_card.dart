@@ -1,13 +1,20 @@
 import 'package:elastico/app/core/components/app_icons.dart';
+import 'package:elastico/app/core/components/cached_image.dart';
 import 'package:elastico/app/core/components/shadow_container.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/features/cart/domain/entities/cart_item.dart';
+import 'package:elastico/app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_item_price.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_item_variants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({
+class CartCard extends StatelessWidget {
+  final CartItem cartItem;
+
+  const CartCard({
     super.key,
+    required this.cartItem,
   });
 
   @override
@@ -24,9 +31,7 @@ class CartItem extends StatelessWidget {
                 aspectRatio: 1,
                 child: SizedBox(
                   width: double.infinity,
-                  child: Image.network(
-                    'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/99e66f47bc914dd79cc13eac6a478213_9366/Real_Madrid_23-24_Third_Jersey_Kids_Black_IN9844_01_laydown.jpg',
-                  ),
+                  child: CachedImage(imageUrl: cartItem.product.thumbnail),
                 ),
               ),
             ),
@@ -47,14 +52,18 @@ class CartItem extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                'لباس پلیری تمرینی رئال مادرید2023-پیراهن تک',
+                                cartItem.product.name,
                                 style: context.theme.appTextTheme.small,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () =>
+                                  context.read<CartBloc>().removeFromCart(
+                                        cartItem.id,
+                                        removeForever: true,
+                                      ),
                               child: const Icon(
                                 AppIcons.iconly_regular_outline_delete,
                                 size: 20,
@@ -62,12 +71,14 @@ class CartItem extends StatelessWidget {
                             )
                           ],
                         ),
-                        const CartItemVariants(),
+                        cartItem.variant != null
+                            ? CartItemVariants(variant: cartItem.variant!)
+                            : const SizedBox(),
                       ],
                     ),
                   ),
                 ),
-                const CartItemPrice(),
+                CartItemPrice(cartItem: cartItem),
               ],
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:flutter/material.dart';
 
@@ -27,14 +28,14 @@ class CartPriceDetailItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            price,
+            '$price ',
             style: context.theme.appTextTheme.regular3.copyWith(
               color: priceColor,
               fontWeight: FontWeight.w600,
             ),
           ),
           Text(
-            'تومان',
+            'toman'.tr(),
             style: context.theme.appTextTheme.tiny.copyWith(
               color: priceColor,
             ),

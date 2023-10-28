@@ -9,17 +9,19 @@ import 'package:persian_number_utility/persian_number_utility.dart';
 
 class ProductActionBar extends StatelessWidget {
   final Product product;
+  final Function() onButtonPressed;
 
   const ProductActionBar({
     super.key,
     required this.product,
+    required this.onButtonPressed,
   });
 
   @override
   Widget build(BuildContext context) {
     return ActionBar(
       buttonText: 'add_to_cart'.tr(),
-      onPressed: () {},
+      onPressed: onButtonPressed,
       trailingWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [

@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 
 class ProductVariantItem extends StatefulWidget {
   final Variant variant;
-  final Function(VariantItem selectedVariant) onVariantItemChanged;
+  final Function(VariantItem selectedVariantItem) onVariantItemChanged;
 
   const ProductVariantItem({
     super.key,

@@ -23,24 +23,27 @@ class ProductListScreen extends StatelessWidget {
     final bloc = context.read<ProductListBloc>();
     return Scaffold(
       appBar: CustomAppBar(title: title),
-      body: BlocBuilder<ProductListBloc, ProductListState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-            loaded: (products) => products.isNotEmpty
-                ? SingleChildScrollView(
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: ProductWrap(products: products),
-                    ),
-                  )
-                : Center(child: Text('nothing_found'.tr())),
-            error: (errorMessage) => ErrorText(
-              errorMessage: errorMessage,
-              onPressed: () => bloc.fetchProducts(filter),
-            ),
-            orElse: () => const Center(child: LoadingIndicator()),
-          );
-        },
+      body: RefreshIndicator(
+        onRefresh: () async => bloc.fetchProducts(filter),
+        child: BlocBuilder<ProductListBloc, ProductListState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+              loaded: (products) => products.isNotEmpty
+                  ? SingleChildScrollView(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ProductWrap(products: products),
+                      ),
+                    )
+                  : Center(child: Text('nothing_found'.tr())),
+              error: (errorMessage) => ErrorText(
+                errorMessage: errorMessage,
+                onPressed: () => bloc.fetchProducts(filter),
+              ),
+              orElse: () => const Center(child: LoadingIndicator()),
+            );
+          },
+        ),
       ),
     );
   }

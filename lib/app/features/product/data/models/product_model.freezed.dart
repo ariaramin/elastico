@@ -20,15 +20,25 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductModel {
+  @HiveField(0)
   String get collectionId => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get thumbnail => throw _privateConstructorUsedError;
+  @HiveField(3)
   List<String> get images => throw _privateConstructorUsedError;
+  @HiveField(4)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(5)
   String get description => throw _privateConstructorUsedError;
+  @HiveField(6)
   String get popularity => throw _privateConstructorUsedError;
+  @HiveField(7)
   String get category => throw _privateConstructorUsedError;
+  @HiveField(8)
   int get price => throw _privateConstructorUsedError;
+  @HiveField(9)
   int get discountPrice => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -44,16 +54,16 @@ abstract class $ProductModelCopyWith<$Res> {
       _$ProductModelCopyWithImpl<$Res, ProductModel>;
   @useResult
   $Res call(
-      {String collectionId,
-      String id,
-      String thumbnail,
-      List<String> images,
-      String name,
-      String description,
-      String popularity,
-      String category,
-      int price,
-      int discountPrice});
+      {@HiveField(0) String collectionId,
+      @HiveField(1) String id,
+      @HiveField(2) String thumbnail,
+      @HiveField(3) List<String> images,
+      @HiveField(4) String name,
+      @HiveField(5) String description,
+      @HiveField(6) String popularity,
+      @HiveField(7) String category,
+      @HiveField(8) int price,
+      @HiveField(9) int discountPrice});
 }
 
 /// @nodoc
@@ -134,16 +144,16 @@ abstract class _$$_ProductModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String collectionId,
-      String id,
-      String thumbnail,
-      List<String> images,
-      String name,
-      String description,
-      String popularity,
-      String category,
-      int price,
-      int discountPrice});
+      {@HiveField(0) String collectionId,
+      @HiveField(1) String id,
+      @HiveField(2) String thumbnail,
+      @HiveField(3) List<String> images,
+      @HiveField(4) String name,
+      @HiveField(5) String description,
+      @HiveField(6) String popularity,
+      @HiveField(7) String category,
+      @HiveField(8) int price,
+      @HiveField(9) int discountPrice});
 }
 
 /// @nodoc
@@ -217,16 +227,16 @@ class __$$_ProductModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ProductModel extends _ProductModel {
   const _$_ProductModel(
-      {required this.collectionId,
-      required this.id,
-      required this.thumbnail,
-      required final List<String> images,
-      required this.name,
-      required this.description,
-      required this.popularity,
-      required this.category,
-      required this.price,
-      required this.discountPrice})
+      {@HiveField(0) required this.collectionId,
+      @HiveField(1) required this.id,
+      @HiveField(2) required this.thumbnail,
+      @HiveField(3) required final List<String> images,
+      @HiveField(4) required this.name,
+      @HiveField(5) required this.description,
+      @HiveField(6) required this.popularity,
+      @HiveField(7) required this.category,
+      @HiveField(8) required this.price,
+      @HiveField(9) required this.discountPrice})
       : _images = images,
         super._();
 
@@ -234,13 +244,17 @@ class _$_ProductModel extends _ProductModel {
       _$$_ProductModelFromJson(json);
 
   @override
+  @HiveField(0)
   final String collectionId;
   @override
+  @HiveField(1)
   final String id;
   @override
+  @HiveField(2)
   final String thumbnail;
   final List<String> _images;
   @override
+  @HiveField(3)
   List<String> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
@@ -248,16 +262,22 @@ class _$_ProductModel extends _ProductModel {
   }
 
   @override
+  @HiveField(4)
   final String name;
   @override
+  @HiveField(5)
   final String description;
   @override
+  @HiveField(6)
   final String popularity;
   @override
+  @HiveField(7)
   final String category;
   @override
+  @HiveField(8)
   final int price;
   @override
+  @HiveField(9)
   final int discountPrice;
 
   @override
@@ -319,40 +339,50 @@ class _$_ProductModel extends _ProductModel {
 
 abstract class _ProductModel extends ProductModel {
   const factory _ProductModel(
-      {required final String collectionId,
-      required final String id,
-      required final String thumbnail,
-      required final List<String> images,
-      required final String name,
-      required final String description,
-      required final String popularity,
-      required final String category,
-      required final int price,
-      required final int discountPrice}) = _$_ProductModel;
+      {@HiveField(0) required final String collectionId,
+      @HiveField(1) required final String id,
+      @HiveField(2) required final String thumbnail,
+      @HiveField(3) required final List<String> images,
+      @HiveField(4) required final String name,
+      @HiveField(5) required final String description,
+      @HiveField(6) required final String popularity,
+      @HiveField(7) required final String category,
+      @HiveField(8) required final int price,
+      @HiveField(9) required final int discountPrice}) = _$_ProductModel;
   const _ProductModel._() : super._();
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$_ProductModel.fromJson;
 
   @override
+  @HiveField(0)
   String get collectionId;
   @override
+  @HiveField(1)
   String get id;
   @override
+  @HiveField(2)
   String get thumbnail;
   @override
+  @HiveField(3)
   List<String> get images;
   @override
+  @HiveField(4)
   String get name;
   @override
+  @HiveField(5)
   String get description;
   @override
+  @HiveField(6)
   String get popularity;
   @override
+  @HiveField(7)
   String get category;
   @override
+  @HiveField(8)
   int get price;
   @override
+  @HiveField(9)
   int get discountPrice;
   @override
   @JsonKey(ignore: true)

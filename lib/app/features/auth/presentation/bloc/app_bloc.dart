@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:elastico/app/core/helpers/auth_helper.dart';
 import 'package:elastico/app/features/auth/domain/entities/user.dart';
+import 'package:elastico/app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -15,12 +16,16 @@ part 'app_bloc.freezed.dart';
 class AppBloc extends Bloc<AppEvent, AppState> {
   final AuthHelper _authHelper;
   final WishlistBloc _wishlistBloc;
+  final CartBloc _cartBloc;
   late final StreamSubscription<User> _userSubscription;
 
-  AppBloc(this._authHelper, this._wishlistBloc)
-      : super(const AppState(status: AppStatus.unauthenticated)) {
+  AppBloc(
+    this._authHelper,
+    this._wishlistBloc,
+    this._cartBloc,
+  ) : super(const AppState(status: AppStatus.unauthenticated)) {
     on<AppEvent>((events, emit) async => events.map(
-          initiale: (_) async => _initiale(emit),
+          initial: (_) async => _initial(emit),
           userChanged: (event) => _userChanged(event, emit),
           logout: (_) => _authHelper.logout(),
         ));
@@ -35,6 +40,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
   ) {
     if (event.user.isNotEmpty) {
       _wishlistBloc.getWishlist();
+      _cartBloc.getCart();
       emit(state.copyWith(
         status: AppStatus.authenticated,
         user: event.user,
@@ -44,8 +50,9 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  void _initiale(Emitter<AppState> emit) async {
+  void _initial(Emitter<AppState> emit) async {
     _wishlistBloc.getWishlist();
+    _cartBloc.getCart();
     final user = await _authHelper.currentUser;
     user.isEmpty
         ? emit(state.copyWith(status: AppStatus.unauthenticated))
@@ -55,7 +62,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           ));
   }
 
-  void initiale() => add(const AppEvent.initiale());
+  void initial() => add(const AppEvent.initial());
 
   @override
   Future<void> close() {

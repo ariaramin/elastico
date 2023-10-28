@@ -16,23 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Product {
-  @HiveField(0)
+  String get collectionId => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
-  @HiveField(1)
   String get thumbnail => throw _privateConstructorUsedError;
-  @HiveField(2)
   List<String> get images => throw _privateConstructorUsedError;
-  @HiveField(3)
   String get name => throw _privateConstructorUsedError;
-  @HiveField(4)
   String get description => throw _privateConstructorUsedError;
-  @HiveField(5)
   String get popularity => throw _privateConstructorUsedError;
-  @HiveField(6)
   String get category => throw _privateConstructorUsedError;
-  @HiveField(7)
   int get price => throw _privateConstructorUsedError;
-  @HiveField(8)
   int get discountPrice => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -45,15 +37,16 @@ abstract class $ProductCopyWith<$Res> {
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
   $Res call(
-      {@HiveField(0) String id,
-      @HiveField(1) String thumbnail,
-      @HiveField(2) List<String> images,
-      @HiveField(3) String name,
-      @HiveField(4) String description,
-      @HiveField(5) String popularity,
-      @HiveField(6) String category,
-      @HiveField(7) int price,
-      @HiveField(8) int discountPrice});
+      {String collectionId,
+      String id,
+      String thumbnail,
+      List<String> images,
+      String name,
+      String description,
+      String popularity,
+      String category,
+      int price,
+      int discountPrice});
 }
 
 /// @nodoc
@@ -69,6 +62,7 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? collectionId = null,
     Object? id = null,
     Object? thumbnail = null,
     Object? images = null,
@@ -80,6 +74,10 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? discountPrice = null,
   }) {
     return _then(_value.copyWith(
+      collectionId: null == collectionId
+          ? _value.collectionId
+          : collectionId // ignore: cast_nullable_to_non_nullable
+              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -128,15 +126,16 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0) String id,
-      @HiveField(1) String thumbnail,
-      @HiveField(2) List<String> images,
-      @HiveField(3) String name,
-      @HiveField(4) String description,
-      @HiveField(5) String popularity,
-      @HiveField(6) String category,
-      @HiveField(7) int price,
-      @HiveField(8) int discountPrice});
+      {String collectionId,
+      String id,
+      String thumbnail,
+      List<String> images,
+      String name,
+      String description,
+      String popularity,
+      String category,
+      int price,
+      int discountPrice});
 }
 
 /// @nodoc
@@ -149,6 +148,7 @@ class __$$_ProductCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? collectionId = null,
     Object? id = null,
     Object? thumbnail = null,
     Object? images = null,
@@ -160,6 +160,10 @@ class __$$_ProductCopyWithImpl<$Res>
     Object? discountPrice = null,
   }) {
     return _then(_$_Product(
+      collectionId: null == collectionId
+          ? _value.collectionId
+          : collectionId // ignore: cast_nullable_to_non_nullable
+              as String,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -204,27 +208,27 @@ class __$$_ProductCopyWithImpl<$Res>
 
 class _$_Product extends _Product {
   const _$_Product(
-      {@HiveField(0) required this.id,
-      @HiveField(1) required this.thumbnail,
-      @HiveField(2) required final List<String> images,
-      @HiveField(3) required this.name,
-      @HiveField(4) required this.description,
-      @HiveField(5) required this.popularity,
-      @HiveField(6) required this.category,
-      @HiveField(7) required this.price,
-      @HiveField(8) required this.discountPrice})
+      {required this.collectionId,
+      required this.id,
+      required this.thumbnail,
+      required final List<String> images,
+      required this.name,
+      required this.description,
+      required this.popularity,
+      required this.category,
+      required this.price,
+      required this.discountPrice})
       : _images = images,
         super._();
 
   @override
-  @HiveField(0)
+  final String collectionId;
+  @override
   final String id;
   @override
-  @HiveField(1)
   final String thumbnail;
   final List<String> _images;
   @override
-  @HiveField(2)
   List<String> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
@@ -232,27 +236,21 @@ class _$_Product extends _Product {
   }
 
   @override
-  @HiveField(3)
   final String name;
   @override
-  @HiveField(4)
   final String description;
   @override
-  @HiveField(5)
   final String popularity;
   @override
-  @HiveField(6)
   final String category;
   @override
-  @HiveField(7)
   final int price;
   @override
-  @HiveField(8)
   final int discountPrice;
 
   @override
   String toString() {
-    return 'Product(id: $id, thumbnail: $thumbnail, images: $images, name: $name, description: $description, popularity: $popularity, category: $category, price: $price, discountPrice: $discountPrice)';
+    return 'Product(collectionId: $collectionId, id: $id, thumbnail: $thumbnail, images: $images, name: $name, description: $description, popularity: $popularity, category: $category, price: $price, discountPrice: $discountPrice)';
   }
 
   @override
@@ -260,6 +258,8 @@ class _$_Product extends _Product {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Product &&
+            (identical(other.collectionId, collectionId) ||
+                other.collectionId == collectionId) &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
@@ -279,6 +279,7 @@ class _$_Product extends _Product {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      collectionId,
       id,
       thumbnail,
       const DeepCollectionEquality().hash(_images),
@@ -298,43 +299,37 @@ class _$_Product extends _Product {
 
 abstract class _Product extends Product {
   const factory _Product(
-      {@HiveField(0) required final String id,
-      @HiveField(1) required final String thumbnail,
-      @HiveField(2) required final List<String> images,
-      @HiveField(3) required final String name,
-      @HiveField(4) required final String description,
-      @HiveField(5) required final String popularity,
-      @HiveField(6) required final String category,
-      @HiveField(7) required final int price,
-      @HiveField(8) required final int discountPrice}) = _$_Product;
+      {required final String collectionId,
+      required final String id,
+      required final String thumbnail,
+      required final List<String> images,
+      required final String name,
+      required final String description,
+      required final String popularity,
+      required final String category,
+      required final int price,
+      required final int discountPrice}) = _$_Product;
   const _Product._() : super._();
 
   @override
-  @HiveField(0)
+  String get collectionId;
+  @override
   String get id;
   @override
-  @HiveField(1)
   String get thumbnail;
   @override
-  @HiveField(2)
   List<String> get images;
   @override
-  @HiveField(3)
   String get name;
   @override
-  @HiveField(4)
   String get description;
   @override
-  @HiveField(5)
   String get popularity;
   @override
-  @HiveField(6)
   String get category;
   @override
-  @HiveField(7)
   int get price;
   @override
-  @HiveField(8)
   int get discountPrice;
   @override
   @JsonKey(ignore: true)

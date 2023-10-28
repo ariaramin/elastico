@@ -4,6 +4,7 @@ import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductAppBar extends StatelessWidget {
   final Product product;
@@ -47,12 +48,10 @@ class ProductAppBar extends StatelessWidget {
           onPressed: () {},
         ),
       ],
-      leading: Navigator.canPop(context)
+      leading: context.canPop()
           ? IconButton(
               icon: const Icon(AppIcons.iconly_regular_outline_arrow___right),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              onPressed: () => context.pop(),
             )
           : null,
     );

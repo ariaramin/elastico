@@ -1,9 +1,13 @@
-import 'package:elastico/app/features/cart/presentation/widgets/cart_item.dart';
+import 'package:elastico/app/features/cart/domain/entities/cart_item.dart';
+import 'package:elastico/app/features/cart/presentation/widgets/cart_card.dart';
 import 'package:flutter/material.dart';
 
 class CartItemGrid extends StatelessWidget {
+  final List<CartItem> cartItems;
+
   const CartItemGrid({
     super.key,
+    required this.cartItems,
   });
 
   @override
@@ -15,10 +19,8 @@ class CartItemGrid extends StatelessWidget {
         crossAxisSpacing: 16,
         childAspectRatio: 2.4,
       ),
-      itemCount: 5,
-      itemBuilder: (context, index) {
-        return const CartItem();
-      },
+      itemCount: cartItems.length,
+      itemBuilder: (context, index) => CartCard(cartItem: cartItems[index]),
     );
   }
 }

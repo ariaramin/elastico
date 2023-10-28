@@ -15,11 +15,11 @@ class CategoryScreen extends StatelessWidget {
     final bloc = context.read<CategoryBloc>();
     return Scaffold(
       appBar: CustomAppBar(title: 'categories'.tr()),
-      body: BlocBuilder<CategoryBloc, CategoryState>(
-        builder: (context, state) => state.maybeWhen(
-          loaded: (categories) => RefreshIndicator(
-            onRefresh: () async => bloc.fetchCategory(),
-            child: Padding(
+      body: RefreshIndicator(
+        onRefresh: () async => bloc.fetchCategory(),
+        child: BlocBuilder<CategoryBloc, CategoryState>(
+          builder: (context, state) => state.maybeWhen(
+            loaded: (categories) => Padding(
               padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
               child: ListView.separated(
                 itemCount: categories.length,
@@ -31,12 +31,12 @@ class CategoryScreen extends StatelessWidget {
                     const SizedBox(height: 18),
               ),
             ),
+            error: (errorMessage) => ErrorText(
+              errorMessage: errorMessage,
+              onPressed: () => bloc.fetchCategory(),
+            ),
+            orElse: () => const Center(child: LoadingIndicator()),
           ),
-          error: (errorMessage) => ErrorText(
-            errorMessage: errorMessage,
-            onPressed: () => bloc.fetchCategory(),
-          ),
-          orElse: () => const Center(child: LoadingIndicator()),
         ),
       ),
     );

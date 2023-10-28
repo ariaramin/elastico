@@ -13,7 +13,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await HiveHelper().init();
   await configureDependencies();
-  locator.get<AppBloc>().initiale();
+  locator.get<AppBloc>().initial();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('fa', 'IR')],

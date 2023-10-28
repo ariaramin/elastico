@@ -64,5 +64,6 @@
    "gallery": "گالری",
    "camera": "دوربین",
    "nothing_found": "هیچ محصولی یافت نشد",
-   "see_products": "مشاهده محصولات"
+   "see_products": "مشاهده محصولات",
+   "cart_is_empty": "سبد خرید شما خالی است"
  }

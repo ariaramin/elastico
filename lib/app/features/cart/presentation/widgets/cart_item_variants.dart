@@ -1,9 +1,13 @@
 import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/features/product/domain/entities/variant.dart';
 import 'package:flutter/material.dart';
 
 class CartItemVariants extends StatelessWidget {
+  final Variant variant;
+
   const CartItemVariants({
     super.key,
+    required this.variant,
   });
 
   @override
@@ -31,14 +35,7 @@ class CartItemVariants extends StatelessWidget {
         // ),
         // const SizedBox(width: 6),
         Text(
-          'سایز',
-          style: context.theme.appTextTheme.tiny.copyWith(
-            color: context.theme.appColors.onBackground.withOpacity(.7),
-          ),
-        ),
-        const SizedBox(width: 6),
-        Text(
-          'L',
+          '${variant.title}: ${variant.items.first.title}',
           style: context.theme.appTextTheme.tiny.copyWith(
             color: context.theme.appColors.onBackground.withOpacity(.7),
           ),

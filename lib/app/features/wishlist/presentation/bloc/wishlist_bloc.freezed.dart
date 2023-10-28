@@ -213,7 +213,7 @@ class __$$_ToggleWishlistCopyWithImpl<$Res>
     Object? product = null,
   }) {
     return _then(_$_ToggleWishlist(
-      product: null == product
+      null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as Product,
@@ -232,7 +232,7 @@ class __$$_ToggleWishlistCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ToggleWishlist implements _ToggleWishlist {
-  const _$_ToggleWishlist({required this.product});
+  const _$_ToggleWishlist(this.product);
 
   @override
   final Product product;
@@ -329,8 +329,7 @@ class _$_ToggleWishlist implements _ToggleWishlist {
 }
 
 abstract class _ToggleWishlist implements WishlistEvent {
-  const factory _ToggleWishlist({required final Product product}) =
-      _$_ToggleWishlist;
+  const factory _ToggleWishlist(final Product product) = _$_ToggleWishlist;
 
   Product get product;
   @JsonKey(ignore: true)
@@ -363,7 +362,7 @@ class __$$_UpdateWishlistCopyWithImpl<$Res>
     Object? product = null,
   }) {
     return _then(_$_UpdateWishlist(
-      product: null == product
+      null == product
           ? _value.product
           : product // ignore: cast_nullable_to_non_nullable
               as Product,
@@ -382,7 +381,7 @@ class __$$_UpdateWishlistCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_UpdateWishlist implements _UpdateWishlist {
-  const _$_UpdateWishlist({required this.product});
+  const _$_UpdateWishlist(this.product);
 
   @override
   final Product product;
@@ -479,8 +478,7 @@ class _$_UpdateWishlist implements _UpdateWishlist {
 }
 
 abstract class _UpdateWishlist implements WishlistEvent {
-  const factory _UpdateWishlist({required final Product product}) =
-      _$_UpdateWishlist;
+  const factory _UpdateWishlist(final Product product) = _$_UpdateWishlist;
 
   Product get product;
   @JsonKey(ignore: true)

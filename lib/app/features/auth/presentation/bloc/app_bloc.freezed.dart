@@ -18,21 +18,21 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initiale,
+    required TResult Function() initial,
     required TResult Function(User user) userChanged,
     required TResult Function() logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initiale,
+    TResult? Function()? initial,
     TResult? Function(User user)? userChanged,
     TResult? Function()? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initiale,
+    TResult Function()? initial,
     TResult Function(User user)? userChanged,
     TResult Function()? logout,
     required TResult orElse(),
@@ -40,21 +40,21 @@ mixin _$AppEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initiale value) initiale,
+    required TResult Function(_Initial value) initial,
     required TResult Function(_UserChanged value) userChanged,
     required TResult Function(_Logout value) logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initiale value)? initiale,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(_UserChanged value)? userChanged,
     TResult? Function(_Logout value)? logout,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initiale value)? initiale,
+    TResult Function(_Initial value)? initial,
     TResult Function(_UserChanged value)? userChanged,
     TResult Function(_Logout value)? logout,
     required TResult orElse(),
@@ -80,35 +80,34 @@ class _$AppEventCopyWithImpl<$Res, $Val extends AppEvent>
 }
 
 /// @nodoc
-abstract class _$$_InitialeCopyWith<$Res> {
-  factory _$$_InitialeCopyWith(
-          _$_Initiale value, $Res Function(_$_Initiale) then) =
-      __$$_InitialeCopyWithImpl<$Res>;
+abstract class _$$_InitialCopyWith<$Res> {
+  factory _$$_InitialCopyWith(
+          _$_Initial value, $Res Function(_$_Initial) then) =
+      __$$_InitialCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$_InitialeCopyWithImpl<$Res>
-    extends _$AppEventCopyWithImpl<$Res, _$_Initiale>
-    implements _$$_InitialeCopyWith<$Res> {
-  __$$_InitialeCopyWithImpl(
-      _$_Initiale _value, $Res Function(_$_Initiale) _then)
+class __$$_InitialCopyWithImpl<$Res>
+    extends _$AppEventCopyWithImpl<$Res, _$_Initial>
+    implements _$$_InitialCopyWith<$Res> {
+  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$_Initiale implements _Initiale {
-  const _$_Initiale();
+class _$_Initial implements _Initial {
+  const _$_Initial();
 
   @override
   String toString() {
-    return 'AppEvent.initiale()';
+    return 'AppEvent.initial()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initiale);
+        (other.runtimeType == runtimeType && other is _$_Initial);
   }
 
   @override
@@ -117,33 +116,33 @@ class _$_Initiale implements _Initiale {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initiale,
+    required TResult Function() initial,
     required TResult Function(User user) userChanged,
     required TResult Function() logout,
   }) {
-    return initiale();
+    return initial();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initiale,
+    TResult? Function()? initial,
     TResult? Function(User user)? userChanged,
     TResult? Function()? logout,
   }) {
-    return initiale?.call();
+    return initial?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initiale,
+    TResult Function()? initial,
     TResult Function(User user)? userChanged,
     TResult Function()? logout,
     required TResult orElse(),
   }) {
-    if (initiale != null) {
-      return initiale();
+    if (initial != null) {
+      return initial();
     }
     return orElse();
   }
@@ -151,40 +150,40 @@ class _$_Initiale implements _Initiale {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initiale value) initiale,
+    required TResult Function(_Initial value) initial,
     required TResult Function(_UserChanged value) userChanged,
     required TResult Function(_Logout value) logout,
   }) {
-    return initiale(this);
+    return initial(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initiale value)? initiale,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(_UserChanged value)? userChanged,
     TResult? Function(_Logout value)? logout,
   }) {
-    return initiale?.call(this);
+    return initial?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initiale value)? initiale,
+    TResult Function(_Initial value)? initial,
     TResult Function(_UserChanged value)? userChanged,
     TResult Function(_Logout value)? logout,
     required TResult orElse(),
   }) {
-    if (initiale != null) {
-      return initiale(this);
+    if (initial != null) {
+      return initial(this);
     }
     return orElse();
   }
 }
 
-abstract class _Initiale implements AppEvent {
-  const factory _Initiale() = _$_Initiale;
+abstract class _Initial implements AppEvent {
+  const factory _Initial() = _$_Initial;
 }
 
 /// @nodoc
@@ -261,7 +260,7 @@ class _$_UserChanged implements _UserChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initiale,
+    required TResult Function() initial,
     required TResult Function(User user) userChanged,
     required TResult Function() logout,
   }) {
@@ -271,7 +270,7 @@ class _$_UserChanged implements _UserChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initiale,
+    TResult? Function()? initial,
     TResult? Function(User user)? userChanged,
     TResult? Function()? logout,
   }) {
@@ -281,7 +280,7 @@ class _$_UserChanged implements _UserChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initiale,
+    TResult Function()? initial,
     TResult Function(User user)? userChanged,
     TResult Function()? logout,
     required TResult orElse(),
@@ -295,7 +294,7 @@ class _$_UserChanged implements _UserChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initiale value) initiale,
+    required TResult Function(_Initial value) initial,
     required TResult Function(_UserChanged value) userChanged,
     required TResult Function(_Logout value) logout,
   }) {
@@ -305,7 +304,7 @@ class _$_UserChanged implements _UserChanged {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initiale value)? initiale,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(_UserChanged value)? userChanged,
     TResult? Function(_Logout value)? logout,
   }) {
@@ -315,7 +314,7 @@ class _$_UserChanged implements _UserChanged {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initiale value)? initiale,
+    TResult Function(_Initial value)? initial,
     TResult Function(_UserChanged value)? userChanged,
     TResult Function(_Logout value)? logout,
     required TResult orElse(),
@@ -372,7 +371,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initiale,
+    required TResult Function() initial,
     required TResult Function(User user) userChanged,
     required TResult Function() logout,
   }) {
@@ -382,7 +381,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initiale,
+    TResult? Function()? initial,
     TResult? Function(User user)? userChanged,
     TResult? Function()? logout,
   }) {
@@ -392,7 +391,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initiale,
+    TResult Function()? initial,
     TResult Function(User user)? userChanged,
     TResult Function()? logout,
     required TResult orElse(),
@@ -406,7 +405,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Initiale value) initiale,
+    required TResult Function(_Initial value) initial,
     required TResult Function(_UserChanged value) userChanged,
     required TResult Function(_Logout value) logout,
   }) {
@@ -416,7 +415,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initiale value)? initiale,
+    TResult? Function(_Initial value)? initial,
     TResult? Function(_UserChanged value)? userChanged,
     TResult? Function(_Logout value)? logout,
   }) {
@@ -426,7 +425,7 @@ class _$_Logout implements _Logout {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initiale value)? initiale,
+    TResult Function(_Initial value)? initial,
     TResult Function(_UserChanged value)? userChanged,
     TResult Function(_Logout value)? logout,
     required TResult orElse(),

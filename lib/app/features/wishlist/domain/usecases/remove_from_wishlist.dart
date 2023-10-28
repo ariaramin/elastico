@@ -5,13 +5,12 @@ import 'package:elastico/app/features/wishlist/domain/repositories/wishlist_repo
 import 'package:injectable/injectable.dart';
 
 @injectable
-class RemoveItemFromWishlist extends Usecase<void, String> {
-  final WishlistRepository wishlistRepository;
+class RemoveFromWishlist implements Usecase<void, String> {
+  final WishlistRepository _wishlistRepository;
 
-  RemoveItemFromWishlist({required this.wishlistRepository});
+  RemoveFromWishlist(this._wishlistRepository);
 
   @override
-  Future<Either<Failure, void>> call(params) async {
-    return wishlistRepository.removeItemFromWishlist(params);
-  }
+  Future<Either<Failure, void>> call(params) async =>
+      _wishlistRepository.removeFromWishlist(params);
 }

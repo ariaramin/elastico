@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 
 class ProductVariants extends StatelessWidget {
   final List<Variant> variants;
+  final Function(Variant selectedVariant) onVariantChanged;
 
   const ProductVariants({
     super.key,
     required this.variants,
+    required this.onVariantChanged,
   });
 
   @override
@@ -18,12 +20,16 @@ class ProductVariants extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ...variants.map((variant) {
-              return ProductVariantItem(
-                variant: variant,
-                onVariantItemChanged: (selectedVariant) {},
-              );
-            }).toList(),
+            ...variants
+                .map((variant) => ProductVariantItem(
+                      variant: variant,
+                      onVariantItemChanged: (selectedVariantItem) {
+                        final selectedVariant =
+                            variant.copyWith(items: [selectedVariantItem]);
+                        onVariantChanged(selectedVariant);
+                      },
+                    ))
+                .toList(),
           ],
         ),
       ),

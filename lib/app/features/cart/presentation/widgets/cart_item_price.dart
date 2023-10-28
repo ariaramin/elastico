@@ -1,11 +1,17 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/features/cart/domain/entities/cart_item.dart';
 import 'package:elastico/app/features/cart/presentation/widgets/cart_item_quantity_counter.dart';
 import 'package:flutter/material.dart';
+import 'package:persian_number_utility/persian_number_utility.dart';
 
 class CartItemPrice extends StatelessWidget {
+  final CartItem cartItem;
+
   const CartItemPrice({
     super.key,
+    required this.cartItem,
   });
 
   @override
@@ -29,21 +35,23 @@ class CartItemPrice extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const CartItemQuantityCounter(),
+          CartItemQuantityCounter(cartItem: cartItem),
           const Spacer(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text(
-                '۱،۲۰۰،۰۰۰',
-                style: context.theme.appTextTheme.tiny.copyWith(
-                  color: AppPalette.light.light100,
-                  decoration: TextDecoration.lineThrough,
+              if (cartItem.product.discountPrice != 0) ...{
+                Text(
+                  cartItem.product.price.toString().seRagham(),
+                  style: context.theme.appTextTheme.tiny.copyWith(
+                    color: AppPalette.light.light100,
+                    decoration: TextDecoration.lineThrough,
+                  ),
                 ),
-              ),
+              },
               Text(
-                '۱،۲۰۰،۰۰۰',
+                cartItem.product.finalPrice.toString().seRagham(),
                 style: context.theme.appTextTheme.regular3.copyWith(
                   color: AppPalette.light.light100,
                 ),
@@ -52,7 +60,7 @@ class CartItemPrice extends StatelessWidget {
           ),
           const SizedBox(width: 8),
           Text(
-            'تومان',
+            'toman'.tr(),
             style: context.theme.appTextTheme.tiny.copyWith(
               color: AppPalette.light.light100,
             ),

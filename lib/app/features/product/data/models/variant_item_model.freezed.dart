@@ -20,10 +20,15 @@ VariantItemModel _$VariantItemModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$VariantItemModel {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get title => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get value => throw _privateConstructorUsedError;
+  @HiveField(3)
   int get priceChange => throw _privateConstructorUsedError;
+  @HiveField(4)
   int get quantity => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +44,11 @@ abstract class $VariantItemModelCopyWith<$Res> {
       _$VariantItemModelCopyWithImpl<$Res, VariantItemModel>;
   @useResult
   $Res call(
-      {String id, String title, String value, int priceChange, int quantity});
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) String value,
+      @HiveField(3) int priceChange,
+      @HiveField(4) int quantity});
 }
 
 /// @nodoc
@@ -95,7 +104,11 @@ abstract class _$$_VariantItemModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String id, String title, String value, int priceChange, int quantity});
+      {@HiveField(0) String id,
+      @HiveField(1) String title,
+      @HiveField(2) String value,
+      @HiveField(3) int priceChange,
+      @HiveField(4) int quantity});
 }
 
 /// @nodoc
@@ -144,25 +157,30 @@ class __$$_VariantItemModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_VariantItemModel extends _VariantItemModel {
   const _$_VariantItemModel(
-      {required this.id,
-      required this.title,
-      required this.value,
-      required this.priceChange,
-      required this.quantity})
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.title,
+      @HiveField(2) required this.value,
+      @HiveField(3) required this.priceChange,
+      @HiveField(4) required this.quantity})
       : super._();
 
   factory _$_VariantItemModel.fromJson(Map<String, dynamic> json) =>
       _$$_VariantItemModelFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String title;
   @override
+  @HiveField(2)
   final String value;
   @override
+  @HiveField(3)
   final int priceChange;
   @override
+  @HiveField(4)
   final int quantity;
 
   @override
@@ -205,25 +223,30 @@ class _$_VariantItemModel extends _VariantItemModel {
 
 abstract class _VariantItemModel extends VariantItemModel {
   const factory _VariantItemModel(
-      {required final String id,
-      required final String title,
-      required final String value,
-      required final int priceChange,
-      required final int quantity}) = _$_VariantItemModel;
+      {@HiveField(0) required final String id,
+      @HiveField(1) required final String title,
+      @HiveField(2) required final String value,
+      @HiveField(3) required final int priceChange,
+      @HiveField(4) required final int quantity}) = _$_VariantItemModel;
   const _VariantItemModel._() : super._();
 
   factory _VariantItemModel.fromJson(Map<String, dynamic> json) =
       _$_VariantItemModel.fromJson;
 
   @override
+  @HiveField(0)
   String get id;
   @override
+  @HiveField(1)
   String get title;
   @override
+  @HiveField(2)
   String get value;
   @override
+  @HiveField(3)
   int get priceChange;
   @override
+  @HiveField(4)
   int get quantity;
   @override
   @JsonKey(ignore: true)

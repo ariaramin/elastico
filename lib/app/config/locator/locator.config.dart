@@ -10,7 +10,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i3;
-import 'package:elastico/app/config/locator/locator.dart' as _i50;
+import 'package:elastico/app/config/locator/locator.dart' as _i57;
 import 'package:elastico/app/config/theme/cubit/theme_cubit.dart' as _i19;
 import 'package:elastico/app/core/helpers/auth_helper.dart' as _i21;
 import 'package:elastico/app/core/helpers/hive_helper.dart' as _i5;
@@ -22,35 +22,49 @@ import 'package:elastico/app/features/auth/data/repositories/auth_repository_imp
     as _i23;
 import 'package:elastico/app/features/auth/domain/repositories/auth_repository.dart'
     as _i22;
-import 'package:elastico/app/features/auth/domain/usecases/login.dart' as _i38;
+import 'package:elastico/app/features/auth/domain/usecases/login.dart' as _i42;
 import 'package:elastico/app/features/auth/domain/usecases/register.dart'
-    as _i39;
+    as _i43;
 import 'package:elastico/app/features/auth/presentation/bloc/app_bloc.dart'
-    as _i49;
-import 'package:elastico/app/features/category/data/data_sources/category_datasource.dart'
+    as _i56;
+import 'package:elastico/app/features/cart/data/data_sources/cart_datasource.dart'
     as _i24;
-import 'package:elastico/app/features/category/data/repositories/category_repository_impl.dart'
+import 'package:elastico/app/features/cart/data/repositories/cart_repository_impl.dart'
     as _i26;
-import 'package:elastico/app/features/category/domain/repositories/category_repository.dart'
+import 'package:elastico/app/features/cart/domain/repositories/cart_repository.dart'
     as _i25;
-import 'package:elastico/app/features/category/domain/usecases/get_main_categories.dart'
-    as _i30;
-import 'package:elastico/app/features/comment/data/data_sources/comment_datasource.dart'
+import 'package:elastico/app/features/cart/domain/usecases/add_to_cart.dart'
+    as _i49;
+import 'package:elastico/app/features/cart/domain/usecases/get_cart.dart'
+    as _i33;
+import 'package:elastico/app/features/cart/domain/usecases/remove_from_cart.dart'
+    as _i44;
+import 'package:elastico/app/features/cart/presentation/bloc/cart_bloc.dart'
+    as _i51;
+import 'package:elastico/app/features/category/data/data_sources/category_datasource.dart'
     as _i27;
-import 'package:elastico/app/features/comment/data/repositories/comment_repository_impl.dart'
+import 'package:elastico/app/features/category/data/repositories/category_repository_impl.dart'
     as _i29;
-import 'package:elastico/app/features/comment/domain/repositories/comment_repository.dart'
+import 'package:elastico/app/features/category/domain/repositories/category_repository.dart'
     as _i28;
-import 'package:elastico/app/features/comment/domain/usecases/get_product_comments.dart'
+import 'package:elastico/app/features/category/domain/usecases/get_main_categories.dart'
+    as _i34;
+import 'package:elastico/app/features/comment/data/data_sources/comment_datasource.dart'
+    as _i30;
+import 'package:elastico/app/features/comment/data/repositories/comment_repository_impl.dart'
     as _i32;
-import 'package:elastico/app/features/home/data/data_sources/home_datasource.dart'
-    as _i35;
-import 'package:elastico/app/features/home/data/repositories/home_repository_impl.dart'
-    as _i37;
-import 'package:elastico/app/features/home/domain/repositories/home_repository.dart'
+import 'package:elastico/app/features/comment/domain/repositories/comment_repository.dart'
+    as _i31;
+import 'package:elastico/app/features/comment/domain/usecases/get_product_comments.dart'
     as _i36;
+import 'package:elastico/app/features/home/data/data_sources/home_datasource.dart'
+    as _i39;
+import 'package:elastico/app/features/home/data/repositories/home_repository_impl.dart'
+    as _i41;
+import 'package:elastico/app/features/home/domain/repositories/home_repository.dart'
+    as _i40;
 import 'package:elastico/app/features/home/domain/usecases/get_home_data.dart'
-    as _i45;
+    as _i52;
 import 'package:elastico/app/features/product/data/data_sources/product_datasource.dart'
     as _i9;
 import 'package:elastico/app/features/product/data/data_sources/product_detail_datasource.dart'
@@ -64,11 +78,11 @@ import 'package:elastico/app/features/product/domain/repositories/product_detail
 import 'package:elastico/app/features/product/domain/repositories/product_repository.dart'
     as _i13;
 import 'package:elastico/app/features/product/domain/usecases/get_product.dart'
-    as _i31;
+    as _i35;
 import 'package:elastico/app/features/product/domain/usecases/get_product_list.dart'
-    as _i33;
+    as _i37;
 import 'package:elastico/app/features/product/domain/usecases/get_product_variants.dart'
-    as _i34;
+    as _i38;
 import 'package:elastico/app/features/search/data/data_sources/search_datasource.dart'
     as _i15;
 import 'package:elastico/app/features/search/data/repositories/search_repository_impl.dart'
@@ -76,21 +90,21 @@ import 'package:elastico/app/features/search/data/repositories/search_repository
 import 'package:elastico/app/features/search/domain/repositories/search_repository.dart'
     as _i16;
 import 'package:elastico/app/features/search/domain/usecases/search_product.dart'
-    as _i40;
+    as _i45;
 import 'package:elastico/app/features/wishlist/data/data_sources/wishlist_datasource.dart'
-    as _i41;
-import 'package:elastico/app/features/wishlist/data/repositories/wishlist_repository_impl.dart'
-    as _i43;
-import 'package:elastico/app/features/wishlist/domain/repositories/wishlist_repository.dart'
-    as _i42;
-import 'package:elastico/app/features/wishlist/domain/usecases/add_item_to_wishlist.dart'
-    as _i44;
-import 'package:elastico/app/features/wishlist/domain/usecases/get_wishlist_items.dart'
     as _i46;
-import 'package:elastico/app/features/wishlist/domain/usecases/remove_item_from_wishlist.dart'
-    as _i47;
-import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart'
+import 'package:elastico/app/features/wishlist/data/repositories/wishlist_repository_impl.dart'
     as _i48;
+import 'package:elastico/app/features/wishlist/domain/repositories/wishlist_repository.dart'
+    as _i47;
+import 'package:elastico/app/features/wishlist/domain/usecases/add_to_wishlist.dart'
+    as _i50;
+import 'package:elastico/app/features/wishlist/domain/usecases/get_wishlist.dart'
+    as _i53;
+import 'package:elastico/app/features/wishlist/domain/usecases/remove_from_wishlist.dart'
+    as _i54;
+import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart'
+    as _i55;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart' as _i4;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -142,57 +156,73 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.factory<_i22.AuthRepository>(
         () => _i23.AuthRepositoryImpl(gh<_i20.AuthDataSource>()));
-    gh.factory<_i24.CategoryDatasource>(
-        () => _i24.CategoryDatasourceImpl(gh<_i8.PocketBaseHelper>()));
-    gh.factory<_i25.CategoryRepository>(
-        () => _i26.CategoryRepositoryImpl(gh<_i24.CategoryDatasource>()));
-    gh.factory<_i27.CommentDatasource>(
-        () => _i27.CommentDatasourceImpl(gh<_i8.PocketBaseHelper>()));
-    gh.factory<_i28.CommentRepository>(
-        () => _i29.CommentRepositoryImpl(gh<_i27.CommentDatasource>()));
-    gh.factory<_i30.GetMainCategories>(
-        () => _i30.GetMainCategories(gh<_i25.CategoryRepository>()));
-    gh.factory<_i31.GetProduct>(
-        () => _i31.GetProduct(gh<_i13.ProductRepository>()));
-    gh.factory<_i32.GetProductComments>(
-        () => _i32.GetProductComments(gh<_i28.CommentRepository>()));
-    gh.factory<_i33.GetProductList>(
-        () => _i33.GetProductList(gh<_i13.ProductRepository>()));
-    gh.factory<_i34.GetProductVariants>(
-        () => _i34.GetProductVariants(gh<_i11.ProductDetailRepository>()));
-    gh.factory<_i35.HomeDatasource>(
-        () => _i35.HomeDatasourceImpl(gh<_i8.PocketBaseHelper>()));
-    gh.factory<_i36.HomeRepository>(
-        () => _i37.HomeRepositoryImpl(gh<_i35.HomeDatasource>()));
-    gh.factory<_i38.Login>(() => _i38.Login(gh<_i22.AuthRepository>()));
-    gh.factory<_i39.Register>(() => _i39.Register(gh<_i22.AuthRepository>()));
-    gh.factory<_i40.SearchProduct>(
-        () => _i40.SearchProduct(gh<_i16.SearchRepository>()));
-    gh.factory<_i41.WishlistDatasource>(() => _i41.WishlistDatasourceImpl(
+    gh.factory<_i24.CartDatasource>(() => _i24.CartDatasourceImpl(
           gh<_i5.HiveHelper>(),
           gh<_i21.AuthHelper>(),
         ));
-    gh.factory<_i42.WishlistRepository>(() => _i43.WishlistRepositoryImpl(
-        wishlistDatasource: gh<_i41.WishlistDatasource>()));
-    gh.factory<_i44.AddItemToWishlist>(() => _i44.AddItemToWishlist(
-        wishlistRepository: gh<_i42.WishlistRepository>()));
-    gh.factory<_i45.GetHomeData>(
-        () => _i45.GetHomeData(gh<_i36.HomeRepository>()));
-    gh.factory<_i46.GetWishlistItems>(() => _i46.GetWishlistItems(
-        wishlistRepository: gh<_i42.WishlistRepository>()));
-    gh.factory<_i47.RemoveItemFromWishlist>(() => _i47.RemoveItemFromWishlist(
-        wishlistRepository: gh<_i42.WishlistRepository>()));
-    gh.lazySingleton<_i48.WishlistBloc>(() => _i48.WishlistBloc(
-          getWishlistItems: gh<_i46.GetWishlistItems>(),
-          addItemToWishlist: gh<_i44.AddItemToWishlist>(),
-          removeItemFromWishlist: gh<_i47.RemoveItemFromWishlist>(),
-        ));
-    gh.lazySingleton<_i49.AppBloc>(() => _i49.AppBloc(
+    gh.factory<_i25.CartRepository>(
+        () => _i26.CartRepositoryImpl(gh<_i24.CartDatasource>()));
+    gh.factory<_i27.CategoryDatasource>(
+        () => _i27.CategoryDatasourceImpl(gh<_i8.PocketBaseHelper>()));
+    gh.factory<_i28.CategoryRepository>(
+        () => _i29.CategoryRepositoryImpl(gh<_i27.CategoryDatasource>()));
+    gh.factory<_i30.CommentDatasource>(
+        () => _i30.CommentDatasourceImpl(gh<_i8.PocketBaseHelper>()));
+    gh.factory<_i31.CommentRepository>(
+        () => _i32.CommentRepositoryImpl(gh<_i30.CommentDatasource>()));
+    gh.factory<_i33.GetCart>(() => _i33.GetCart(gh<_i25.CartRepository>()));
+    gh.factory<_i34.GetMainCategories>(
+        () => _i34.GetMainCategories(gh<_i28.CategoryRepository>()));
+    gh.factory<_i35.GetProduct>(
+        () => _i35.GetProduct(gh<_i13.ProductRepository>()));
+    gh.factory<_i36.GetProductComments>(
+        () => _i36.GetProductComments(gh<_i31.CommentRepository>()));
+    gh.factory<_i37.GetProductList>(
+        () => _i37.GetProductList(gh<_i13.ProductRepository>()));
+    gh.factory<_i38.GetProductVariants>(
+        () => _i38.GetProductVariants(gh<_i11.ProductDetailRepository>()));
+    gh.factory<_i39.HomeDatasource>(
+        () => _i39.HomeDatasourceImpl(gh<_i8.PocketBaseHelper>()));
+    gh.factory<_i40.HomeRepository>(
+        () => _i41.HomeRepositoryImpl(gh<_i39.HomeDatasource>()));
+    gh.factory<_i42.Login>(() => _i42.Login(gh<_i22.AuthRepository>()));
+    gh.factory<_i43.Register>(() => _i43.Register(gh<_i22.AuthRepository>()));
+    gh.factory<_i44.RemoveFromCart>(
+        () => _i44.RemoveFromCart(gh<_i25.CartRepository>()));
+    gh.factory<_i45.SearchProduct>(
+        () => _i45.SearchProduct(gh<_i16.SearchRepository>()));
+    gh.factory<_i46.WishlistDatasource>(() => _i46.WishlistDatasourceImpl(
+          gh<_i5.HiveHelper>(),
           gh<_i21.AuthHelper>(),
-          gh<_i48.WishlistBloc>(),
+        ));
+    gh.factory<_i47.WishlistRepository>(
+        () => _i48.WishlistRepositoryImpl(gh<_i46.WishlistDatasource>()));
+    gh.factory<_i49.AddToCart>(() => _i49.AddToCart(gh<_i25.CartRepository>()));
+    gh.factory<_i50.AddToWishlist>(
+        () => _i50.AddToWishlist(gh<_i47.WishlistRepository>()));
+    gh.lazySingleton<_i51.CartBloc>(() => _i51.CartBloc(
+          gh<_i33.GetCart>(),
+          gh<_i49.AddToCart>(),
+          gh<_i44.RemoveFromCart>(),
+        ));
+    gh.factory<_i52.GetHomeData>(
+        () => _i52.GetHomeData(gh<_i40.HomeRepository>()));
+    gh.factory<_i53.GetWishlist>(
+        () => _i53.GetWishlist(gh<_i47.WishlistRepository>()));
+    gh.factory<_i54.RemoveFromWishlist>(
+        () => _i54.RemoveFromWishlist(gh<_i47.WishlistRepository>()));
+    gh.lazySingleton<_i55.WishlistBloc>(() => _i55.WishlistBloc(
+          gh<_i53.GetWishlist>(),
+          gh<_i50.AddToWishlist>(),
+          gh<_i54.RemoveFromWishlist>(),
+        ));
+    gh.lazySingleton<_i56.AppBloc>(() => _i56.AppBloc(
+          gh<_i21.AuthHelper>(),
+          gh<_i55.WishlistBloc>(),
+          gh<_i51.CartBloc>(),
         ));
     return this;
   }
 }
 
-class _$ServiceModule extends _i50.ServiceModule {}
+class _$ServiceModule extends _i57.ServiceModule {}

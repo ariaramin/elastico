@@ -8,26 +8,26 @@ import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: WishlistRepository)
-class WishlistRepositoryImpl extends WishlistRepository {
-  final WishlistDatasource wishlistDatasource;
+class WishlistRepositoryImpl implements WishlistRepository {
+  final WishlistDatasource _wishlistDatasource;
 
-  WishlistRepositoryImpl({required this.wishlistDatasource});
+  WishlistRepositoryImpl(this._wishlistDatasource);
 
   @override
-  Future<Either<Failure, List<WishlistItem>>> getWishlistItems() async {
+  Future<Either<Failure, List<WishlistItem>>> getWishlist() async {
     try {
-      final wishlist = await wishlistDatasource.getWishlistItems();
-      return Right(wishlist);
+      final wishlist = await _wishlistDatasource.getWishlist();
+      return Right(wishlist.map((e) => e.toEntity()).toList());
     } on HiveError catch (error) {
       return Left(DatabaseFailure(message: error.message));
     }
   }
 
   @override
-  Future<Either<Failure, void>> addItemToWishlist(WishlistItem item) async {
+  Future<Either<Failure, void>> addToWishlist(WishlistItem item) async {
     try {
-      await wishlistDatasource
-          .addItemToWishlist(WishlistItemModel.fromEntity(item));
+      await _wishlistDatasource
+          .addToWishlist(WishlistItemModel.fromEntity(item));
       return const Right(null);
     } on HiveError catch (error) {
       return Left(DatabaseFailure(message: error.message));
@@ -35,9 +35,9 @@ class WishlistRepositoryImpl extends WishlistRepository {
   }
 
   @override
-  Future<Either<Failure, void>> removeItemFromWishlist(String itemId) async {
+  Future<Either<Failure, void>> removeFromWishlist(String itemId) async {
     try {
-      await wishlistDatasource.removeItemFromWishlist(itemId);
+      await _wishlistDatasource.removeFromWishlist(itemId);
       return const Right(null);
     } on HiveError catch (error) {
       return Left(DatabaseFailure(message: error.message));
