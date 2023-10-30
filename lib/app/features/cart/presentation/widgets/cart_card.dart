@@ -1,3 +1,4 @@
+import 'package:elastico/app/config/route/app_router_paths.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/cached_image.dart';
 import 'package:elastico/app/core/components/shadow_container.dart';
@@ -8,6 +9,7 @@ import 'package:elastico/app/features/cart/presentation/widgets/cart_item_price.
 import 'package:elastico/app/features/cart/presentation/widgets/cart_item_variants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class CartCard extends StatelessWidget {
   final CartItem cartItem;
@@ -19,70 +21,75 @@ class CartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ShadowContainer(
-      height: 142,
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: CachedImage(imageUrl: cartItem.product.thumbnail),
+    return GestureDetector(
+      onTap: () => context.push(
+        AppRouterPaths.product.replaceFirst(':productId', cartItem.product.id),
+      ),
+      child: ShadowContainer(
+        height: 142,
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: CachedImage(imageUrl: cartItem.product.thumbnail),
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                cartItem.product.name,
-                                style: context.theme.appTextTheme.small,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+            Expanded(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  cartItem.product.name,
+                                  style: context.theme.appTextTheme.small,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () =>
-                                  context.read<CartBloc>().removeFromCart(
-                                        cartItem.id,
-                                        removeForever: true,
-                                      ),
-                              child: const Icon(
-                                AppIcons.iconly_regular_outline_delete,
-                                size: 20,
-                              ),
-                            )
-                          ],
-                        ),
-                        cartItem.variant != null
-                            ? CartItemVariants(variant: cartItem.variant!)
-                            : const SizedBox(),
-                      ],
+                              GestureDetector(
+                                onTap: () =>
+                                    context.read<CartBloc>().removeFromCart(
+                                          cartItem.id,
+                                          removeForever: true,
+                                        ),
+                                child: const Icon(
+                                  AppIcons.iconly_regular_outline_delete,
+                                  size: 20,
+                                ),
+                              )
+                            ],
+                          ),
+                          cartItem.variant != null
+                              ? CartItemVariants(variant: cartItem.variant!)
+                              : const SizedBox(),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                CartItemPrice(cartItem: cartItem),
-              ],
+                  CartItemPrice(cartItem: cartItem),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

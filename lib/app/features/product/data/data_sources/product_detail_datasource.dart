@@ -8,7 +8,7 @@ sealed class ProductDetailDatasource {
 }
 
 @Injectable(as: ProductDetailDatasource)
-class ProductDetailDatasourceImpl extends ProductDetailDatasource {
+class ProductDetailDatasourceImpl implements ProductDetailDatasource {
   final PocketBaseHelper _pocketBaseHelper;
 
   ProductDetailDatasourceImpl(this._pocketBaseHelper);

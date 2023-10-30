@@ -30,7 +30,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           logout: (_) => _authHelper.logout(),
         ));
     _userSubscription = _authHelper.user.listen((user) {
-      add(AppEvent.userChanged(user));
+      add(_UserChanged(user));
     });
   }
 
@@ -50,7 +50,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
     }
   }
 
-  void _initial(Emitter<AppState> emit) async {
+  Future<void> _initial(Emitter<AppState> emit) async {
     _wishlistBloc.getWishlist();
     _cartBloc.getCart();
     final user = await _authHelper.currentUser;
@@ -62,7 +62,7 @@ class AppBloc extends Bloc<AppEvent, AppState> {
           ));
   }
 
-  void initial() => add(const AppEvent.initial());
+  void initial() => add(const _Initial());
 
   @override
   Future<void> close() {

@@ -6,7 +6,9 @@ import 'package:injectable/injectable.dart';
 
 sealed class WishlistDatasource {
   Future<List<WishlistItemModel>> getWishlist();
+
   Future<void> addToWishlist(WishlistItemModel item);
+
   Future<void> removeFromWishlist(String itemId);
 }
 

@@ -19,7 +19,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
     );
   }
 
-  void _fetchProductComments(
+  Future<void> _fetchProductComments(
     _FetchProductComments event,
     Emitter<CommentState> emit,
   ) async {

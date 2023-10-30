@@ -47,31 +47,28 @@ class SplashScreen extends StatelessWidget {
               ),
               BlocConsumer<NetworkBloc, NetworkState>(
                 listener: (context, state) {
-                  if (state is NetworkSuccess) {
-                    Future.delayed(
+                  state.whenOrNull(
+                    success: () => Future.delayed(
                       const Duration(milliseconds: 2500),
                       () => context.go(AppRouterPaths.home),
-                    );
-                  }
+                    ),
+                  );
                 },
-                builder: (context, state) {
-                  if (state is NetworkFailure) {
-                    return ErrorText(
-                      errorMessage: 'connection_error_message'.tr(),
-                      onPressed: () => context
-                          .read<NetworkBloc>()
-                          .add(CheckNetworkConnection()),
-                    );
-                  }
-                  return SizedBox(
+                builder: (context, state) => state.maybeWhen(
+                  success: () => SizedBox(
                     width: 56,
                     height: 56,
                     child: LoadingIndicator(
                       indicatorType: Indicator.ballRotateChase,
                       colors: [context.theme.appColors.onBackground],
                     ),
-                  );
-                },
+                  ),
+                  orElse: () => ErrorText(
+                    errorMessage: 'connection_error_message'.tr(),
+                    onPressed: () =>
+                        context.read<NetworkBloc>().checkNetworkConnection(),
+                  ),
+                ),
               ),
               const SizedBox(height: 56),
             ],

@@ -32,14 +32,12 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
     );
   }
 
-  void _getWishlist(
+  Future<void> _getWishlist(
     _GetWishlist event,
     Emitter<WishlistState> emit,
   ) async {
     emit(state.copyWith(status: const WishlistStatus.loading()));
-
     final wishlist = await _getWishlistItems.call();
-
     wishlist.fold(
       (failure) => emit(
         state.copyWith(
@@ -48,18 +46,16 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
           ),
         ),
       ),
-      (response) {
-        emit(
-          state.copyWith(
-            status: WishlistStatus.loaded(wishlist: response),
-            wishlist: response,
-          ),
-        );
-      },
+      (response) => emit(
+        state.copyWith(
+          status: WishlistStatus.loaded(wishlist: response),
+          wishlist: response,
+        ),
+      ),
     );
   }
 
-  void _toggleWishlist(
+  Future<void> _toggleWishlist(
     _ToggleWishlist event,
     Emitter<WishlistState> emit,
   ) async {
@@ -70,6 +66,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
 
     List<WishlistItem> updatedWishlist = List.from(state.wishlist);
 
+    // If the product is already in the wishlist, remove it
     if (updatedWishlist.any((element) => element.id == event.product.id)) {
       final result = await _removeFromWishlist.call(event.product.id);
       result.fold(
@@ -92,10 +89,10 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
       ),
     );
 
-    add(const _GetWishlist());
+    getWishlist();
   }
 
-  void _updateWishlist(
+  Future<void> _updateWishlist(
     _UpdateWishlist event,
     Emitter<WishlistState> emit,
   ) async {
@@ -113,14 +110,12 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
       (r) => updatedWishlist.add(wishlistItem),
     );
 
-    add(const _GetWishlist());
+    getWishlist();
   }
 
-  void getWishlist() => add(const WishlistEvent.getWishlist());
+  void getWishlist() => add(const _GetWishlist());
 
-  void toggleWishlist(Product product) =>
-      add(WishlistEvent.toggleWishlist(product));
+  void toggleWishlist(Product product) => add(_ToggleWishlist(product));
 
-  void updateWishlist(Product product) =>
-      add(WishlistEvent.updateWishlist(product));
+  void updateWishlist(Product product) => add(_UpdateWishlist(product));
 }

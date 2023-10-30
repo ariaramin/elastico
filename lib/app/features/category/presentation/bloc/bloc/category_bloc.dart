@@ -18,7 +18,7 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     );
   }
 
-  void _fetchMainCategories(
+  Future<void> _fetchMainCategories(
     _FetchMainCategories event,
     Emitter<CategoryState> emit,
   ) async {

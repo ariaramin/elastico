@@ -24,7 +24,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     );
   }
 
-  void _fetchProduct(
+  Future<void> _fetchProduct(
     _FetchProduct event,
     Emitter<ProductState> emit,
   ) async {
@@ -44,5 +44,5 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   }
 
   void fetchProduct(String productId) =>
-      add(ProductEvent.fetchProduct(productId: productId));
+      add(_FetchProduct(productId: productId));
 }

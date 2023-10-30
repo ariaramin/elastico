@@ -16,7 +16,7 @@ class SearchParams {
 }
 
 @injectable
-class SearchProduct extends Usecase<Search, SearchParams> {
+class SearchProduct implements Usecase<Search, SearchParams> {
   final SearchRepository _repository;
 
   SearchProduct(this._repository);

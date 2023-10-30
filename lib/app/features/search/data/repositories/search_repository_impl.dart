@@ -9,7 +9,7 @@ import 'package:elastico/app/features/search/domain/repositories/search_reposito
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: SearchRepository)
-class SearchRepositoryImpl extends SearchRepository {
+class SearchRepositoryImpl implements SearchRepository {
   final SearchDatasource _datasource;
 
   SearchRepositoryImpl(this._datasource);

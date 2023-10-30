@@ -5,4 +5,6 @@ class Constants {
   static const String product = 'products';
   static const String productVariant = 'variants';
   static const String comment = 'comments';
+  static const String userKey = 'user';
+  static const String tokenKey = 'token';
 }

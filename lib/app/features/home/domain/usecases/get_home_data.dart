@@ -6,7 +6,7 @@ import 'package:elastico/app/features/home/domain/repositories/home_repository.d
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetHomeData extends NoParamUsecase<HomeData> {
+class GetHomeData implements NoParamUsecase<HomeData> {
   final HomeRepository _repository;
 
   GetHomeData(this._repository);

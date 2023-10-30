@@ -82,8 +82,8 @@ class AppRouter {
     return _createRoute(
       AppRouterPaths.splash,
       (context, state) => BlocProvider(
-        create: (context) => NetworkBloc(networkHelper: locator.get())
-          ..add(CheckNetworkConnection()),
+        create: (context) =>
+            NetworkBloc(locator.get())..checkNetworkConnection(),
         child: const SplashScreen(),
       ),
     );

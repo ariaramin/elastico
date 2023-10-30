@@ -8,7 +8,7 @@ sealed class CommentDatasource {
 }
 
 @Injectable(as: CommentDatasource)
-class CommentDatasourceImpl extends CommentDatasource {
+class CommentDatasourceImpl implements CommentDatasource {
   final PocketBaseHelper _pocketBaseHelper;
 
   CommentDatasourceImpl(this._pocketBaseHelper);

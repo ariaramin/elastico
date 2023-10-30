@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/helpers/pocketbase_helper.dart';
+import 'package:elastico/app/core/helpers/auth_helper.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AuthDataSource {
@@ -15,16 +15,16 @@ abstract class AuthDataSource {
 
 @Injectable(as: AuthDataSource)
 class AuthDatasourceImpl implements AuthDataSource {
-  final PocketBaseHelper _pocketBaseHelper;
+  final AuthHelper _authHelper;
 
-  AuthDatasourceImpl(this._pocketBaseHelper);
+  AuthDatasourceImpl(this._authHelper);
 
   @override
   Future<void> login({
     required String email,
     required String password,
   }) async =>
-      await _pocketBaseHelper.login(email, password);
+      await _authHelper.login(email, password);
 
   @override
   Future<void> register({
@@ -32,5 +32,5 @@ class AuthDatasourceImpl implements AuthDataSource {
     required String email,
     required String password,
   }) =>
-      _pocketBaseHelper.register(fullName, email, password);
+      _authHelper.register(fullName, email, password);
 }

@@ -1,14 +1,9 @@
 part of 'network_bloc.dart';
 
-sealed class NetworkState extends Equatable {
-  const NetworkState();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class NetworkState with _$NetworkState {
+  const factory NetworkState.initial() = _Initial;
+  const factory NetworkState.loading() = _Loading;
+  const factory NetworkState.success() = _Success;
+  const factory NetworkState.failure() = _Failure;
 }
-
-class NetworkInitial extends NetworkState {}
-
-class NetworkSuccess extends NetworkState {}
-
-class NetworkFailure extends NetworkState {}

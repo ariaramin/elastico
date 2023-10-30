@@ -6,7 +6,7 @@ import 'package:elastico/app/features/comment/domain/repositories/comment_reposi
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetProductComments extends Usecase<List<Comment>, String> {
+class GetProductComments implements Usecase<List<Comment>, String> {
   final CommentRepository _repository;
 
   GetProductComments(this._repository);

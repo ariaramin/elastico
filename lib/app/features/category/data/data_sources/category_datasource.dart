@@ -8,7 +8,7 @@ sealed class CategoryDatasource {
 }
 
 @Injectable(as: CategoryDatasource)
-class CategoryDatasourceImpl extends CategoryDatasource {
+class CategoryDatasourceImpl implements CategoryDatasource {
   final PocketBaseHelper _pocketBaseHelper;
 
   CategoryDatasourceImpl(this._pocketBaseHelper);

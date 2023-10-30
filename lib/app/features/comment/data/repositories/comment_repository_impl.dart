@@ -9,7 +9,7 @@ import 'package:elastico/app/features/comment/domain/repositories/comment_reposi
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: CommentRepository)
-class CommentRepositoryImpl extends CommentRepository {
+class CommentRepositoryImpl implements CommentRepository {
   final CommentDatasource _datasource;
 
   CommentRepositoryImpl(this._datasource);

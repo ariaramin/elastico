@@ -6,7 +6,7 @@ import 'package:elastico/app/features/category/domain/repositories/category_repo
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetMainCategories extends NoParamUsecase<List<Category>> {
+class GetMainCategories implements NoParamUsecase<List<Category>> {
   final CategoryRepository _repository;
 
   GetMainCategories(this._repository);

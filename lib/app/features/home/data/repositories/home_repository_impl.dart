@@ -9,7 +9,7 @@ import 'package:elastico/app/features/home/domain/repositories/home_repository.d
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: HomeRepository)
-class HomeRepositoryImpl extends HomeRepository {
+class HomeRepositoryImpl implements HomeRepository {
   final HomeDatasource _datasource;
 
   HomeRepositoryImpl(this._datasource);

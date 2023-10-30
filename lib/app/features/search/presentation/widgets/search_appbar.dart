@@ -29,12 +29,6 @@ class _SearchAppBarState extends State<SearchAppBar> {
   }
 
   @override
-  void dispose() {
-    _searchEditingController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       floating: true,

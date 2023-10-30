@@ -5,7 +5,7 @@ import 'package:elastico/app/features/auth/domain/repositories/auth_repository.d
 import 'package:injectable/injectable.dart';
 
 @injectable
-class Register extends Usecase<void, RegisterParams> {
+class Register implements Usecase<void, RegisterParams> {
   final AuthRepository _repository;
 
   Register(this._repository);

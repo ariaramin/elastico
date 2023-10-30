@@ -10,9 +10,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
-  await HiveHelper().init();
-  await configureDependencies();
+  await Future.wait([
+    EasyLocalization.ensureInitialized(),
+    HiveHelper().init(),
+    configureDependencies()
+  ]);
   locator.get<AppBloc>().initial();
   runApp(
     EasyLocalization(

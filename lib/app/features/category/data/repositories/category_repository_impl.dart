@@ -9,7 +9,7 @@ import 'package:elastico/app/features/category/domain/repositories/category_repo
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: CategoryRepository)
-class CategoryRepositoryImpl extends CategoryRepository {
+class CategoryRepositoryImpl implements CategoryRepository {
   final CategoryDatasource _datasource;
 
   CategoryRepositoryImpl(this._datasource);

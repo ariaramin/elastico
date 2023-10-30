@@ -21,7 +21,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     );
   }
 
-  _search(
+  Future<void> _search(
     _Search event,
     Emitter<SearchState> emit,
   ) async {
@@ -36,10 +36,5 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     );
   }
 
-  void search(String query) => add(SearchEvent.search(query: query));
-
-  void loadMore(String query) {
-    page++;
-    add(SearchEvent.search(query: query));
-  }
+  void search(String query) => add(_Search(query: query));
 }

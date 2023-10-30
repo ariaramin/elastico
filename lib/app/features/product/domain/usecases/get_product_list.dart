@@ -6,7 +6,7 @@ import 'package:elastico/app/features/product/domain/repositories/product_reposi
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetProductList extends Usecase<List<Product>, String> {
+class GetProductList implements Usecase<List<Product>, String> {
   final ProductRepository _repository;
 
   GetProductList(this._repository);

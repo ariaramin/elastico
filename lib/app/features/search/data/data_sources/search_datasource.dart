@@ -4,12 +4,12 @@ import 'package:elastico/app/features/product/data/models/product_model.dart';
 import 'package:elastico/app/features/search/data/models/search_model.dart';
 import 'package:injectable/injectable.dart';
 
-abstract class SearchDatasource {
+sealed class SearchDatasource {
   Future<SearchModel> search(int page, String query);
 }
 
 @Injectable(as: SearchDatasource)
-class SearchDatasourceImpl extends SearchDatasource {
+class SearchDatasourceImpl implements SearchDatasource {
   final PocketBaseHelper _pocketBaseHelper;
 
   SearchDatasourceImpl(this._pocketBaseHelper);

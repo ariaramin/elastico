@@ -17,21 +17,18 @@ class $AssetsImagesGen {
   /// File path: assets/images/app_icon.svg
   SvgGenImage get appIcon => const SvgGenImage('assets/images/app_icon.svg');
 
-  /// File path: assets/images/banner.jpg
-  AssetGenImage get banner => const AssetGenImage('assets/images/banner.jpg');
+  /// File path: assets/images/empty_cart.svg
+  SvgGenImage get emptyCart =>
+      const SvgGenImage('assets/images/empty_cart.svg');
 
   /// File path: assets/images/no_data.svg
   SvgGenImage get noData => const SvgGenImage('assets/images/no_data.svg');
 
-  /// File path: assets/images/profile.jpg
-  AssetGenImage get profile => const AssetGenImage('assets/images/profile.jpg');
-
-  /// File path: assets/images/real-madrid.png
-  AssetGenImage get realMadrid =>
-      const AssetGenImage('assets/images/real-madrid.png');
+  /// File path: assets/images/wishlist.svg
+  SvgGenImage get wishlist => const SvgGenImage('assets/images/wishlist.svg');
 
   /// List of all assets
-  List<dynamic> get values => [appIcon, banner, noData, profile, realMadrid];
+  List<SvgGenImage> get values => [appIcon, emptyCart, noData, wishlist];
 }
 
 class $AssetsTranslationsGen {

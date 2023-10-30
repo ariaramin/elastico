@@ -5,7 +5,7 @@ import 'package:elastico/app/features/auth/domain/repositories/auth_repository.d
 import 'package:injectable/injectable.dart';
 
 @injectable
-class Login extends Usecase<void, LoginParams> {
+class Login implements Usecase<void, LoginParams> {
   final AuthRepository _repository;
 
   Login(this._repository);

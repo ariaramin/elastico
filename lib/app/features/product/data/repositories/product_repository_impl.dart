@@ -9,7 +9,7 @@ import 'package:elastico/app/features/product/domain/repositories/product_reposi
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProductRepository)
-class ProductRepositoryImpl extends ProductRepository {
+class ProductRepositoryImpl implements ProductRepository {
   final ProductDatasource _datasource;
 
   ProductRepositoryImpl(this._datasource);

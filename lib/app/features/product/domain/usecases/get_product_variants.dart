@@ -6,7 +6,7 @@ import 'package:elastico/app/features/product/domain/repositories/product_detail
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetProductVariants extends Usecase<List<Variant>, String> {
+class GetProductVariants implements Usecase<List<Variant>, String> {
   final ProductDetailRepository _repository;
 
   GetProductVariants(this._repository);

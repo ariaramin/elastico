@@ -1,22 +1,29 @@
 import 'package:bloc/bloc.dart';
 import 'package:elastico/app/core/helpers/network_helper.dart';
-import 'package:equatable/equatable.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'network_event.dart';
 part 'network_state.dart';
+part 'network_bloc.freezed.dart';
 
 class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
-  final NetworkHelper networkHelper;
+  final NetworkHelper _networkHelper;
 
-  NetworkBloc({required this.networkHelper}) : super(NetworkInitial()) {
-    on<CheckNetworkConnection>(_checkNetworkConnection);
+  NetworkBloc(this._networkHelper) : super(const _Initial()) {
+    on<NetworkEvent>(
+      (events, emit) async => events.map(
+        checkNetworkConnection: (event) => _checkNetworkConnection(event, emit),
+      ),
+    );
   }
 
-  void _checkNetworkConnection(
-    CheckNetworkConnection event,
+  Future<void> _checkNetworkConnection(
+    _CheckNetworkConnection event,
     Emitter<NetworkState> emit,
   ) async {
-    final isConnected = await networkHelper.checkNetworkConnection();
-    isConnected ? emit(NetworkSuccess()) : emit(NetworkFailure());
+    final isConnected = await _networkHelper.checkNetworkConnection();
+    isConnected ? emit(const _Success()) : emit(const _Failure());
   }
+
+  void checkNetworkConnection() => add(const _CheckNetworkConnection());
 }

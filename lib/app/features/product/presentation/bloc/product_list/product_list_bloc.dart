@@ -23,7 +23,7 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
     );
   }
 
-  void _fetchProducts(
+  Future<void> _fetchProducts(
     _FetchProducts event,
     Emitter<ProductListState> emit,
   ) async {

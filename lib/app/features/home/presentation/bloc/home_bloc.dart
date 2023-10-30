@@ -24,7 +24,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
-  void _initialRequest(
+  Future<void> _initialRequest(
     _HomeInitialRequest event,
     Emitter<HomeState> emit,
   ) async {
