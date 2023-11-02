@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/helpers/pocketbase_helper.dart';
+import 'package:elastico/app/core/services/remote/pocketbase_service.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/home/data/models/home_data_model.dart';
 import 'package:injectable/injectable.dart';
@@ -9,7 +9,7 @@ sealed class HomeDatasource {
 
 @Injectable(as: HomeDatasource)
 class HomeDatasourceImpl implements HomeDatasource {
-  final PocketBaseHelper _pocketBaseHelper;
+  final PocketBaseService _pocketBaseHelper;
 
   HomeDatasourceImpl(this._pocketBaseHelper);
 

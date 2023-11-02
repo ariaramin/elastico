@@ -4,6 +4,7 @@ import 'package:elastico/app/features/auth/presentation/cubit/register/register_
 import 'package:elastico/app/features/auth/presentation/screens/login_screen.dart';
 import 'package:elastico/app/features/auth/presentation/screens/register_screen.dart';
 import 'package:elastico/app/features/cart/presentation/bloc/cart_bloc.dart';
+import 'package:elastico/app/features/cart/presentation/cubit/payment_cubit.dart';
 import 'package:elastico/app/features/category/presentation/bloc/bloc/category_bloc.dart';
 import 'package:elastico/app/features/category/presentation/screens/category_screen.dart';
 import 'package:flutter/material.dart';
@@ -135,8 +136,15 @@ class AppRouter {
   static StatefulShellBranch _createCartRoute() {
     return _createShellBranch(
       AppRouterPaths.cart,
-      (context, state) => BlocProvider.value(
-        value: locator.get<CartBloc>(),
+      (context, state) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(
+            value: locator.get<CartBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => PaymentCubit(locator.get()),
+          )
+        ],
         child: const CartScreen(),
       ),
       navigatorKey: _cartNavigatorKey,

@@ -55,7 +55,10 @@ class RegisterScreen extends StatelessWidget {
                 children: [
                   const SizedBox(height: 56),
                   Assets.images.appIcon.svg(
-                    width: context.width / 3.8,
+                    width: context.responsive(
+                      context.width / 3.8,
+                      sm: 138,
+                    ),
                     colorFilter: ColorFilter.mode(
                       context.theme.appColors.onBackground,
                       BlendMode.srcIn,

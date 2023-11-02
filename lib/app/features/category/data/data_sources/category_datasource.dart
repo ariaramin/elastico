@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/helpers/pocketbase_helper.dart';
+import 'package:elastico/app/core/services/remote/pocketbase_service.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/category/data/models/category_model.dart';
 import 'package:injectable/injectable.dart';
@@ -9,7 +9,7 @@ sealed class CategoryDatasource {
 
 @Injectable(as: CategoryDatasource)
 class CategoryDatasourceImpl implements CategoryDatasource {
-  final PocketBaseHelper _pocketBaseHelper;
+  final PocketBaseService _pocketBaseHelper;
 
   CategoryDatasourceImpl(this._pocketBaseHelper);
 

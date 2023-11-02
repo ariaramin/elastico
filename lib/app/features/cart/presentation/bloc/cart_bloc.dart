@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:elastico/app/features/cart/domain/entities/cart_item.dart';
 import 'package:elastico/app/features/cart/domain/usecases/add_to_cart.dart';

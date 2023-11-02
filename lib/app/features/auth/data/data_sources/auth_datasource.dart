@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/helpers/auth_helper.dart';
+import 'package:elastico/app/core/services/remote/auth_service.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AuthDataSource {
@@ -15,7 +15,7 @@ abstract class AuthDataSource {
 
 @Injectable(as: AuthDataSource)
 class AuthDatasourceImpl implements AuthDataSource {
-  final AuthHelper _authHelper;
+  final AuthService _authHelper;
 
   AuthDatasourceImpl(this._authHelper);
 

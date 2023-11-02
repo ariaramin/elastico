@@ -1,4 +1,4 @@
-import 'package:elastico/app/core/helpers/pocketbase_helper.dart';
+import 'package:elastico/app/core/services/remote/pocketbase_service.dart';
 import 'package:elastico/app/core/utils/constants.dart';
 import 'package:elastico/app/features/product/data/models/product_model.dart';
 import 'package:injectable/injectable.dart';
@@ -11,7 +11,7 @@ sealed class ProductDatasource {
 
 @Injectable(as: ProductDatasource)
 class ProductDatasourceImpl implements ProductDatasource {
-  final PocketBaseHelper _pocketBaseHelper;
+  final PocketBaseService _pocketBaseHelper;
 
   ProductDatasourceImpl(this._pocketBaseHelper);
 

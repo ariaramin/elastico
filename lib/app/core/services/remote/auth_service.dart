@@ -9,11 +9,11 @@ import 'package:injectable/injectable.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 @lazySingleton
-class AuthHelper {
+class AuthService {
   final PocketBase _pocketBase;
   final FlutterSecureStorage _storage;
 
-  AuthHelper(this._pocketBase, this._storage);
+  AuthService(this._pocketBase, this._storage);
 
   Future<RecordAuth> login(
     String usernameOrEmail,

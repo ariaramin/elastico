@@ -5,14 +5,12 @@ import 'package:flutter/material.dart';
 class ActionBar extends StatelessWidget {
   final String buttonText;
   final Widget trailingWidget;
-  final Widget? leadingWidget;
   final Function()? onPressed;
 
   const ActionBar({
     super.key,
     required this.buttonText,
     required this.trailingWidget,
-    this.leadingWidget,
     this.onPressed,
   });
 
@@ -34,15 +32,14 @@ class ActionBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          leadingWidget ??
-              Expanded(
-                child: AppButton(
-                  text: buttonText,
-                  height: 48,
-                  backgroundColor: context.theme.appColors.success,
-                  onPressed: onPressed,
-                ),
-              ),
+          Expanded(
+            child: AppButton(
+              text: buttonText,
+              height: 48,
+              backgroundColor: context.theme.appColors.success,
+              onPressed: onPressed,
+            ),
+          ),
           Expanded(child: trailingWidget),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pocketbase/pocketbase.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zarinpal/zarinpal.dart';
 import 'locator.config.dart';
 
 final locator = GetIt.instance;
@@ -19,6 +20,9 @@ abstract class ServiceModule {
 
   @lazySingleton
   PocketBase get pb => PocketBase(Constants.baseUrl);
+
+  @injectable
+  PaymentRequest get paymentRequest => PaymentRequest();
 
   @preResolve
   @lazySingleton

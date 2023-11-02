@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:elastico/app/core/helpers/auth_helper.dart';
+import 'package:elastico/app/core/services/remote/auth_service.dart';
 import 'package:elastico/app/features/auth/domain/entities/user.dart';
 import 'package:elastico/app/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
@@ -14,7 +14,7 @@ part 'app_bloc.freezed.dart';
 
 @lazySingleton
 class AppBloc extends Bloc<AppEvent, AppState> {
-  final AuthHelper _authHelper;
+  final AuthService _authHelper;
   final WishlistBloc _wishlistBloc;
   final CartBloc _cartBloc;
   late final StreamSubscription<User> _userSubscription;

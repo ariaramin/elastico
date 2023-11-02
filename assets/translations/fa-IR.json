@@ -65,5 +65,8 @@
    "camera": "دوربین",
    "nothing_found": "هیچ محصولی یافت نشد",
    "see_products": "مشاهده محصولات",
-   "cart_is_empty": "سبد خرید شما خالی است"
+   "cart_is_empty": "سبد خرید شما خالی است",
+   "operation_failed": "عملیات ناموفق بود",
+   "operation_successfully": "عملیات با موفقیت انجام شد",
+   "add_to_cart_successfully": "محصول با موفقیت به سبد خرید اضافه شد"
  }

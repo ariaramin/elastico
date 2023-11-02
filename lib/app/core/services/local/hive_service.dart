@@ -7,8 +7,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class HiveHelper {
-  Future<HiveHelper> init() async {
+class HiveService {
+  Future<HiveService> init() async {
     await Hive.initFlutter();
     Hive.registerAdapter(ProductModelAdapter());
     Hive.registerAdapter(WishlistItemModelAdapter());

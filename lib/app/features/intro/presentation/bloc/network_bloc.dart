@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:elastico/app/core/helpers/network_helper.dart';
+import 'package:elastico/app/core/services/remote/network_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'network_event.dart';
@@ -7,7 +7,7 @@ part 'network_state.dart';
 part 'network_bloc.freezed.dart';
 
 class NetworkBloc extends Bloc<NetworkEvent, NetworkState> {
-  final NetworkHelper _networkHelper;
+  final NetworkService _networkHelper;
 
   NetworkBloc(this._networkHelper) : super(const _Initial()) {
     on<NetworkEvent>(

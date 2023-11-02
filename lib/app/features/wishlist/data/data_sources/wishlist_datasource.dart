@@ -1,5 +1,5 @@
-import 'package:elastico/app/core/helpers/auth_helper.dart';
-import 'package:elastico/app/core/helpers/hive_helper.dart';
+import 'package:elastico/app/core/services/remote/auth_service.dart';
+import 'package:elastico/app/core/services/local/hive_service.dart';
 import 'package:elastico/app/features/auth/domain/entities/user.dart';
 import 'package:elastico/app/features/wishlist/data/models/wishlist_item_model.dart';
 import 'package:injectable/injectable.dart';
@@ -14,8 +14,8 @@ sealed class WishlistDatasource {
 
 @Injectable(as: WishlistDatasource)
 class WishlistDatasourceImpl implements WishlistDatasource {
-  final HiveHelper _hiveHelper;
-  final AuthHelper _authHelper;
+  final HiveService _hiveHelper;
+  final AuthService _authHelper;
 
   WishlistDatasourceImpl(this._hiveHelper, this._authHelper);
 

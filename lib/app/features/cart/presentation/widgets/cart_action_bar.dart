@@ -3,7 +3,9 @@ import 'package:elastico/app/core/components/action_bar.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
 import 'package:elastico/app/features/cart/domain/entities/cart_item.dart';
+import 'package:elastico/app/features/cart/presentation/cubit/payment_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 
 class CartActionBar extends StatelessWidget {
@@ -16,12 +18,15 @@ class CartActionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String totalFinalPrice =
-        '${cartItems.fold(0, (previousValue, element) => previousValue + (element.product.finalPrice * element.quantity))}'
-            .seRagham();
+    double totalFinalPrice = cartItems.fold(
+      0,
+      (previousValue, element) =>
+          previousValue + (element.product.finalPrice * element.quantity),
+    );
     return ActionBar(
       buttonText: 'continue_the_purchase'.tr(),
-      onPressed: () {},
+      onPressed: () =>
+          context.read<PaymentCubit>().startPayment(totalFinalPrice),
       trailingWidget: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -36,7 +41,7 @@ class CartActionBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                totalFinalPrice,
+                totalFinalPrice.toInt().toString().seRagham(),
                 style: context.theme.appTextTheme.regular2.copyWith(
                   color: AppPalette.light.light100,
                 ),

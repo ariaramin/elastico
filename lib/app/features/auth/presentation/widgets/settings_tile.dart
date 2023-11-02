@@ -6,7 +6,7 @@ import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/bottom_sheet/entity/option.dart';
 import 'package:elastico/app/core/components/bottom_sheet/selectable_bottom_sheet.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
-import 'package:elastico/app/core/helpers/auth_helper.dart';
+import 'package:elastico/app/core/services/remote/auth_service.dart';
 import 'package:elastico/app/features/auth/domain/entities/settings_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,7 +68,7 @@ class _SettingsTileState extends State<SettingsTile> {
             ),
           ),
         SettingsItemType.logout => {
-            locator.get<AuthHelper>().logout(),
+            locator.get<AuthService>().logout(),
             context.go(AppRouterPaths.login),
           },
       },

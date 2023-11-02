@@ -3,10 +3,10 @@ import 'package:injectable/injectable.dart';
 import 'package:pocketbase/pocketbase.dart';
 
 @lazySingleton
-class PocketBaseHelper {
+class PocketBaseService {
   final PocketBase _pocketBase;
 
-  PocketBaseHelper(this._pocketBase);
+  PocketBaseService(this._pocketBase);
 
   Future<ResultList<RecordModel>> getList(
     String collectionName, {

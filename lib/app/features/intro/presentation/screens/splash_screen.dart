@@ -55,18 +55,18 @@ class SplashScreen extends StatelessWidget {
                   );
                 },
                 builder: (context, state) => state.maybeWhen(
-                  success: () => SizedBox(
+                  failure: () => ErrorText(
+                    errorMessage: 'connection_error_message'.tr(),
+                    onPressed: () =>
+                        context.read<NetworkBloc>().checkNetworkConnection(),
+                  ),
+                  orElse: () => SizedBox(
                     width: 56,
                     height: 56,
                     child: LoadingIndicator(
                       indicatorType: Indicator.ballRotateChase,
                       colors: [context.theme.appColors.onBackground],
                     ),
-                  ),
-                  orElse: () => ErrorText(
-                    errorMessage: 'connection_error_message'.tr(),
-                    onPressed: () =>
-                        context.read<NetworkBloc>().checkNetworkConnection(),
                   ),
                 ),
               ),
