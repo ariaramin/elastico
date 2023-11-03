@@ -1,5 +1,8 @@
 import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
+import 'package:elastico/app/features/auth/presentation/bloc/app_bloc.dart';
+import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
+import 'package:elastico/app/features/comment/presentation/widgets/add_comment_bottom_sheet.dart';
 import 'package:elastico/app/features/product/domain/entities/product.dart';
 import 'package:elastico/app/features/wishlist/presentation/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
@@ -44,8 +47,25 @@ class ProductAppBar extends StatelessWidget {
           },
         ),
         IconButton(
-          icon: const Icon(AppIcons.iconly_regular_outline_send),
-          onPressed: () {},
+          icon: const Icon(AppIcons.iconly_regular_outline_chat),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (modalContext) => AddCommentBottomSheet(
+                onSavePressed: (text, rating) {
+                  if (text.isEmpty) return;
+                  final appState = context.read<AppBloc>().state;
+                  context.read<CommentBloc>().addUserComment(
+                        userId: appState.user.id,
+                        productId: product.id,
+                        text: text,
+                        rating: rating,
+                      );
+                },
+              ),
+            );
+          },
         ),
       ],
       leading: context.canPop()

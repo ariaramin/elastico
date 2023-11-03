@@ -5,6 +5,21 @@ import 'package:injectable/injectable.dart';
 
 sealed class CommentDatasource {
   Future<List<CommentModel>> getProductComments(String productId);
+
+  Future<void> addComment(
+    String userId,
+    String productId,
+    String text,
+    double rating,
+  );
+
+  Future<void> updateComment(
+    String commentId,
+    String text,
+    double rating,
+  );
+
+  Future<void> deleteComment(String commentId);
 }
 
 @Injectable(as: CommentDatasource)
@@ -26,4 +41,44 @@ class CommentDatasourceImpl implements CommentDatasource {
 
     return comments;
   }
+
+  @override
+  Future<void> addComment(
+    String userId,
+    String productId,
+    String text,
+    double rating,
+  ) async =>
+      await _pocketBaseHelper.create(
+        Constants.comment,
+        data: {
+          'user': userId,
+          'product': productId,
+          'text': text,
+          'rating': rating,
+          'isPublished': true,
+        },
+      );
+
+  @override
+  Future<void> updateComment(
+    String commentId,
+    String text,
+    double rating,
+  ) async =>
+      await _pocketBaseHelper.update(
+        Constants.comment,
+        id: commentId,
+        data: {
+          'text': text,
+          'rating': rating,
+        },
+      );
+
+  @override
+  Future<void> deleteComment(String commentId) async =>
+      await _pocketBaseHelper.delete(
+        Constants.comment,
+        id: commentId,
+      );
 }

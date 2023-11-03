@@ -68,5 +68,17 @@
    "cart_is_empty": "سبد خرید شما خالی است",
    "operation_failed": "عملیات ناموفق بود",
    "operation_successfully": "عملیات با موفقیت انجام شد",
-   "add_to_cart_successfully": "محصول با موفقیت به سبد خرید اضافه شد"
+   "add_to_cart_successfully": "محصول با موفقیت به سبد خرید اضافه شد",
+   "no_comments": "هیچ نظری درباره این محصول ثبت نشده است",
+   "leave_comment": "ثبت نظر",
+   "leave": "ثبت",
+   "your_rating_about_product": "امتیاز شما به این محصول",
+   "your_comment_about_product": "نظر شما در مورد این محصول",
+   "comment_added_successfully": "نظر شما با موفقیت ثبت شد",
+   "comment_will_be_displayed_after_approval": "نظر شما پس از تایید نمایش داده خواهد شد",
+   "comment_updated_successfully": "نظر شما با موفقیت ویرایش شد",
+   "comment_deleted_successfully": "نظر شما با موفقیت حذف شد",
+   "comment_deleted": "نظر شما درباره این محصول حذف شد",
+   "edit": "ویرایش",
+   "delete": "حذف"
  }

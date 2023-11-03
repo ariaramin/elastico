@@ -1,11 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:elastico/app/core/components/app_button.dart';
 import 'package:elastico/app/core/components/app_icons.dart';
 import 'package:elastico/app/core/components/shadow_container.dart';
 import 'package:elastico/app/config/theme/colors/app_palette.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/features/auth/presentation/bloc/app_bloc.dart';
 import 'package:elastico/app/features/comment/domain/entities/comment.dart';
+import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
+import 'package:elastico/app/features/comment/presentation/widgets/add_comment_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:persian_number_utility/persian_number_utility.dart';
 import 'package:readmore/readmore.dart';
@@ -20,6 +25,7 @@ class CommentItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appState = context.read<AppBloc>().state;
     return ShadowContainer(
       padding: const EdgeInsets.symmetric(
         vertical: 12,
@@ -82,6 +88,42 @@ class CommentItem extends StatelessWidget {
             trimExpandedText: 'see_less'.tr(),
             style: context.theme.appTextTheme.small,
           ),
+          if (appState.user.id == comment.user.id) ...{
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                AppButton(
+                  height: 42,
+                  text: 'edit'.tr(),
+                  onPressed: () => showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (modalContext) => AddCommentBottomSheet(
+                      initialText: comment.text,
+                      initialRating: comment.rating,
+                      onSavePressed: (text, rating) {
+                        if (text.isEmpty) return;
+                        context.read<CommentBloc>().updateUserComment(
+                              comment: comment,
+                              text: text,
+                              rating: rating,
+                            );
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                AppButton(
+                  height: 42,
+                  text: 'delete'.tr(),
+                  isPrimary: false,
+                  onPressed: () =>
+                      context.read<CommentBloc>().deleteUserComment(comment),
+                ),
+              ],
+            ),
+          }
         ],
       ),
     );

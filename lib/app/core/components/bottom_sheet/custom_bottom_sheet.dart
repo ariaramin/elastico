@@ -22,7 +22,12 @@ class CustomBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 18),
+      padding: EdgeInsets.fromLTRB(
+        18,
+        0,
+        18,
+        MediaQuery.viewInsetsOf(context).bottom,
+      ),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),
@@ -49,8 +54,9 @@ class CustomBottomSheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Divider(),
-          const SizedBox(height: 16),
+          const SizedBox(height: 8),
           content,
+          const SizedBox(height: 8),
           const Divider(),
           const SizedBox(height: 16),
           Row(
@@ -62,7 +68,7 @@ class CustomBottomSheet extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 16),
               Expanded(
                 child: AppButton(
                   text: saveText ?? 'تایید',

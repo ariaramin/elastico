@@ -1,17 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:elastico/app/core/error/failure.dart';
 import 'package:elastico/app/core/usecase/usecase.dart';
-import 'package:elastico/app/features/comment/domain/entities/comment.dart';
 import 'package:elastico/app/features/comment/domain/repositories/comment_repository.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class GetProductComments implements Usecase<List<Comment>, String> {
+class DeleteComment implements Usecase<void, String> {
   final CommentRepository _repository;
 
-  GetProductComments(this._repository);
+  DeleteComment(this._repository);
 
   @override
-  Future<Either<Failure, List<Comment>>> call(params) =>
-      _repository.getProductComments(params);
+  Future<Either<Failure, void>> call(params) =>
+      _repository.deleteComment(params);
 }

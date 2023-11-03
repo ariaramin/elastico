@@ -1,5 +1,7 @@
 part of 'comment_bloc.dart';
 
+enum ActionType { add, update, delete }
+
 @freezed
 abstract class CommentState with _$CommentState {
   const factory CommentState.initial() = _Initial;
@@ -10,4 +12,11 @@ abstract class CommentState with _$CommentState {
   const factory CommentState.error({
     required String errorMessage,
   }) = _Error;
+  const factory CommentState.success({
+    required ActionType actionType,
+  }) = _Success;
+  const factory CommentState.failed({
+    required ActionType actionType,
+    required String errorMessage,
+  }) = _Failed;
 }

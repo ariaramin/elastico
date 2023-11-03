@@ -1,12 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app/core/components/error_text.dart';
 import 'package:elastico/app/core/components/loading_indicator.dart';
-import 'package:elastico/app/core/extention/responsive_extention.dart';
 import 'package:elastico/app/core/extention/theme_extention.dart';
+import 'package:elastico/app/core/extention/ui_extention.dart';
 import 'package:elastico/app/features/comment/presentation/bloc/comment_bloc.dart';
 import 'package:elastico/app/features/comment/presentation/widgets/comment_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:toastification/toastification.dart';
 
 class ProductComments extends StatelessWidget {
   final String productId;
@@ -22,7 +24,44 @@ class ProductComments extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
-        child: BlocBuilder<CommentBloc, CommentState>(
+        child: BlocConsumer<CommentBloc, CommentState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              failed: (actionType, errorMessage) => context.showToast(
+                title: 'operation_failed'.tr(),
+                description: errorMessage,
+                type: ToastificationType.error,
+              ),
+              success: (actionType) {
+                switch (actionType) {
+                  case ActionType.add:
+                    context.pop();
+                    context.showToast(
+                      title: 'comment_added_successfully'.tr(),
+                      description:
+                          'comment_will_be_displayed_after_approval'.tr(),
+                      type: ToastificationType.success,
+                    );
+                    break;
+                  case ActionType.update:
+                    context.pop();
+                    context.showToast(
+                      title: 'comment_updated_successfully'.tr(),
+                      description:
+                          'comment_will_be_displayed_after_approval'.tr(),
+                      type: ToastificationType.success,
+                    );
+                    break;
+                  default:
+                    context.showToast(
+                      title: 'comment_deleted_successfully'.tr(),
+                      description: 'comment_deleted'.tr(),
+                      type: ToastificationType.success,
+                    );
+                }
+              },
+            );
+          },
           builder: (context, state) {
             return state.maybeWhen(
               loaded: (comments) => Column(
@@ -50,31 +89,15 @@ class ProductComments extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 18),
                     child: comments.isNotEmpty
-                        ? GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: EdgeInsets.zero,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: context.responsive<int>(
-                                1,
-                                sm: 2,
-                                md: 2,
-                              ),
-                              mainAxisSpacing: 16,
-                              crossAxisSpacing: 16,
-                              childAspectRatio: context.responsive<double>(
-                                1 / .28,
-                                sm: 1 / .27,
-                                md: 1 / .27,
-                              ),
-                            ),
-                            itemCount: comments.length,
-                            itemBuilder: (context, index) =>
-                                CommentItem(comment: comments[index]),
+                        ? Wrap(
+                            spacing: 16,
+                            runSpacing: 16,
+                            children: comments
+                                .map((comment) => CommentItem(comment: comment))
+                                .toList(),
                           )
                         : Text(
-                            'هیچ نظری درباره این محصول ثبت نشده است.',
+                            'no_comments'.tr(),
                             style: context.theme.appTextTheme.regular3,
                           ),
                   ),

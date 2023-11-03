@@ -192,8 +192,12 @@ class AppRouter {
                 ..fetchProduct(productId),
             ),
             BlocProvider(
-              create: (context) =>
-                  CommentBloc(locator.get())..fetchProductComments(productId),
+              create: (context) => CommentBloc(
+                locator.get(),
+                locator.get(),
+                locator.get(),
+                locator.get(),
+              )..fetchProductComments(productId),
             ),
             BlocProvider.value(
               value: locator.get<WishlistBloc>(),
