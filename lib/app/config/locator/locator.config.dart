@@ -11,13 +11,14 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i3;
 import 'package:elastico/app/config/locator/locator.dart' as _i62;
-import 'package:elastico/app/config/theme/cubit/theme_cubit.dart' as _i11;
+import 'package:elastico/app/features/auth/presentation/cubit/settings/settings_cubit.dart'
+    as _i27;
 import 'package:elastico/app/core/services/local/hive_service.dart' as _i5;
-import 'package:elastico/app/core/services/remote/auth_service.dart' as _i12;
+import 'package:elastico/app/core/services/remote/auth_service.dart' as _i11;
 import 'package:elastico/app/core/services/remote/network_service.dart' as _i6;
 import 'package:elastico/app/core/services/remote/payment_service.dart' as _i8;
 import 'package:elastico/app/core/services/remote/pocketbase_service.dart'
-    as _i17;
+    as _i16;
 import 'package:elastico/app/features/auth/data/data_sources/auth_datasource.dart'
     as _i33;
 import 'package:elastico/app/features/auth/data/repositories/auth_repository_impl.dart'
@@ -30,17 +31,17 @@ import 'package:elastico/app/features/auth/domain/usecases/register.dart'
 import 'package:elastico/app/features/auth/presentation/bloc/app_bloc.dart'
     as _i60;
 import 'package:elastico/app/features/cart/data/data_sources/cart_datasource.dart'
-    as _i13;
+    as _i12;
 import 'package:elastico/app/features/cart/data/repositories/cart_repository_impl.dart'
-    as _i15;
-import 'package:elastico/app/features/cart/domain/repositories/cart_repository.dart'
     as _i14;
+import 'package:elastico/app/features/cart/domain/repositories/cart_repository.dart'
+    as _i13;
 import 'package:elastico/app/features/cart/domain/usecases/add_to_cart.dart'
     as _i31;
 import 'package:elastico/app/features/cart/domain/usecases/get_cart.dart'
-    as _i16;
+    as _i15;
 import 'package:elastico/app/features/cart/domain/usecases/remove_from_cart.dart'
-    as _i24;
+    as _i23;
 import 'package:elastico/app/features/cart/presentation/bloc/cart_bloc.dart'
     as _i36;
 import 'package:elastico/app/features/category/data/data_sources/category_datasource.dart'
@@ -74,17 +75,17 @@ import 'package:elastico/app/features/home/domain/repositories/home_repository.d
 import 'package:elastico/app/features/home/domain/usecases/get_home_data.dart'
     as _i61;
 import 'package:elastico/app/features/product/data/data_sources/product_datasource.dart'
-    as _i18;
+    as _i17;
 import 'package:elastico/app/features/product/data/data_sources/product_detail_datasource.dart'
-    as _i19;
+    as _i18;
 import 'package:elastico/app/features/product/data/repositories/product_detail_repository_impl.dart'
-    as _i21;
-import 'package:elastico/app/features/product/data/repositories/product_repository_impl.dart'
-    as _i23;
-import 'package:elastico/app/features/product/domain/repositories/product_detail_repository.dart'
     as _i20;
-import 'package:elastico/app/features/product/domain/repositories/product_repository.dart'
+import 'package:elastico/app/features/product/data/repositories/product_repository_impl.dart'
     as _i22;
+import 'package:elastico/app/features/product/domain/repositories/product_detail_repository.dart'
+    as _i19;
+import 'package:elastico/app/features/product/domain/repositories/product_repository.dart'
+    as _i21;
 import 'package:elastico/app/features/product/domain/usecases/get_product.dart'
     as _i45;
 import 'package:elastico/app/features/product/domain/usecases/get_product_list.dart'
@@ -92,11 +93,11 @@ import 'package:elastico/app/features/product/domain/usecases/get_product_list.d
 import 'package:elastico/app/features/product/domain/usecases/get_product_variants.dart'
     as _i48;
 import 'package:elastico/app/features/search/data/data_sources/search_datasource.dart'
-    as _i25;
+    as _i24;
 import 'package:elastico/app/features/search/data/repositories/search_repository_impl.dart'
-    as _i27;
-import 'package:elastico/app/features/search/domain/repositories/search_repository.dart'
     as _i26;
+import 'package:elastico/app/features/search/domain/repositories/search_repository.dart'
+    as _i25;
 import 'package:elastico/app/features/search/domain/usecases/search_product.dart'
     as _i56;
 import 'package:elastico/app/features/wishlist/data/data_sources/wishlist_datasource.dart'
@@ -144,61 +145,61 @@ extension GetItInjectableX on _i1.GetIt {
       () => serviceModule.prefs,
       preResolve: true,
     );
-    gh.lazySingleton<_i11.ThemeCubit>(
-        () => _i11.ThemeCubit(gh<_i10.SharedPreferences>()));
-    gh.lazySingleton<_i12.AuthService>(() => _i12.AuthService(
+    gh.lazySingleton<_i11.AuthService>(() => _i11.AuthService(
           gh<_i9.PocketBase>(),
           gh<_i4.FlutterSecureStorage>(),
         ));
-    gh.factory<_i13.CartDatasource>(() => _i13.CartDatasourceImpl(
+    gh.factory<_i12.CartDatasource>(() => _i12.CartDatasourceImpl(
           gh<_i5.HiveService>(),
-          gh<_i12.AuthService>(),
+          gh<_i11.AuthService>(),
         ));
-    gh.factory<_i14.CartRepository>(
-        () => _i15.CartRepositoryImpl(gh<_i13.CartDatasource>()));
-    gh.factory<_i16.GetCart>(() => _i16.GetCart(gh<_i14.CartRepository>()));
-    gh.lazySingleton<_i17.PocketBaseService>(() => _i17.PocketBaseService(
+    gh.factory<_i13.CartRepository>(
+        () => _i14.CartRepositoryImpl(gh<_i12.CartDatasource>()));
+    gh.factory<_i15.GetCart>(() => _i15.GetCart(gh<_i13.CartRepository>()));
+    gh.lazySingleton<_i16.PocketBaseService>(() => _i16.PocketBaseService(
           gh<_i9.PocketBase>(),
-          gh<_i12.AuthService>(),
+          gh<_i11.AuthService>(),
         ));
-    gh.factory<_i18.ProductDatasource>(
-        () => _i18.ProductDatasourceImpl(gh<_i17.PocketBaseService>()));
-    gh.factory<_i19.ProductDetailDatasource>(
-        () => _i19.ProductDetailDatasourceImpl(gh<_i17.PocketBaseService>()));
-    gh.factory<_i20.ProductDetailRepository>(() =>
-        _i21.ProductDetailRepositoryImpl(gh<_i19.ProductDetailDatasource>()));
-    gh.factory<_i22.ProductRepository>(
-        () => _i23.ProductRepositoryImpl(gh<_i18.ProductDatasource>()));
-    gh.factory<_i24.RemoveFromCart>(
-        () => _i24.RemoveFromCart(gh<_i14.CartRepository>()));
-    gh.factory<_i25.SearchDatasource>(
-        () => _i25.SearchDatasourceImpl(gh<_i17.PocketBaseService>()));
-    gh.factory<_i26.SearchRepository>(
-        () => _i27.SearchRepositoryImpl(gh<_i25.SearchDatasource>()));
+    gh.factory<_i17.ProductDatasource>(
+        () => _i17.ProductDatasourceImpl(gh<_i16.PocketBaseService>()));
+    gh.factory<_i18.ProductDetailDatasource>(
+        () => _i18.ProductDetailDatasourceImpl(gh<_i16.PocketBaseService>()));
+    gh.factory<_i19.ProductDetailRepository>(() =>
+        _i20.ProductDetailRepositoryImpl(gh<_i18.ProductDetailDatasource>()));
+    gh.factory<_i21.ProductRepository>(
+        () => _i22.ProductRepositoryImpl(gh<_i17.ProductDatasource>()));
+    gh.factory<_i23.RemoveFromCart>(
+        () => _i23.RemoveFromCart(gh<_i13.CartRepository>()));
+    gh.factory<_i24.SearchDatasource>(
+        () => _i24.SearchDatasourceImpl(gh<_i16.PocketBaseService>()));
+    gh.factory<_i25.SearchRepository>(
+        () => _i26.SearchRepositoryImpl(gh<_i24.SearchDatasource>()));
+    gh.lazySingleton<_i27.SettingsCubit>(
+        () => _i27.SettingsCubit(gh<_i10.SharedPreferences>()));
     gh.factory<_i28.WishlistDatasource>(() => _i28.WishlistDatasourceImpl(
           gh<_i5.HiveService>(),
-          gh<_i12.AuthService>(),
+          gh<_i11.AuthService>(),
         ));
     gh.factory<_i29.WishlistRepository>(
         () => _i30.WishlistRepositoryImpl(gh<_i28.WishlistDatasource>()));
-    gh.factory<_i31.AddToCart>(() => _i31.AddToCart(gh<_i14.CartRepository>()));
+    gh.factory<_i31.AddToCart>(() => _i31.AddToCart(gh<_i13.CartRepository>()));
     gh.factory<_i32.AddToWishlist>(
         () => _i32.AddToWishlist(gh<_i29.WishlistRepository>()));
     gh.factory<_i33.AuthDataSource>(
-        () => _i33.AuthDatasourceImpl(gh<_i12.AuthService>()));
+        () => _i33.AuthDatasourceImpl(gh<_i11.AuthService>()));
     gh.factory<_i34.AuthRepository>(
         () => _i35.AuthRepositoryImpl(gh<_i33.AuthDataSource>()));
     gh.lazySingleton<_i36.CartBloc>(() => _i36.CartBloc(
-          gh<_i16.GetCart>(),
+          gh<_i15.GetCart>(),
           gh<_i31.AddToCart>(),
-          gh<_i24.RemoveFromCart>(),
+          gh<_i23.RemoveFromCart>(),
         ));
     gh.factory<_i37.CategoryDatasource>(
-        () => _i37.CategoryDatasourceImpl(gh<_i17.PocketBaseService>()));
+        () => _i37.CategoryDatasourceImpl(gh<_i16.PocketBaseService>()));
     gh.factory<_i38.CategoryRepository>(
         () => _i39.CategoryRepositoryImpl(gh<_i37.CategoryDatasource>()));
     gh.factory<_i40.CommentDatasource>(
-        () => _i40.CommentDatasourceImpl(gh<_i17.PocketBaseService>()));
+        () => _i40.CommentDatasourceImpl(gh<_i16.PocketBaseService>()));
     gh.factory<_i41.CommentRepository>(
         () => _i42.CommentRepositoryImpl(gh<_i40.CommentDatasource>()));
     gh.factory<_i43.DeleteComment>(
@@ -206,17 +207,17 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i44.GetMainCategories>(
         () => _i44.GetMainCategories(gh<_i38.CategoryRepository>()));
     gh.factory<_i45.GetProduct>(
-        () => _i45.GetProduct(gh<_i22.ProductRepository>()));
+        () => _i45.GetProduct(gh<_i21.ProductRepository>()));
     gh.factory<_i46.GetProductComments>(
         () => _i46.GetProductComments(gh<_i41.CommentRepository>()));
     gh.factory<_i47.GetProductList>(
-        () => _i47.GetProductList(gh<_i22.ProductRepository>()));
+        () => _i47.GetProductList(gh<_i21.ProductRepository>()));
     gh.factory<_i48.GetProductVariants>(
-        () => _i48.GetProductVariants(gh<_i20.ProductDetailRepository>()));
+        () => _i48.GetProductVariants(gh<_i19.ProductDetailRepository>()));
     gh.factory<_i49.GetWishlist>(
         () => _i49.GetWishlist(gh<_i29.WishlistRepository>()));
     gh.factory<_i50.HomeDatasource>(
-        () => _i50.HomeDatasourceImpl(gh<_i17.PocketBaseService>()));
+        () => _i50.HomeDatasourceImpl(gh<_i16.PocketBaseService>()));
     gh.factory<_i51.HomeRepository>(
         () => _i52.HomeRepositoryImpl(gh<_i50.HomeDatasource>()));
     gh.factory<_i53.Login>(() => _i53.Login(gh<_i34.AuthRepository>()));
@@ -224,7 +225,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i55.RemoveFromWishlist>(
         () => _i55.RemoveFromWishlist(gh<_i29.WishlistRepository>()));
     gh.factory<_i56.SearchProduct>(
-        () => _i56.SearchProduct(gh<_i26.SearchRepository>()));
+        () => _i56.SearchProduct(gh<_i25.SearchRepository>()));
     gh.factory<_i57.UpdateComment>(
         () => _i57.UpdateComment(gh<_i41.CommentRepository>()));
     gh.lazySingleton<_i58.WishlistBloc>(() => _i58.WishlistBloc(
@@ -235,7 +236,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i59.AddComment>(
         () => _i59.AddComment(gh<_i41.CommentRepository>()));
     gh.lazySingleton<_i60.AppBloc>(() => _i60.AppBloc(
-          gh<_i12.AuthService>(),
+          gh<_i11.AuthService>(),
           gh<_i58.WishlistBloc>(),
           gh<_i36.CartBloc>(),
         ));

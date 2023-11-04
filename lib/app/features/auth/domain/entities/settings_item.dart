@@ -45,10 +45,10 @@ List<SettingsItem> settings = [
         title: 'persian'.tr(),
         value: const Locale('fa', 'IR'),
       ),
-      Option(
-        title: 'english'.tr(),
-        value: const Locale('en', 'US'),
-      ),
+      // Option(
+      //   title: 'english'.tr(),
+      //   value: const Locale('en', 'US'),
+      // ),
     ],
   ),
   SettingsItem(

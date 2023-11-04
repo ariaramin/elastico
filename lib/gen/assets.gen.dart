@@ -34,11 +34,11 @@ class $AssetsImagesGen {
 class $AssetsTranslationsGen {
   const $AssetsTranslationsGen();
 
-  /// File path: assets/translations/fa-IR.json
-  String get faIR => 'assets/translations/fa-IR.json';
+  /// File path: assets/translations/fa.json
+  String get fa => 'assets/translations/fa.json';
 
   /// List of all assets
-  List<String> get values => [faIR];
+  List<String> get values => [fa];
 }
 
 class Assets {

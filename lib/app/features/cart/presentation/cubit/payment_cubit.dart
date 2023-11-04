@@ -24,7 +24,7 @@ class PaymentCubit extends Cubit<PaymentState> {
     _paymentService.startPayment(amount);
   }
 
-  _verifyPayment(
+  void _verifyPayment(
     String status,
     String authority,
   ) {

@@ -29,12 +29,7 @@ class ProductListScreen extends StatelessWidget {
           builder: (context, state) {
             return state.maybeWhen(
               loaded: (products) => products.isNotEmpty
-                  ? SingleChildScrollView(
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: ProductWrap(products: products),
-                      ),
-                    )
+                  ? ProductWrap(products: products)
                   : Center(child: Text('nothing_found'.tr())),
               error: (errorMessage) => ErrorText(
                 errorMessage: errorMessage,

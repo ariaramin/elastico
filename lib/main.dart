@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:elastico/app.dart';
 import 'package:elastico/app/config/locator/locator.dart';
-import 'package:elastico/app/config/theme/cubit/theme_cubit.dart';
+import 'package:elastico/app/features/auth/presentation/cubit/settings/settings_cubit.dart';
 import 'package:elastico/app/core/services/local/hive_service.dart';
 import 'package:elastico/app/features/auth/presentation/bloc/app_bloc.dart';
 
@@ -18,20 +18,20 @@ void main() async {
   locator.get<AppBloc>().initial();
   runApp(
     EasyLocalization(
-      supportedLocales: const [Locale('fa', 'IR')],
+      supportedLocales: const [Locale('fa')],
       path: 'assets/translations',
-      fallbackLocale: const Locale('fa', 'IR'),
-      startLocale: const Locale('fa', 'IR'),
+      fallbackLocale: const Locale('fa'),
+      startLocale: const Locale('fa'),
       child: MultiBlocProvider(
         providers: [
           BlocProvider.value(
-            value: locator.get<ThemeCubit>(),
+            value: locator.get<SettingsCubit>(),
           ),
           BlocProvider.value(
             value: locator.get<AppBloc>(),
           ),
         ],
-        child: const MyApp(),
+        child: MyApp(),
       ),
     ),
   );

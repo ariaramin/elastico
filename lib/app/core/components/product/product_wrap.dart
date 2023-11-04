@@ -69,22 +69,28 @@ class _ProductWrapState extends State<ProductWrap> {
               ),
             ),
           )
-        : Padding(
-            padding: widget.padding ??
-                EdgeInsets.symmetric(
-                  vertical: 18,
-                  horizontal: widget.products.length <= 1 ? 16 : 8,
-                ),
-            child: Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              alignment: widget.products.length <= 1
-                  ? WrapAlignment.start
-                  : WrapAlignment.center,
-              children: List.generate(
-                widget.products.length,
-                (index) => ProductItem(
-                  product: widget.products[index],
+        : SingleChildScrollView(
+            controller: _scrollController,
+            child: SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: widget.padding ??
+                    EdgeInsets.symmetric(
+                      vertical: 18,
+                      horizontal: widget.products.length <= 1 ? 16 : 8,
+                    ),
+                child: Wrap(
+                  spacing: 16,
+                  runSpacing: 16,
+                  alignment: widget.products.length <= 1
+                      ? WrapAlignment.start
+                      : WrapAlignment.center,
+                  children: List.generate(
+                    widget.products.length,
+                    (index) => ProductItem(
+                      product: widget.products[index],
+                    ),
+                  ),
                 ),
               ),
             ),
