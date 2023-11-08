@@ -226,7 +226,10 @@ class AppRouter {
     return _createRoute(
       AppRouterPaths.search,
       (context, state) => BlocProvider(
-        create: (context) => SearchBloc(locator.get()),
+        create: (context) => SearchBloc(
+          locator.get(),
+          locator.get(),
+        ),
         child: const SearchScreen(),
       ),
     );

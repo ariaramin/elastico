@@ -17,19 +17,25 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SearchEvent {
   String get query => throw _privateConstructorUsedError;
+  List<FilterItem>? get filters => throw _privateConstructorUsedError;
+  String? get sort => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String query) search,
+    required TResult Function(
+            String query, List<FilterItem>? filters, String? sort)
+        search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? search,
+    TResult? Function(String query, List<FilterItem>? filters, String? sort)?
+        search,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? search,
+    TResult Function(String query, List<FilterItem>? filters, String? sort)?
+        search,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +67,7 @@ abstract class $SearchEventCopyWith<$Res> {
           SearchEvent value, $Res Function(SearchEvent) then) =
       _$SearchEventCopyWithImpl<$Res, SearchEvent>;
   @useResult
-  $Res call({String query});
+  $Res call({String query, List<FilterItem>? filters, String? sort});
 }
 
 /// @nodoc
@@ -78,12 +84,22 @@ class _$SearchEventCopyWithImpl<$Res, $Val extends SearchEvent>
   @override
   $Res call({
     Object? query = null,
+    Object? filters = freezed,
+    Object? sort = freezed,
   }) {
     return _then(_value.copyWith(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
+      filters: freezed == filters
+          ? _value.filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as List<FilterItem>?,
+      sort: freezed == sort
+          ? _value.sort
+          : sort // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -94,7 +110,7 @@ abstract class _$$_SearchCopyWith<$Res> implements $SearchEventCopyWith<$Res> {
       __$$_SearchCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String query});
+  $Res call({String query, List<FilterItem>? filters, String? sort});
 }
 
 /// @nodoc
@@ -108,12 +124,22 @@ class __$$_SearchCopyWithImpl<$Res>
   @override
   $Res call({
     Object? query = null,
+    Object? filters = freezed,
+    Object? sort = freezed,
   }) {
     return _then(_$_Search(
       query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
+      filters: freezed == filters
+          ? _value._filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as List<FilterItem>?,
+      sort: freezed == sort
+          ? _value.sort
+          : sort // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -121,14 +147,28 @@ class __$$_SearchCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Search implements _Search {
-  const _$_Search({required this.query});
+  const _$_Search(
+      {required this.query, final List<FilterItem>? filters, this.sort})
+      : _filters = filters;
 
   @override
   final String query;
+  final List<FilterItem>? _filters;
+  @override
+  List<FilterItem>? get filters {
+    final value = _filters;
+    if (value == null) return null;
+    if (_filters is EqualUnmodifiableListView) return _filters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? sort;
 
   @override
   String toString() {
-    return 'SearchEvent.search(query: $query)';
+    return 'SearchEvent.search(query: $query, filters: $filters, sort: $sort)';
   }
 
   @override
@@ -136,11 +176,14 @@ class _$_Search implements _Search {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Search &&
-            (identical(other.query, query) || other.query == query));
+            (identical(other.query, query) || other.query == query) &&
+            const DeepCollectionEquality().equals(other._filters, _filters) &&
+            (identical(other.sort, sort) || other.sort == sort));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query);
+  int get hashCode => Object.hash(
+      runtimeType, query, const DeepCollectionEquality().hash(_filters), sort);
 
   @JsonKey(ignore: true)
   @override
@@ -151,27 +194,31 @@ class _$_Search implements _Search {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String query) search,
+    required TResult Function(
+            String query, List<FilterItem>? filters, String? sort)
+        search,
   }) {
-    return search(query);
+    return search(query, filters, sort);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String query)? search,
+    TResult? Function(String query, List<FilterItem>? filters, String? sort)?
+        search,
   }) {
-    return search?.call(query);
+    return search?.call(query, filters, sort);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String query)? search,
+    TResult Function(String query, List<FilterItem>? filters, String? sort)?
+        search,
     required TResult orElse(),
   }) {
     if (search != null) {
-      return search(query);
+      return search(query, filters, sort);
     }
     return orElse();
   }
@@ -206,10 +253,17 @@ class _$_Search implements _Search {
 }
 
 abstract class _Search implements SearchEvent {
-  const factory _Search({required final String query}) = _$_Search;
+  const factory _Search(
+      {required final String query,
+      final List<FilterItem>? filters,
+      final String? sort}) = _$_Search;
 
   @override
   String get query;
+  @override
+  List<FilterItem>? get filters;
+  @override
+  String? get sort;
   @override
   @JsonKey(ignore: true)
   _$$_SearchCopyWith<_$_Search> get copyWith =>
@@ -222,7 +276,7 @@ mixin _$SearchState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Search search) loaded,
+    required TResult Function(Search search, List<Filter> filters) loaded,
     required TResult Function(String errorMessage) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -230,7 +284,7 @@ mixin _$SearchState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Search search)? loaded,
+    TResult? Function(Search search, List<Filter> filters)? loaded,
     TResult? Function(String errorMessage)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -238,7 +292,7 @@ mixin _$SearchState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Search search)? loaded,
+    TResult Function(Search search, List<Filter> filters)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) =>
@@ -327,7 +381,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Search search) loaded,
+    required TResult Function(Search search, List<Filter> filters) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return initial();
@@ -338,7 +392,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Search search)? loaded,
+    TResult? Function(Search search, List<Filter> filters)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return initial?.call();
@@ -349,7 +403,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Search search)? loaded,
+    TResult Function(Search search, List<Filter> filters)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -440,7 +494,7 @@ class _$_Loading implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Search search) loaded,
+    required TResult Function(Search search, List<Filter> filters) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return loading();
@@ -451,7 +505,7 @@ class _$_Loading implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Search search)? loaded,
+    TResult? Function(Search search, List<Filter> filters)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return loading?.call();
@@ -462,7 +516,7 @@ class _$_Loading implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Search search)? loaded,
+    TResult Function(Search search, List<Filter> filters)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
@@ -519,7 +573,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({Search search});
+  $Res call({Search search, List<Filter> filters});
 
   $SearchCopyWith<$Res> get search;
 }
@@ -535,12 +589,17 @@ class __$$_LoadedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? search = null,
+    Object? filters = null,
   }) {
     return _then(_$_Loaded(
       search: null == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
               as Search,
+      filters: null == filters
+          ? _value._filters
+          : filters // ignore: cast_nullable_to_non_nullable
+              as List<Filter>,
     ));
   }
 
@@ -556,14 +615,22 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded({required this.search});
+  const _$_Loaded({required this.search, required final List<Filter> filters})
+      : _filters = filters;
 
   @override
   final Search search;
+  final List<Filter> _filters;
+  @override
+  List<Filter> get filters {
+    if (_filters is EqualUnmodifiableListView) return _filters;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_filters);
+  }
 
   @override
   String toString() {
-    return 'SearchState.loaded(search: $search)';
+    return 'SearchState.loaded(search: $search, filters: $filters)';
   }
 
   @override
@@ -571,11 +638,13 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
-            (identical(other.search, search) || other.search == search));
+            (identical(other.search, search) || other.search == search) &&
+            const DeepCollectionEquality().equals(other._filters, _filters));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, search);
+  int get hashCode => Object.hash(
+      runtimeType, search, const DeepCollectionEquality().hash(_filters));
 
   @JsonKey(ignore: true)
   @override
@@ -588,10 +657,10 @@ class _$_Loaded implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Search search) loaded,
+    required TResult Function(Search search, List<Filter> filters) loaded,
     required TResult Function(String errorMessage) error,
   }) {
-    return loaded(search);
+    return loaded(search, filters);
   }
 
   @override
@@ -599,10 +668,10 @@ class _$_Loaded implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Search search)? loaded,
+    TResult? Function(Search search, List<Filter> filters)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
-    return loaded?.call(search);
+    return loaded?.call(search, filters);
   }
 
   @override
@@ -610,12 +679,12 @@ class _$_Loaded implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Search search)? loaded,
+    TResult Function(Search search, List<Filter> filters)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(search);
+      return loaded(search, filters);
     }
     return orElse();
   }
@@ -659,9 +728,12 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements SearchState {
-  const factory _Loaded({required final Search search}) = _$_Loaded;
+  const factory _Loaded(
+      {required final Search search,
+      required final List<Filter> filters}) = _$_Loaded;
 
   Search get search;
+  List<Filter> get filters;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;
@@ -732,7 +804,7 @@ class _$_Error implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(Search search) loaded,
+    required TResult Function(Search search, List<Filter> filters) loaded,
     required TResult Function(String errorMessage) error,
   }) {
     return error(errorMessage);
@@ -743,7 +815,7 @@ class _$_Error implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(Search search)? loaded,
+    TResult? Function(Search search, List<Filter> filters)? loaded,
     TResult? Function(String errorMessage)? error,
   }) {
     return error?.call(errorMessage);
@@ -754,7 +826,7 @@ class _$_Error implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(Search search)? loaded,
+    TResult Function(Search search, List<Filter> filters)? loaded,
     TResult Function(String errorMessage)? error,
     required TResult orElse(),
   }) {

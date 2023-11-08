@@ -19,6 +19,7 @@ class PocketBaseService {
     int perPage = 30,
     String? expand,
     String? filter,
+    String? sort,
   }) async {
     try {
       return await _pocketBase.collection(collectionName).getList(
@@ -26,6 +27,7 @@ class PocketBaseService {
             perPage: perPage,
             expand: expand,
             filter: filter,
+            sort: sort,
           );
     } on ClientException catch (error) {
       throw ApiException(

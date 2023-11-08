@@ -25,7 +25,7 @@ class SearchScreen extends StatelessWidget {
               const SearchAppBar(),
               BlocBuilder<SearchBloc, SearchState>(
                 builder: (context, state) => state.maybeWhen(
-                  loaded: (search) => SectionTitle(
+                  loaded: (search, filters) => SectionTitle(
                     title: search.query.isNotEmpty
                         ? 'results_for'.tr(args: [search.query])
                         : 'all_products'.tr(),
@@ -40,7 +40,7 @@ class SearchScreen extends StatelessWidget {
                   loading: () => const SliverToBoxAdapter(
                     child: Center(child: LoadingIndicator()),
                   ),
-                  loaded: (search) => search.products.isNotEmpty
+                  loaded: (search, filters) => search.products.isNotEmpty
                       ? ProductWrap(
                           products: search.products,
                           isSliver: true,
@@ -48,7 +48,10 @@ class SearchScreen extends StatelessWidget {
                       : const SearchNotFound(),
                   error: (errorMessage) => SliverFillRemaining(
                     hasScrollBody: false,
-                    child: ErrorText(errorMessage: errorMessage),
+                    child: ErrorText(
+                      errorMessage: errorMessage,
+                      onPressed: () => context.read<SearchBloc>().search(''),
+                    ),
                   ),
                   orElse: () => const SliverToBoxAdapter(),
                 ),

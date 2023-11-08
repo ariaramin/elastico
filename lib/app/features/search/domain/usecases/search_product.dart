@@ -8,10 +8,14 @@ import 'package:injectable/injectable.dart';
 class SearchParams {
   final int page;
   final String query;
+  final String? filter;
+  final String? sort;
 
   SearchParams({
     required this.page,
     required this.query,
+    this.filter,
+    this.sort,
   });
 }
 
@@ -22,7 +26,10 @@ class SearchProduct implements Usecase<Search, SearchParams> {
   SearchProduct(this._repository);
 
   @override
-  Future<Either<Failure, Search>> call(params) {
-    return _repository.search(params.page, params.query);
-  }
+  Future<Either<Failure, Search>> call(params) => _repository.search(
+        params.page,
+        params.query,
+        params.filter,
+        params.sort,
+      );
 }
