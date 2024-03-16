@@ -24,9 +24,12 @@ For start the backend application you should download [Pocketbase](https://pocke
 
 ## 💻 Technologies:
 
+<p>
 <img src="https://img.icons8.com/color/48/000000/dart.png"/>
 <img src="https://img.icons8.com/color/48/000000/flutter.png"/>
 <img src="https://pocketbase.io/images/logo.svg"/>
+</p>
+
 
 ## 💰 You can help me by Donating
 <p><a href="https://www.buymeacoffee.com/ariaramin"> <img align="left" src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" width="210" alt="ariaramin" /></a></p>
